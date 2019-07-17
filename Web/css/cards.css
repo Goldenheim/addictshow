@@ -1,0 +1,494 @@
+body {
+  height: 100%;
+  width: 100%;
+  background: #45BDE5;
+  font-family: 'Arimo', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #010b26;
+}
+
+* {
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+#movie_Page {
+  background-size: cover;
+  /* Full height */
+}
+
+.intro {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1, h2, h3, h4, h5, p {
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #6ABCEA;
+}
+
+#smoothAnchor {
+  position: relative;
+  top: -80px;
+}
+
+.btn-primary {
+  background: #22A6D2!important;
+  color: white;
+  border: none;
+} 
+
+.btn-primary:hover {
+  background: #96DFF7!important;
+  color: white;
+  border: none;
+}
+
+.blue {
+  background: #45BDE5;
+  opacity: 0.8;
+}
+
+.dark {
+  background: black;
+}
+
+.jumbotron {
+  margin-bottom: 0;
+}
+
+#fullHeader {
+  height:100vh; 
+  background-size: cover; 
+}
+
+#blur {
+  position: absolute;
+  top: 5%;
+}
+
+#login-form {
+  position: absolute;
+  top: 35%;
+  background-color: rgba(106,207,240,0.5);
+}
+
+.login {
+  background-image: url('/img/login-bg.jpg');
+  -webkit-filter: blur(3px);
+    -moz-filter: blur(3px);
+    -o-filter: blur(3px);
+    -ms-filter: blur(3px);
+    filter: blur(3px);
+}
+
+#fullHeaderMovie {
+  height:150vh; 
+  background-size: cover;
+  z-index: 1;
+  -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+#fullHeaderSeason {
+  height:60vh; 
+  background-size: cover;
+  z-index: 1;
+  -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+.navbar {
+  background: #6ACFF0;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 100%;
+  margin-top: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+          margin: 0;
+}
+
+.form-inline {
+  justify-content: center;
+}
+
+.movie-card {
+  background: #ffffff;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  height: 465px;
+}
+
+.movie-header {
+  padding: 0;
+  margin: 0;
+  height: 281px;
+  width: 100%;
+  display: block;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-size: cover;
+}
+
+.header-icon-container {
+  position: relative;
+}
+
+.header-icon {
+  width: 100%;
+  height: 281px;
+  line-height: 281px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 auto;
+  color: #ffffff;
+  font-size: 54px;
+  text-shadow: 0px 0px 20px #6abcea, 0px 5px 20px #6ABCEA;
+  opacity: .85;
+}
+
+.header-icon:hover {
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 74px;
+  text-shadow: 0px 0px 20px #6abcea, 0px 5px 30px #6ABCEA;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  /* show 3 items */
+  .carousel-inner .active,
+  .carousel-inner .active + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item {
+    display: block;
+  }
+
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+  .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+    transition: none;
+  }
+
+  .carousel-inner .carousel-item-next,
+  .carousel-inner .carousel-item-prev {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -33.3333%;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+
+  /* left or forward direction */
+  .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+  .carousel-item-next.carousel-item-left + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  .carousel-item {
+    margin-right: 0px;
+  }
+
+  /* farthest right hidden item must be abso position for animations */
+  .carousel-inner .carousel-item-prev.carousel-item-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
+
+  /* right or prev direction */
+  .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+  .carousel-item-prev.carousel-item-right + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+    position: relative;
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+    display: block;
+    visibility: visible;
+  }
+}
+
+
+.movie-card:hover {
+  -webkit-transform: scale(1.03);
+          transform: scale(1.03);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.movie-content {
+  padding: 18px 18px 24px 18px;
+  margin: 0;
+}
+
+.movie-content-header, .movie-info {
+  display: table;
+  width: 100%;
+}
+
+.movie-title {
+  font-size: 24px;
+  margin: 0;
+  display: table-cell;
+}
+
+.imax-logo {
+  width: 50px;
+  height: 15px;
+  background: url("https://6a25bbd04bd33b8a843e-9626a8b6c7858057941524bfdad5f5b0.ssl.cf5.rackcdn.com/media_kit/3e27ede823afbf139c57f1c78a03c870.jpg") no-repeat;
+  background-size: contain;
+  display: table-cell;
+  float: right;
+  position: relative;
+  margin-top: 5px;
+}
+
+.movie-info {
+  margin-top: 1em;
+}
+
+.info-section {
+  display: table-cell;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.info-section:first-of-type {
+  text-align: left;
+}
+
+.info-section:last-of-type {
+  text-align: right;
+}
+
+.info-section label {
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: .5em;
+  font-size: 9px;
+}
+
+.info-section span {
+  font-weight: 700;
+  font-size: 11px;
+}
+
+@media screen and (max-width: 500px) {
+  .movie-card {
+    width: 95%;
+    max-width: 95%;
+    margin: 1em;
+    display: block;
+  }
+
+  .container {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+#seasonCard {
+  margin: 1%;
+  max-width: 307px;
+}
+
+#seasonContent {
+  padding: 5% 0 5% 0;
+  background: url("/img/addictshow.png") repeat, rgba(255,255,255,0.7);
+}
+
+.cardContainer {
+  overflow: hidden;
+  height: 575px;
+  max-width: 1250px;
+  margin: auto;
+}
+
+#infosContent {
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.resume {
+  text-align: justify;
+}
+
+#episodeCard {
+  background: rgba(0,0,0,0.9);
+  padding: 1%;
+  box-shadow: 5px 5px 5px grey;
+  max-width: 1050px;
+}
+
+.profile {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border: 5px white solid;
+}
+
+#profiles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.network {
+  width: 220px;
+  height: 105px;
+  background-color: rgba(255,255,255,0.4);
+  padding: 5%;
+  border-radius: 22% 0;
+  display: flex;
+  margin: 0 auto;
+}
+
+.similar, .similar label {
+  color: white !important;
+}
+
+.movieContent {
+  max-width: 1250px;
+  margin: auto;
+}
+
+.poster {
+  padding: 0px;
+}
+
+.carousel-inner {
+  overflow: visible;
+}
+
+.pos-f-t {
+  position: sticky;
+  top: 0;
+  margin-bottom: 2%;
+  z-index: 99999;
+}
+
+.pos-f {
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+}
+
+.fa-star {
+  color: yellow;
+}
+
+.scrolltop {
+  display:none;
+  width:100%;
+  margin:0 auto;
+  position:fixed;
+  bottom:20px;
+  right:10px; 
+}
+.scroll {
+  position:absolute;
+  color: white;
+  right:1%;
+  bottom:1%;
+  background:#6ACFF0;
+  padding:0.5%;
+  text-align: center;
+  margin: 0 0 0 0;
+  cursor:pointer;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;    
+}
+.scroll:hover {
+  background:rgba(178,178,178,1.0);
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;    
+}
+.scroll:hover .fa {
+  padding-top:-10px;
+}
+.scroll .fa {
+  font-size:30px;
+  transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;  
+}
+
+.wrap {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+/*footer*/
+footer { width:100%; background-color:#6ACFF0; min-height:250px; padding:10px 0px 25px 0px ; color: white;}
+.pt2 { padding-top:40px ; margin-bottom:20px ;}
+footer p { font-size:13px; padding-bottom:0px; margin-bottom:8px;}
+footer hr {
+  border-top: 15px solid rgba(255, 255, 255, 0.2);
+}
+
+-------------------------------------------------------------
+
