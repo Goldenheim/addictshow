@@ -8,7 +8,7 @@ class Member extends Entity
   protected $pseudo,
             $password,
             $mail,
-            $avatar
+            $avatar;
 
   const PSEUDO_INVALIDE = 1;
   const MAIL_INVALIDE = 2;
@@ -67,5 +67,15 @@ class Member extends Entity
   public function password()
   {
     return $this->password;
+  }
+
+  public function dateAjout()
+  {
+    return $this->date_inscription;
+  }
+
+  public function avatar()
+  {
+    return $this->avatar;
   }
 }

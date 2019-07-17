@@ -30,7 +30,8 @@
 		  <hr>
 		</div>
 		<form method="POST" action="" role="form" class="col-lg-3 text-white mx-auto">
-			<div class="form-group">
+			<?php echo $form; 
+			/*<div class="form-group">
 			         <label for="pseudo">Pseudo :</label>
 			         <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo" value="<?php if(isset($pseudo)) { echo $pseudo; } ?>" class="form-control"/>
 			</div>
@@ -49,7 +50,7 @@
 			<div class="form-group">   
 			         <label for="mdp2">Confirmation du mot de passe :</label>
 			         <input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2" class="form-control"/>
-			</div>    
+			</div> */ ?>   
 			<div align="center">    
 			        <input type="submit" name="forminscription" value="Envoyer" class="btn btn-primary btn-rounded">
 			        <input class="btn btn-primary" type="button" onclick="window.location.replace('/')" value="Annuler" />

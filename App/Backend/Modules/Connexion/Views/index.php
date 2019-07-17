@@ -33,7 +33,7 @@
 <hr>
 <div class="container-fluid">
   <div class="row">
-    <a href="subcribe.php" class="btn btn-primary btn-rounded mx-auto">Vous n'êtes pas encore inscris ?</a>
+    <a href="/subscribe.php" class="btn btn-primary btn-rounded mx-auto">Vous n'êtes pas encore inscris ?</a>
   </div>
 </div>
 <br>
