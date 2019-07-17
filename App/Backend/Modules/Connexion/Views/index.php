@@ -30,4 +30,10 @@
   	<button class="btn btn-primary my-2 my-sm-0 mx-auto" type="submit">Connexion</button>
   </div>
 </form>
+<hr>
+<div class="container-fluid">
+  <div class="row">
+    <a href="subcribe.php" class="btn btn-primary btn-rounded mx-auto">Vous n'êtes pas encore inscris ?</a>
+  </div>
+</div>
 <br>

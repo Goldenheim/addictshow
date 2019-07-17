@@ -4,53 +4,23 @@
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
-	  <form class="inline-group">
-	    <button class="btn btn-primary my-2 my-sm-0" type="subscribe">Inscription</button>
-	    <button class="btn btn-primary my-2 my-sm-0" type="login" onclick="window.location.replace('admin/')">Connexion</button>
+	  <form class="inline-group" method="get" action="">
+	    <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
+	    <a class="btn btn-primary my-2 my-sm-0" href="/admin/index.php" >Connexion</a>
 	  </form>
 	</nav>
 	<div class="collapse" id="navbarToggleExternalContent">
-	  <div class="bg-dark p-4">
+	  <div class="bg-dark p-3">
 	    <div class="jumbotron">
-	      <h1 class="display-4"><em>Jumbotron Component</em></h1>
-	      <p class="lead">There are links on this page on GitHub and Blogspot.</p>
+	      <h1 class="display-5 form-inline"><em>Faire une recherche</em></h1>
+	      <form method="post" action="search.php" class="form-inline">
+	        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
+	        <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
+	      </form>
 	      <hr class="my-4">
-	      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-	        Press <strong>button</strong> below to show links in Modal window.
-	        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	          <span aria-hidden="true">×</span>
-	        </button>
-	      </div>
-	      <p class="lead">
-	        <!-- Button trigger modal -->
-	        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-	          Show Modal Component with Links
-	        </button>
-	      </p>
-	      <!-- Modal -->
-	      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	        <div class="modal-dialog modal-dialog-centered" role="document">
-	          <div class="modal-content">
-	            <div class="modal-header">
-	              <h5 class="modal-title" id="exampleModalLongTitle">Modal Component title</h5>
-	              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	                <span aria-hidden="true">×</span>
-	              </button>
-	            </div>
-	            <div class="modal-body">
-	              <a href="https://sergeiki.github.io/bs0/" class="badge badge-danger">Visit this Bootstrap 4 Examples page on GitHub</a>
-	              <a href="http://sergeiki.blogspot.com/2017/12/bootstrap-v4-layout-content-components-utilities-examples.html" class="badge badge-warning">Visit this Bootstrap 4 Examples blog on Blogspot</a>
-	            </div>
-	            <div class="modal-footer">
-	              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	              <button type="button" class="btn btn-primary">Save changes</button>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
 	    </div>
 	  </div>
-</div>
+	</div>
 </div>
 <!-- Page Header -->
 <header>
@@ -123,28 +93,31 @@
 <?php
 	foreach ($movie['seasons'] as $seasons) 
 	{
+		if($seasons['name'] != 'Specials')
+			{	
 ?>
-		<div id="seasonCard" class="p-2 card col-lg-3">
-			<a href="season-<?= $movie['id']; ?>-<?= $seasons['season_number']; ?>.html">
-				<h3 class="lead text-center"><?php echo $seasons['name']; ?></h3>
-			</a>
-			<?php 
-			if($seasons['poster_path'] != null) 
-			{
-			?>
-				<img src="https://image.tmdb.org/t/p/w300<?php echo $seasons['poster_path']; ?>">
-			<?php
-			} else
-			{
-			?>
-				<img src="img/img_404.png">
-			<?php	
-			}
-			?>
-			<span class="mt-1">Date de sortie: <?php echo $seasons['air_date']; ?></span>
-			<p>Nombre d'épisodes: <?php echo $seasons['episode_count']; ?></p>
-		</div>
-<?php		
+			<div id="seasonCard" class="p-2 card col-lg-3">
+				<a href="season-<?= $movie['id']; ?>-<?= $seasons['season_number']; ?>.html">
+					<h3 class="lead text-center"><?php echo $seasons['name']; ?></h3>
+				</a>
+				<?php 
+				if($seasons['poster_path'] != null) 
+				{
+				?>
+					<img src="https://image.tmdb.org/t/p/w300<?php echo $seasons['poster_path']; ?>">
+				<?php
+				} else
+				{
+				?>
+					<img src="img/img_404.png">
+				<?php	
+				}
+				?>
+				<span class="mt-1">Date de sortie: <?php echo $seasons['air_date']; ?></span>
+				<p>Nombre d'épisodes: <?php echo $seasons['episode_count']; ?></p>
+			</div>
+<?php	
+			}	
 	}
 ?>
 </div>
@@ -214,11 +187,11 @@ else
 	foreach ($comments as $comment)
 	{
 	?>
-	<div class="col-lg-11 mx-auto media border p-3 m-3">
+	<div class="col-lg-11 mx-auto media comment border p-3 m-3">
 		<div class="media-body">
 				<fieldset>
 				  <legend class="" style="margin: 0!important;">
-				    <span class="offset-lg-5 col-lg-2 small text-white">Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?></span>
+				    <span class="offset-lg-6 col-lg-2 small text-white">Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?></span>
 				    	<div class="btn-group float-right"> 
 				    	  <button class="btn btn-info">Action(s)</button>
 			  			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
@@ -240,6 +213,7 @@ else
 				    	  </ul>
 				    	</div> 
 				  </legend>
+				  <hr>
 				   <div class="container-fluid">
 			   		   <?php
 			   		   if ($comment['report'] == 2) 

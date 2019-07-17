@@ -79,6 +79,10 @@ a:hover {
   top: 5%;
 }
 
+.comment {
+  max-width: 1250px;
+}
+
 #login-form {
   position: absolute;
   top: 35%;

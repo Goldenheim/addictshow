@@ -28,6 +28,7 @@ class NewsController extends BackController
   {
     if (isset($_POST["search"]) && $_POST["search"] != null) 
     { 
+      $title = $_POST["search"];
       $search = $_POST["search"]; 
       $searchEncode = urlencode($_POST["search"]);
 
@@ -40,6 +41,7 @@ class NewsController extends BackController
     }
  
     $this->page->addVar('search', $parsee);
+    $this->page->addVar('title', $title);
   }
 
   public function executeMovie(HTTPRequest $request)

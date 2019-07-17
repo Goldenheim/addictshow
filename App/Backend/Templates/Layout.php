@@ -203,7 +203,7 @@
                 <h5 class="mb-1">Créer un compte</h5>
               </li>
               <li class="list-inline-item">
-                <a href="#!" class="btn btn-primary btn-rounded">Inscrivez-vous !</a>
+                <a href="subcribe.php" class="btn btn-primary btn-rounded">Inscrivez-vous !</a>
               </li>
             </ul>
             <!-- Call to action -->
