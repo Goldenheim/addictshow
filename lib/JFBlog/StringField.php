@@ -14,11 +14,26 @@ class StringField extends Field
       $widget .= $this->errorMessage.'<br />';
     }
     
-    $widget .= '<div class="form-group"><label class="display-5 text-white" for="'.$this->label.'">'.$this->label.'</label><input type="'.$this->type.'" name="'.$this->name.'" id="'.$this->label.'"class="form-control"';
-    
+    $widget .= '<div class="form-group"><label class="display-5 text-white" for="'.$this->name.'">'.$this->label.'</label><input type="'.$this->type.'" name="'.$this->name.'" id="'.$this->name.'"class="form-control"';
+
+    if (!empty($this->placeHolder))
+    {
+      $widget .= ' placeHolder="'.htmlspecialchars($this->placeHolder).'"';
+    }
+
     if (!empty($this->value))
     {
       $widget .= ' value="'.htmlspecialchars($this->value).'"';
+    }
+
+    if (!empty($this->required))
+    {
+      $widget .= ' required="'.htmlspecialchars($this->required).'"';
+    }
+
+    if (!empty($this->accept))
+    {
+      $widget .= ' accept="'.htmlspecialchars($this->accept).'"';
     }
     
     if (!empty($this->maxLength))

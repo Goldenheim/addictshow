@@ -36,6 +36,7 @@ class ConnexionController extends BackController
     // Suppression des cookies de connexion automatique
     setcookie('login', '');
     setcookie('pass', '');
+    $this->app->user()->setFlash('Vous vous êtes bien déconnecté');
     $this->app->httpResponse()->redirect('/');
   }
 }

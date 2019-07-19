@@ -48,24 +48,22 @@ class MemberManagerPDO extends MemberManager
     return $listeAllMember;
   }
 
-  public function getUnique($id)
+  public function get($attr, $value)
   {
-    $requete = $this->dao->prepare('SELECT id, pseudo, mail, password, date_inscription FROM members WHERE id = :id');
-    $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $requete = $this->dao->prepare('SELECT id, pseudo, mail, password, avatar, date_inscription FROM members WHERE '. $attr .' = :attr');
+    $requete->bindValue(':attr', $value);
     $requete->execute();
     
     $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Member');
     
     if ($member = $requete->fetch())
-    {
-      $member->setDateAjout(new \DateTime($member->dateAjout()));
-      
+    { 
       return $member;
     }
       
     return null;
   }
-
+  
   public function count()
   {
     return $this->dao->query('SELECT COUNT(*) FROM members')->fetchColumn();
@@ -73,18 +71,20 @@ class MemberManagerPDO extends MemberManager
 
   protected function add(Member $member)
   {
-    $requete = $this->dao->prepare('INSERT INTO member SET pseudo = :pseudo, mail = :mail, password = :password, date_inscription');
+    $requete = $this->dao->prepare('INSERT INTO members SET pseudo = :pseudo, mail = :mail, password = :password, hash_validation = :hash_validation, avatar = :avatar, date_inscription = NOW()');
     
     $requete->bindValue(':pseudo', $member->pseudo());
     $requete->bindValue(':mail', $member->mail());
-    $requete->bindValue(':password', $member->password());
+    $requete->bindValue(':password', password_hash($member->password(), PASSWORD_DEFAULT));
+    $requete->bindValue(':hash_validation', $member->hash_validation());
+    $requete->bindValue(':avatar', $member->avatar());
     
     $requete->execute();
   }
 
   protected function modify(Member $member)
   {
-    $requete = $this->dao->prepare('UPDATE member SET pseudo = :pseudo, mail = :mail, password = :password WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE members SET pseudo = :pseudo, mail = :mail, password = :password WHERE id = :id');
     
     $requete->bindValue(':pseudo', $member->pseudo());
     $requete->bindValue(':mail', $member->mail());

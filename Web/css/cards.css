@@ -13,6 +13,22 @@ body {
   transition: 300ms;
 }
 
+/* AVATAR */ 
+
+#avatar {
+  height: 20%;
+  background: none;
+}
+
+#login-avatar {
+  height: 80px;
+}
+
+#avatar-nav {
+  height: 25px;
+  border-radius: 50%;
+}
+
 #movie_Page {
   background-size: cover;
   /* Full height */
@@ -42,6 +58,25 @@ a:hover {
 #smoothAnchor {
   position: relative;
   top: -80px;
+}
+
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
 }
 
 .btn-primary {
@@ -188,6 +223,12 @@ a:hover {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   opacity: 1;
+}
+
+@media (min-width: 1230px) {
+  #seasonContent {
+    justify-content: space-around !important;
+  }
 }
 
 @media (min-width: 768px) {
@@ -493,6 +534,4 @@ footer p { font-size:13px; padding-bottom:0px; margin-bottom:8px;}
 footer hr {
   border-top: 15px solid rgba(255, 255, 255, 0.2);
 }
-
--------------------------------------------------------------
 

@@ -8,10 +8,14 @@ abstract class Field
   protected $errorMessage;
   protected $label;
   protected $name;
+  protected $id;
   protected $validators = [];
   protected $value;
   protected $type;
- 
+  protected $placeHolder;
+  protected $required;
+  protected $accept;
+
   public function __construct(array $options = [])
   {
     if (!empty($options))
@@ -65,6 +69,21 @@ abstract class Field
   {
     return $this->type;
   }
+
+  public function required()
+  {
+    return $this->required;
+  }
+
+  public function placeHolder()
+  {
+    return $this->placeHolder;
+  }
+
+  public function accept()
+  {
+    return $this->accept;
+  }
  
   public function setLabel($label)
   {
@@ -72,6 +91,14 @@ abstract class Field
     {
       $this->label = $label;
     }
+  }
+
+  public function setRequired($required)
+  {
+    if (is_string($required))
+    {
+      $this->required = $required;
+    } 
   }
  
   public function setLength($length)
@@ -97,6 +124,22 @@ abstract class Field
     if (is_string($type))
     {
       $this->type = $type;
+    }
+  }
+
+  public function setPlaceHolder($placeHolder)
+  {
+    if (is_string($placeHolder))
+    {
+      $this->placeHolder = $placeHolder;
+    }
+  }
+
+  public function setAccept($accept)
+  {
+    if (is_string($accept))
+    {
+      $this->accept = $accept;
     }
   }
  

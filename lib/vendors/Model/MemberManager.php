@@ -15,11 +15,12 @@ abstract class MemberManager extends Manager
   abstract public function getList($debut = -1, $limite = -1);
 
   /**
-     * Méthode retournant un membre précis.
-     * @param $id int L'identifiant du membre à récupérer
+     * Méthode retournant un pseudo précis.
+     * @param $attr string L'attribut du membre à récupérer
+     * @param $value 
      * @return Member le membre demandé
      */
-   abstract public function getUnique($id);
+   abstract public function get($attr, $value);
 
  /**
     * Méthode renvoyant le nombre de membres.
@@ -49,7 +50,7 @@ abstract class MemberManager extends Manager
      }
      else
      {
-       throw new \RuntimeException('L\'utilisateur doit être validée pour être enregistré');
+       throw new \RuntimeException('L\'utilisateur doit être validé pour être enregistré');
      }
    }   
 

@@ -94,6 +94,7 @@ class NewsController extends BackController
  
   public function executeInsertComment(HTTPRequest $request)
   {
+    $id = $request->getData('movie');
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
@@ -121,7 +122,8 @@ class NewsController extends BackController
  
       $this->app->httpResponse()->redirect('movie-'.$request->getData('movie').'.html');
     }
- 
+    
+    $this->page->addVar('id', $id);
     $this->page->addVar('comment', $comment);
     $this->page->addVar('form', $form->createView());
     $this->page->addVar('title', 'Ajout d\'un commentaire');

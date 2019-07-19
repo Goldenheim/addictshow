@@ -151,12 +151,25 @@
 
       <!-- Call to action -->
       <ul class="list-unstyled list-inline text-center py-2">
+        <?php if ($user->isAuthenticated())
+        {
+        ?>
+          <li class="list-inline-item">
+            <h5 class="mb-1">Vous êtes actuellement connecté en tant que <strong><?php echo $_SESSION['pseudo']; ?></strong></h5>
+          </li>
+        <?php  
+        } else 
+        {
+        ?> 
         <li class="list-inline-item">
           <h5 class="mb-1">Créer un compte</h5>
         </li>
         <li class="list-inline-item">
-          <a href="#!" class="btn btn-primary btn-rounded">Inscrivez-vous !</a>
+          <a href="/subscribe.php" class="btn btn-primary btn-rounded">Inscrivez-vous !</a>
         </li>
+        <?php
+        }
+        ?>
       </ul>
       <!-- Call to action -->
 
