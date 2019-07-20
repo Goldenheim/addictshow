@@ -3,6 +3,7 @@ namespace App\Frontend\Modules\Member;
  
 use \JFBlog\BackController;
 use \JFBlog\HTTPRequest;
+use \JFBlog\httpResponse;
 use \Entity\Member;
 use \FormBuilder\MemberFormBuilder;
 use \JFBlog\FormHandler;
@@ -103,6 +104,13 @@ class memberController extends BackController
 					$_SESSION['mail']  = $member['mail'];
 					$_SESSION['avatar']  = $member['avatar'];
 
+					if(!empty($_POST['autoLogin'])) {
+						$this->app->httpResponse()->setCookie('login', $pseudo, time()+ (10 * 365 * 24 * 60 * 60));
+					} else {
+						if(isset($_COOKIE['login'])) {
+							$this->app->httpResponse()->setCookie('pseudo', '');
+						}
+					}
 
 					$this->app->user()->setAuthenticated(true);
 					$this->app->httpResponse()->redirect('/');
@@ -119,7 +127,21 @@ class memberController extends BackController
 		} 
 	}
 
+	public function executeLogout(HTTPRequest $request)
+	{ 
+
+	  // Suppression des variables de session et de la session
+	  $_SESSION = array();
+	  session_destroy();
+
+
+	  // Suppression des cookies de connexion automatique
+	  $this->app->httpResponse()->setCookie('login', Null, time() - 360);
+	  $this->app->user()->setFlash('Vous vous êtes bien déconnecté');
+	  $this->app->httpResponse()->redirect('/');
+	}
+
 	public function executeProfil (HTTPRequest $request) {
-		
+
 	}
 }

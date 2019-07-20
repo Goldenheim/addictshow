@@ -45,7 +45,7 @@
   <div class="form-group">
     <!-- Default checked -->
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="autoLogin" checked>
+      <input type="checkbox" class="custom-control-input" name="autoLogin" id="autoLogin" checked>
       <label class="custom-control-label" for="autoLogin">Connexion automatique</label>
     </div>
   </div>   

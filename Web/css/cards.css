@@ -112,6 +112,7 @@ a:hover {
 #blur {
   position: absolute;
   top: 5%;
+  z-index: 20;
 }
 
 .comment {
@@ -227,7 +228,7 @@ a:hover {
 
 @media (min-width: 1230px) {
   #seasonContent {
-    justify-content: space-around !important;
+    justify-content: space-evenly !important;
   }
 }
 

@@ -11,6 +11,16 @@ class NewsController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
+    if (isset($_COOKIE['login']) && $_COOKIE['login'] != Null) {
+      $manager = $this->managers->getManagerOf('Member'); 
+      $member = $manager->get('pseudo', $_COOKIE['login']);
+      $_SESSION['id']     = $member['id'];
+      $_SESSION['pseudo'] = $member['pseudo'];
+      $_SESSION['mail']  = $member['mail'];
+      $_SESSION['avatar']  = $member['avatar'];
+      $this->app->user()->setAuthenticated(true);
+    }
+
     $api = $this->app->config()->get('apiKey');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
  

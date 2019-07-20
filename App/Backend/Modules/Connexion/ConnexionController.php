@@ -29,13 +29,14 @@ class ConnexionController extends BackController
 
   public function executeLogout(HTTPRequest $request)
   { 
+
     // Suppression des variables de session et de la session
     $_SESSION = array();
     session_destroy();
 
+
     // Suppression des cookies de connexion automatique
-    setcookie('login', '');
-    setcookie('pass', '');
+    $this->app->httpResponse()->setCookie('login', Null, time() - 360);
     $this->app->user()->setFlash('Vous vous êtes bien déconnecté');
     $this->app->httpResponse()->redirect('/');
   }

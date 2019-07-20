@@ -50,7 +50,7 @@
                               <div class="col-lg-8">
                                   <p class="text-left"><strong><?php echo $_SESSION['pseudo']; ?></strong></p>
                                   <p class="text-left">
-                                      <a href="#" class="btn btn-primary btn-block btn-sm">Compte</a>
+                                      <a href="profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
                                   </p>
                               </div>
                           </div>
@@ -62,7 +62,7 @@
                           <div class="row">
                               <div class="col-lg-12">
                                   <p>
-                                      <a href="/admin/logout.html" class="btn btn-danger btn-block">Déconnexion</a>
+                                      <a href="logout.html" class="btn btn-danger btn-block">Déconnexion</a>
                                   </p>
                               </div>
                           </div>
