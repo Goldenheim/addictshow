@@ -11,7 +11,7 @@ class MemberFormBuilder extends FormBuilder
   public function build()
   {
     $this->form->add(new StringField([
-        'label' => 'Pseudo',
+        'label' => 'Pseudo*',
         'name' => 'pseudo',
         'type' => 'text',
         'placeHolder' => 'Entrez votre pseudo',
@@ -22,7 +22,7 @@ class MemberFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
-        'label' => 'Adresse email',
+        'label' => 'Adresse email*',
         'name' => 'mail',
         'type' => 'email',
         'placeHolder' => 'Entrez votre adresse mail',
@@ -33,14 +33,14 @@ class MemberFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
-        'label' => 'Confirmation de votre adresse email',
+        'label' => 'Confirmation de votre adresse email*',
         'name' => 'mail_confirm',
         'type' => 'email',
         'placeHolder' => 'Confirmez votre adresse mail',
         'maxLength' => 100,
        ]))
        ->add(new StringField([
-        'label' => 'Mot de passe',
+        'label' => 'Mot de passe*',
         'name' => 'password',
         'type' => 'password',
         'placeHolder' => 'Entrez votre mdp',
@@ -51,7 +51,7 @@ class MemberFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
-        'label' => 'Confirmation de votre mot de passe',
+        'label' => 'Confirmation de votre mot de passe*',
         'name' => 'password_confirm',
         'type' => 'password',
         'placeHolder' => 'Confirmez votre mdp',
@@ -60,7 +60,6 @@ class MemberFormBuilder extends FormBuilder
        ->add(new StringField([
         'label' => 'Envoyer une photo de profil',
         'name' => 'avatar',
-        'required' => 'false',
         'accept' =>'image/*',
         'type' => 'file',
        ]));

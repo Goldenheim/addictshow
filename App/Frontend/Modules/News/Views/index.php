@@ -44,7 +44,18 @@
                           <div class="row">
                               <div class="col-lg-4">
                                   <p class="text-center">
-                                      <img id="login-avatar" src="img/upload/<?php echo $_SESSION['avatar']; ?>">
+                                      <?php if (isset($_SESSION['avatar'])) 
+                                      {
+                                      ?>  
+                                        <img id="login-avatar" src="img/upload/<?php echo $_SESSION['avatar']; ?>">
+                                      <?php  
+                                      } else 
+                                      {
+                                      ?>  
+                                        <img id="login-avatar" src="img/img_404.png">
+                                      <?php
+                                      }
+                                      ?>
                                   </p>
                               </div>
                               <div class="col-lg-8">

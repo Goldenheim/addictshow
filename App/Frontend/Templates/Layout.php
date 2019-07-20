@@ -215,7 +215,7 @@
         <a href="#"><span class="label label-info">UI</span></a> 
         <a href="#"><span class="label label-info">growth</span></a>
         | <i class="icon-user"></i> <a href="#">Admin</a> 
-        | <i class="icon-calendar"></i> Sept 16, 2019 à 16:20
+        | <i class="icon-calendar"></i> <?php setlocale(LC_TIME, 'fra_fra'); echo strftime('%A %d %B %Y, %H:%M'); ?>
         | <i class="icon-comment"></i> <a href="#">3 Commentaires</a>
           | <i class="icon-share"></i> <a href="#">39 Partages</a>
       </p>

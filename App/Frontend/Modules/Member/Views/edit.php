@@ -70,15 +70,15 @@
 	<div class="blue">
 		<div class="container-fluid p-4">
 		  <div class="row">
-		    <h2 class="display-5 mx-auto text-white">Formulaire d'inscription</h2>
+		    <h2 class="display-5 mx-auto text-white">Édition du profil</h2>
 		  </div>
 		  <hr>
 		</div>
 		<form method="POST" action="" enctype="multipart/form-data" role="form" class="col-lg-3 text-white mx-auto">
 			<?php echo $form; ?>   
 			<div align="center">    
-			        <input type="submit" name="forminscription" value="Envoyer" class="btn btn-primary btn-rounded">
-			        <input class="btn btn-primary" type="button" onclick="window.location.replace('/')" value="Annuler" />
+			        <input type="submit" name="editProfil" value="Envoyer" class="btn btn-primary btn-rounded">
+			        <input class="btn btn-primary" type="button" onclick="window.location.replace('profil.php')" value="Annuler" />
 			</div>
 		</form>
 		<br>

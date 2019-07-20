@@ -6,6 +6,7 @@ use \JFBlog\HTTPRequest;
 use \JFBlog\httpResponse;
 use \Entity\Member;
 use \FormBuilder\MemberFormBuilder;
+use \FormBuilder\EditFormBuilder;
 use \JFBlog\FormHandler;
 use \JFBlog\Image;
  
@@ -102,6 +103,9 @@ class memberController extends BackController
 					$_SESSION['id']     = $member['id'];
 					$_SESSION['pseudo'] = $member['pseudo'];
 					$_SESSION['mail']  = $member['mail'];
+					$_SESSION['phone'] = $member['phone'];
+					$_SESSION['profession']  = $member['profession'];
+					$_SESSION['name']  = $member['name'];
 					$_SESSION['avatar']  = $member['avatar'];
 
 					if(!empty($_POST['autoLogin'])) {
@@ -113,6 +117,7 @@ class memberController extends BackController
 					}
 
 					$this->app->user()->setAuthenticated(true);
+					$this->app->user()->setFlash('Bonjour ' . $_SESSION['pseudo'] . ' !');
 					$this->app->httpResponse()->redirect('/');
 				} 
 				else 
@@ -142,6 +147,71 @@ class memberController extends BackController
 	}
 
 	public function executeProfil (HTTPRequest $request) {
+		$this->page->addVar('title', 'Profil');
+	}
 
+	public function executeDelete (HTTPRequest $request) {
+		$memberId = $request->getData('id');
+		
+		$this->managers->getManagerOf('Member')->delete($memberId);
+
+		$this->app->user()->setFlash('Le profil a bien été supprimé');
+		$this->app->httpResponse()->redirect('logout.html');
+	}
+
+	public function executeEdit (HTTPRequest $request) {
+		  $pseudo = $request->postData('pseudo');
+		  $name = $request->postData('name');
+		  $mail = $request->postData('mail');
+		  $phone = $request->postData('phone');
+		  $profession = $request->postData('profession');
+		  $manager = $this->managers->getManagerOf('Member');	
+
+		  // Si le formulaire a été envoyé.
+		  if ($request->method() == 'POST')
+		  {
+		  	$member = new Member([
+		  		'pseudo' => $pseudo,
+		  		'name' => $name,
+		  		'phone' => $phone,
+		  		'mail' => $mail,
+		  		'profession' => $profession,
+		  	]);
+
+		  	if ($request->getExists('id'))
+		  	{
+		  	  $member->setId($request->getData('id'));
+		  	}
+		  }
+		  else
+		  {
+		    $member = new Member;
+		  }
+
+		  $formBuilder = new EditFormBuilder($member);
+		  $formBuilder->build();
+		  
+		  $form = $formBuilder->form();
+		 
+		  if ($manager->get('pseudo',$pseudo) == Null) {
+		  	if ($manager->get('mail',$mail) == Null) {
+		  		$formHandler = new FormHandler($form, $manager, $request);
+		  		 
+		  		  if ($formHandler->process())
+  		  	  		{
+  		  	  		  $this->app->user()->setFlash('Votre profil a bien été édité');
+  		  	  		
+  		  	  		  $this->app->httpResponse()->redirect('/');
+  		  	  		}
+		  	} else {
+		  		$this->app->user()->setFlash('Cette adresse mail est déjà utilisée');
+		  	}
+		  } else {
+		  	  $this->app->user()->setFlash('Ce pseudo existe déjà');
+		  }
+		  
+		  $this->page->addVar('form', $form->createView());
+		  // On ajoute une définition pour le titre.
+		  $this->page->addVar('title', 'Édition du profil');
 	}
 }

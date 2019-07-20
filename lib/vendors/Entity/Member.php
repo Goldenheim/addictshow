@@ -11,6 +11,9 @@ class Member extends Entity
             $mail_confirm,
             $password_confirm,
             $hash_validation,
+            $name,
+            $phone,
+            $profession,
             $avatar = array();
 
   const PSEUDO_INVALIDE = 1;
@@ -20,12 +23,14 @@ class Member extends Entity
   const PASSWORD_CONFIRM_INVALIDE = 5;
   const HASH_VALIDATION_INVALIDE = 6;
   const AVATAR_INVALIDE = 7;
+  const NAME_INVALIDE = 8;
+  const PHONE_INVALIDE = 9;
+  const PROFESSION_INVALIDE = 10;
 
   public function isValid()
   {
-    return !(empty($this->pseudo) || empty($this->mail) || empty($this->password));
+    return !(empty($this->pseudo) || empty($this->mail));
   }
-
 
   // SETTERS //
 
@@ -49,7 +54,37 @@ class Member extends Entity
     $this->mail = $mail;
   }
 
-   public function setAvatar($avatar)
+  public function setName($name)
+  {
+    if (!is_string($name) || empty($name))
+    {
+      $this->erreurs[] = self::NAME_INVALIDE;
+    }
+
+    $this->name = $name;
+  }
+
+  public function setProfession($profession)
+  {
+    if (!is_string($profession) || empty($profession))
+    {
+      $this->erreurs[] = self::PROFESSION_INVALIDE;
+    }
+
+    $this->profession = $profession;
+  }
+
+  public function setPhone($phone)
+  {
+    if (!is_int($phone) || empty($phone))
+    {
+      $this->erreurs[] = self::PHONE_INVALIDE;
+    }
+
+    $this->phone = $phone;
+  }
+
+  public function setAvatar($avatar)
   {
     if (!empty($avatar))
     {
@@ -114,6 +149,21 @@ class Member extends Entity
   public function password()
   {
     return $this->password;
+  }
+
+  public function name()
+  {
+    return $this->name;
+  }
+
+  public function phone()
+  {
+    return $this->phone;
+  }
+
+  public function profession()
+  {
+    return $this->profession;
   }
 
   public function mail_confirm()

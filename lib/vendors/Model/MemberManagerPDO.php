@@ -50,7 +50,7 @@ class MemberManagerPDO extends MemberManager
 
   public function get($attr, $value)
   {
-    $requete = $this->dao->prepare('SELECT id, pseudo, mail, password, avatar, date_inscription FROM members WHERE '. $attr .' = :attr');
+    $requete = $this->dao->prepare('SELECT id, pseudo, mail, password, avatar, date_inscription, phone, name, profession FROM members WHERE '. $attr .' = :attr');
     $requete->bindValue(':attr', $value);
     $requete->execute();
     
@@ -84,11 +84,13 @@ class MemberManagerPDO extends MemberManager
 
   protected function modify(Member $member)
   {
-    $requete = $this->dao->prepare('UPDATE members SET pseudo = :pseudo, mail = :mail, password = :password WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE members SET pseudo = :pseudo, mail = :mail, name = :name, phone = :phone, profession = :profession WHERE id = :id');
     
     $requete->bindValue(':pseudo', $member->pseudo());
     $requete->bindValue(':mail', $member->mail());
-    $requete->bindValue(':password', $member->password());
+    $requete->bindValue(':name', $member->name());
+    $requete->bindValue(':phone', $member->phone());
+    $requete->bindValue(':profession', $member->profession());
     $requete->bindValue(':id', $member->id(), \PDO::PARAM_INT);
     
     $requete->execute();
