@@ -7,11 +7,12 @@ class CommentsManagerPDO extends CommentsManager
 {
   protected function add(Comment $comment)
   {
-    $q = $this->dao->prepare('INSERT INTO comments SET movie = :movie, auteur = :auteur, contenu = :contenu, date = NOW()');
+    $q = $this->dao->prepare('INSERT INTO comments SET movie = :movie, auteur = :auteur, contenu = :contenu, avatar = :avatar, date = NOW()');
     
     $q->bindValue(':movie', $comment->movie(), \PDO::PARAM_INT);
     $q->bindValue(':auteur', $comment->auteur());
     $q->bindValue(':contenu', $comment->contenu());
+    $q->bindValue(':avatar', $comment->avatar());
     
     $q->execute();
     
@@ -54,7 +55,7 @@ class CommentsManagerPDO extends CommentsManager
         throw new \InvalidArgumentException('L\'identifiant passé doit être un nombre entier valide');
       }
       
-      $q = $this->dao->prepare('SELECT id, movie, auteur, contenu, answer, report, date FROM comments WHERE movie = :movie');
+      $q = $this->dao->prepare('SELECT id, movie, auteur, contenu, answer, report, date, avatar FROM comments WHERE movie = :movie');
       $q->bindValue(':movie', $movie, \PDO::PARAM_INT);
       $q->execute();
       

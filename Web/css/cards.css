@@ -21,6 +21,19 @@ body {
 
 /* AVATAR */ 
 
+#comment-container {
+  padding: 2%;
+  background: white;
+  border-radius: 5px;
+  width: 95%;
+  margin: auto;
+}
+
+.comment-avatar {
+  height: 100px;
+  width: 100px;
+}
+
 #avatar {
   height: 20%;
   background: none;

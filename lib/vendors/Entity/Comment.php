@@ -9,10 +9,12 @@ class Comment extends Entity
             $auteur,
             $contenu,
             $answer,
+            $avatar,
             $date;
 
   const AUTEUR_INVALIDE = 1;
   const CONTENU_INVALIDE = 2;
+  const AVATAR_INVALIDE = 3;
 
   public function isValid()
   {
@@ -46,12 +48,22 @@ class Comment extends Entity
 
   public function setTitre($titre)
   {
-    if (!is_string($auteur) || empty($auteur))
+    if (!is_string($titre) || empty($titre))
     {
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
 
     $this->titre = $titre;
+  }
+
+  public function setAvatar($avatar)
+  {
+    if (!is_string($avatar) || empty($avatar))
+    {
+      $this->erreurs[] = self::AVATAR_INVALIDE;
+    }
+
+    $this->avatar = $avatar;
   }
 
   public function setAnswer($answer)
@@ -82,6 +94,11 @@ class Comment extends Entity
   public function auteur()
   {
     return $this->auteur;
+  }
+
+  public function avatar()
+  {
+    return $this->avatar;
   }
 
   public function contenu()

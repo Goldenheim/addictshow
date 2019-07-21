@@ -58,7 +58,7 @@ class memberController extends BackController
 	  			'pseudo' => $request->postData('pseudo'),
 	  			'mail' => $request->postData('mail'),
 	  			'password' => $request->postData('password'),
-	  			'avatar' => 'img_404.png',
+	  			'avatar' => 'avatar-404.jpg',
 	  			'hash_validation' => $hash_validation
 	  		]);
 	  	}

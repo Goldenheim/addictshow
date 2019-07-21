@@ -317,6 +317,23 @@
 		<h2 class="display-5 text-light text-white">Commentaires:</h2>
 	</div>
 </div>
+<div class="container">
+    <div class="row">
+    <?php if ($user->isAuthenticated())
+    {
+    ?>
+        <a class="mx-auto" href="commenter-<?= $movie['id'] ?>.html"><button class="btn btn-info">Ajouter un commentaire</button></a>
+    <?php
+    } 
+    else
+    {
+    ?>
+      <a class="nav-link" href="connexion.php"><p class="text-white">Vous devez être connecté pour poster un commentaire</p></a>
+    <?php  
+    }  
+    ?>
+  </div>
+</div>
 <?php 
 if (empty($comments))
 {
@@ -331,76 +348,79 @@ if (empty($comments))
 }
 else 
 {
-	foreach ($comments as $comment)
-	{
-	?>
-	<div class="col-lg-11 mx-auto media comment border p-3 m-3">
-		<div class="media-body">
-				<fieldset>
-				  <legend class="" style="margin: 0!important;">
-				    <span class="offset-lg-6 col-lg-2 small text-white">Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?></span>
-				    	<div class="btn-group float-right"> 
-				    	  <button class="btn btn-info">Action(s)</button>
-			  			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-				    	  <ul class="dropdown-menu">
-				    	  	<?php if ($user->isAuthenticated() && ($_SESSION['pseudo'] == $comment['auteur'])) { ?> 
-				    	    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
-				    	    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
-				    	    <?php if ($comment['answer'] != null) { ?>
-				    	    		<li class="nav-item"><a class="nav-link" href="admin/Answer-delete-<?= $comment['id'] ?>.html"><i class="fas fa-eraser"> Supp. la réponse</i></a></li>
-				    	    	<?php
-				    	    	} else 
-				    	    	{ ?>
-			    	    			<li class="nav-item"><a class="nav-link" href="admin/comment-answer-<?= $comment['id'] ?>.html"><i class="fas fa-feather-alt"> Répondre</i></a></li>
-				    	    <?php
-				    	    } } else { ?>
-				    	    		<li class="nav-item"><a class="nav-link" data-toggle="tooltip" title="signaler le commentaire" href="/comment-report-<?= $comment['id'] ?>.html"><i class="fas fa-flag"> Signaler</i></a></li>
-				    	    <?php 
-				    			} ?>
-				    	  </ul>
-				    	</div> 
-				  </legend>
-				  <hr>
-				   <div class="container-fluid">
-			   		   <?php
-			   		   if ($comment['report'] == 2) 
-			   		   	{ 
-			   	   			echo '<p id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'<div style="text-align:right;"><small> Édité par J.Forteroche</small><hr></div></p>'; ?>
-			   		   		
-			   			<?php 
-			   			} else 
-			   			{
-			   		   	echo '<p class="lead text-white text-light" id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'</P>';
-			   		 	}
-			   		 	if ($comment['answer'] != null) 
-			   		 	{
-			   	    		echo '<br><div><i class="fas fa-comment-dots"></i> Réponse de l\'admin:</div><div class="card bg-danger text-white"><div class="card-body">'.nl2br($comment['answer']).'</div></div>';
-			   	    	}	     
-			   		 ?>   	
-				   </div>	   
-				   <br>
-				</fieldset>
-		</div>
-	</div>
-	<?php
-	}
+?>
+<!-- Grid row -->
+<div id="comment-container" class="mt-3 d-flex justify-content-center">
+
+  <!-- Grid column -->
+  <div class="col-lg-12 col-xl-8">
+<?php  
+  foreach ($comments as $comment)
+  {
+  ?>
+      <div class="media d-block d-md-flex">
+        <?php
+        if ($comment['avatar'] == Null) 
+        {
+        ?>
+        <img class="d-flex rounded-circle comment-avatar z-depth-1-half mb-3 mx-auto" src="img/upload/avatar-404.jpg" alt="Avatar">
+        <?php
+        } else 
+        {
+        ?>
+        <img class="d-flex rounded-circle comment-avatar z-depth-1-half mb-3 mx-auto" src="img/upload/<?php echo $comment["avatar"]; ?>" alt="Avatar">
+        <?php 
+        }
+        ?>
+        <div class="media-body text-center text-md-left ml-md-3 ml-0">
+          <h5 class="mt-0 font-weight-bold blue-text"><span class="small">Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?>
+                <div class="btn-group float-right"> 
+                  <button class="btn btn-info">Action(s)</button>
+                  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <?php if ($user->isAuthenticated() && ($_SESSION['pseudo'] == $comment['auteur'])) { ?> 
+                    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
+                    <?php if ($comment['answer'] != null) { ?>
+                        <li class="nav-item"><a class="nav-link" href="admin/Answer-delete-<?= $comment['id'] ?>.html"><i class="fas fa-eraser"> Supp. la réponse</i></a></li>
+                      <?php
+                      } else 
+                      { ?>
+                        <li class="nav-item"><a class="nav-link" href="admin/comment-answer-<?= $comment['id'] ?>.html"><i class="fas fa-feather-alt"> Répondre</i></a></li>
+                    <?php
+                    } } else { ?>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tooltip" title="signaler le commentaire" href="/comment-report-<?= $comment['id'] ?>.html"><i class="fas fa-flag"> Signaler</i></a></li>
+                    <?php 
+                    } ?>
+                  </ul>
+                </div> 
+                <hr>
+                 <div class="container-fluid">
+                     <?php
+                     if ($comment['report'] == 2) 
+                      { 
+                        echo '<p id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'<div style="text-align:right;"><small> Édité par J.Forteroche</small><hr></div></p>'; ?>
+                        
+                    <?php 
+                    } else 
+                    {
+                      echo '<p class="lead text-black" id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'</P>';
+                    }
+                    if ($comment['answer'] != null) 
+                    {
+                        echo '<br><div><i class="fas fa-comment-dots"></i> Réponse de l\'admin:</div><div class="card bg-danger text-white"><div class="card-body">'.nl2br($comment['answer']).'</div></div>';
+                      }      
+                   ?>     
+                 </div>    
+                 <br>
+        </div>
+      </div>
+  <?php
+  }
 }
 ?>
-
-<div class="container">
-    <div class="row">
-    <?php if ($user->isAuthenticated())
-    {
-    ?>
-  		  <a class="mx-auto" href="commenter-<?= $movie['id'] ?>.html"><button class="btn btn-info">Ajouter un commentaire</button></a>
-    <?php
-    } 
-    else
-    {
-    ?>
-      <a class="nav-link" href="connexion.php"><p class="text-white">Vous devez être connecté pour poster un commentaire</p></a>
-    <?php  
-    }  
-    ?>
   </div>
+  <!-- Grid column -->
+
 </div>
+<!-- Grid row -->
