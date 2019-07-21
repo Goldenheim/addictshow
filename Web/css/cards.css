@@ -13,6 +13,12 @@ body {
   transition: 300ms;
 }
 
+/* TITLE */
+
+.title {
+  color: #6ACFF0;
+}
+
 /* AVATAR */ 
 
 #avatar {

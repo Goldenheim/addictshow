@@ -69,16 +69,29 @@
 <div class="container">
   <h2 class="display-5 text-white mt-3">Ajouter un commentaire</h2> 
 </div>
-<form class="form" action="" method="post">
-  <p>
-    <?= $form ?>
-    
-    <div class="row">
-    	<p class="mx-auto">
-  		    <input class="btn btn-primary" type="submit" value="Répondre" />
-  			  <input class="btn btn-primary" type="button" onclick="window.location.replace('/movie-<?php echo $id ?>.html')" value="Annuler" />
-    	</p>
-    </div>
-  </p>
-</form>
+<?php if ($user->isAuthenticated())
+{
+?>
+    <form class="form" action="" method="post">
+      <p>
+        <?= $form ?>
+        <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
+        <div class="row">
+          <p class="mx-auto">
+              <input class="btn btn-primary" type="submit" value="Répondre" />
+              <input class="btn btn-primary" type="button" onclick="window.location.replace('/movie-<?php echo $id ?>.html')" value="Annuler" />
+          </p>
+        </div>
+      </p>
+    </form>
+<?php
+} 
+else
+{
+?>
+  <a class="nav-link" href="connexion.php"><p class="text-white">Vous devez être connecté pour poster un commentaire</p></a>
+<?php  
+}  
+?>
+
 

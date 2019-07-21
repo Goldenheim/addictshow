@@ -51,7 +51,7 @@ class CommentsManagerPDO extends CommentsManager
     {
       if (!ctype_digit($movie))
       {
-        throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
+        throw new \InvalidArgumentException('L\'identifiant passé doit être un nombre entier valide');
       }
       
       $q = $this->dao->prepare('SELECT id, movie, auteur, contenu, answer, report, date FROM comments WHERE movie = :movie');
@@ -104,6 +104,24 @@ class CommentsManagerPDO extends CommentsManager
     $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
     
     return $q->fetch();
+  }  
+
+  public function author($auteur)
+  {
+    $q = $this->dao->prepare('SELECT id, movie, auteur, contenu, date, report FROM comments WHERE auteur = :auteur');
+    $q->bindValue(':auteur', $auteur);
+    $q->execute();
+    
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+
+    $comments = $q->fetchAll();
+          
+    foreach ($comments as $comment)
+    {
+      $comment->setDate(new \DateTime($comment->date()));
+    }
+    
+    return $comments;
   }  
 
   public function delete($id)

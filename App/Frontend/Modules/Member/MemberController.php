@@ -22,7 +22,7 @@ class memberController extends BackController
 	  // Si le formulaire a été envoyé.
 	  if ($request->method() == 'POST')
 	  {
-	  	if(isset($_FILES['avatar']))
+	  	if(isset($_FILES['avatar']) AND $_FILES['avatar']['error'] == 0)
 	  	{
 		  	$content_dir = "img/upload/"; // dossier où sera déplacé le fichier
 		  	 
@@ -44,15 +44,24 @@ class memberController extends BackController
 		  	{
 		  	    echo "Le fichier est enregistré";
 			}
-	  	}
 
-	  	$member = new Member([
-	  		'pseudo' => $request->postData('pseudo'),
-	  		'mail' => $request->postData('mail'),
-	  		'password' => $request->postData('password'),
-	  		'avatar' => $name_file,
-	  		'hash_validation' => $hash_validation
-	  	]);
+			$member = new Member([
+				'pseudo' => $request->postData('pseudo'),
+				'mail' => $request->postData('mail'),
+				'password' => $request->postData('password'),
+				'avatar' => $name_file,
+				'hash_validation' => $hash_validation
+			]);
+	  	} else 
+	  	{
+	  		$member = new Member([
+	  			'pseudo' => $request->postData('pseudo'),
+	  			'mail' => $request->postData('mail'),
+	  			'password' => $request->postData('password'),
+	  			'avatar' => 'img_404.png',
+	  			'hash_validation' => $hash_validation
+	  		]);
+	  	}
 	  }
 	  else
 	  {
@@ -148,6 +157,9 @@ class memberController extends BackController
 
 	public function executeProfil (HTTPRequest $request) {
 		$this->page->addVar('title', 'Profil');
+		$auteur = $this->managers->getManagerOf('Comments')->author($_SESSION['pseudo']);
+
+		$this->page->addVar('auteur', $auteur);	
 	}
 
 	public function executeDelete (HTTPRequest $request) {
@@ -156,7 +168,7 @@ class memberController extends BackController
 		$this->managers->getManagerOf('Member')->delete($memberId);
 
 		$this->app->user()->setFlash('Le profil a bien été supprimé');
-		$this->app->httpResponse()->redirect('logout.html');
+		$this->app->httpResponse()->redirect('/');
 	}
 
 	public function executeEdit (HTTPRequest $request) {

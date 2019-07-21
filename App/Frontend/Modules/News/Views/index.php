@@ -6,7 +6,7 @@
          <div class="container-fluid">
             <div class="row  justify-content-center align-items-center d-flex text-center h-100">
               <div class="col-12 col-md-8  h-50 ">
-                  <a href="/" style="text-decoration: none;"><h1 class="display-2  text-light mb-2 mt-5"><strong>ADDICTSHOW</strong></h1></a>
+                  <a href="/" style="text-decoration: none;"><h1 class="display-2  text-light mb-2 mt-5"><strong><span class="title">ADDICT</span>SHOW</strong></h1></a>
                   <p class="lead  text-light mb-5">Retrouvez toutes les informations disponibles sur vos séries préférées</p>
                   <p class="mb5">
                       <form method="post" action="search.php" class="form-inline">
@@ -44,15 +44,15 @@
                           <div class="row">
                               <div class="col-lg-4">
                                   <p class="text-center">
-                                      <?php if (isset($_SESSION['avatar'])) 
+                                      <?php if ($_SESSION['avatar'] == 'Array') 
                                       {
                                       ?>  
-                                        <img id="login-avatar" src="img/upload/<?php echo $_SESSION['avatar']; ?>">
+                                        <img id="login-avatar" src="img/img_404.png">
                                       <?php  
                                       } else 
                                       {
                                       ?>  
-                                        <img id="login-avatar" src="img/img_404.png">
+                                        <img id="login-avatar" src="img/upload/<?php echo $_SESSION['avatar']; ?>">
                                       <?php
                                       }
                                       ?>

@@ -343,7 +343,7 @@ else
 				    	  <button class="btn btn-info">Action(s)</button>
 			  			  <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
 				    	  <ul class="dropdown-menu">
-				    	  	<?php if ($user->isAuthenticated()) { ?> 
+				    	  	<?php if ($user->isAuthenticated() && ($_SESSION['pseudo'] == $comment['auteur'])) { ?> 
 				    	    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
 				    	    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
 				    	    <?php if ($comment['answer'] != null) { ?>
@@ -388,8 +388,19 @@ else
 ?>
 
 <div class="container">
-	<div class="row">
-		<a class="mx-auto" href="commenter-<?= $movie['id'] ?>.html"><button class="btn btn-info">Ajouter un commentaire</button></a>
-	</div>
-</div>
+    <div class="row">
+    <?php if ($user->isAuthenticated())
+    {
+    ?>
+  		  <a class="mx-auto" href="commenter-<?= $movie['id'] ?>.html"><button class="btn btn-info">Ajouter un commentaire</button></a>
+    <?php
+    } 
+    else
+    {
+    ?>
+      <a class="nav-link" href="connexion.php"><p class="text-white">Vous devez être connecté pour poster un commentaire</p></a>
+    <?php  
+    }  
+    ?>
+  </div>
 </div>

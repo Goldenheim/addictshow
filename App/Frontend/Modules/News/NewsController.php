@@ -105,12 +105,14 @@ class NewsController extends BackController
   public function executeInsertComment(HTTPRequest $request)
   {
     $id = $request->getData('movie');
+    $manager = $this->managers->getManagerOf('member');
+    $member = $manager->get('id', $request->postData('id'));
     // Si le formulaire a été envoyé.
     if ($request->method() == 'POST')
     {
       $comment = new Comment([
         'movie' => $request->getData('movie'),
-        'auteur' => $request->postData('auteur'),
+        'auteur' => $member['pseudo'],
         'contenu' => $request->postData('contenu')
       ]);
     }

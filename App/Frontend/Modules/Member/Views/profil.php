@@ -178,11 +178,18 @@
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experience</label>
+                                                <label>Derniers commentaires publiés : </label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
+                                            
+                                                <?php foreach ($auteur as $com) 
+                                                {
+                                                ?>
+	                                                <div class="col-md-10" id="<?php echo $com['id']; ?>">
+	                                                	<a href="movie-<?php echo $com['movie']; ?>.html#comment-<?php echo $com['id']; ?>"><?php echo $com['contenu']; ?></a><small> publié le <?php echo $com['date']->format('d/m/Y'); ?></small>
+	                                                </div>
+                                                <?php	
+                                                }
+                                                ?>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -228,3 +235,5 @@
                 </div>
             </form>           
         </div>
+
+        

@@ -155,7 +155,7 @@
         {
         ?>
           <li class="list-inline-item">
-            <h5 class="mb-1">Vous êtes actuellement connecté en tant que <strong><?php echo $_SESSION['pseudo']; ?></strong></h5>
+            <h5 class="mb-1">Vous êtes actuellement connecté en tant que <a href="profil.php"><strong><?php echo $_SESSION['pseudo']; ?></strong></a></h5>
           </li>
         <?php  
         } else 
