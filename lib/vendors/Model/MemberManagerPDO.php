@@ -50,7 +50,7 @@ class MemberManagerPDO extends MemberManager
 
   public function get($attr, $value)
   {
-    $requete = $this->dao->prepare('SELECT id, pseudo, mail, password, avatar, date_inscription, phone, name, profession FROM members WHERE '. $attr .' = :attr');
+    $requete = $this->dao->prepare('SELECT id, pseudo, mail, password, avatar, date_inscription, phone, name, profession, genre FROM members WHERE '. $attr .' = :attr');
     $requete->bindValue(':attr', $value);
     $requete->execute();
     
@@ -71,12 +71,13 @@ class MemberManagerPDO extends MemberManager
 
   protected function add(Member $member)
   {
-    $requete = $this->dao->prepare('INSERT INTO members SET pseudo = :pseudo, mail = :mail, password = :password, hash_validation = :hash_validation, avatar = :avatar, date_inscription = NOW()');
+    $requete = $this->dao->prepare('INSERT INTO members SET pseudo = :pseudo, mail = :mail, password = :password, hash_validation = :hash_validation, avatar = :avatar, tmdbSession = :tmdbSession, date_inscription = NOW()');
     
     $requete->bindValue(':pseudo', $member->pseudo());
     $requete->bindValue(':mail', $member->mail());
     $requete->bindValue(':password', password_hash($member->password(), PASSWORD_DEFAULT));
     $requete->bindValue(':hash_validation', $member->hash_validation());
+    $requete->bindValue(':tmdbSession', $member->tmdbSession());
     $requete->bindValue(':avatar', $member->avatar());
     
     $requete->execute();
@@ -84,13 +85,14 @@ class MemberManagerPDO extends MemberManager
 
   protected function modify(Member $member)
   {
-    $requete = $this->dao->prepare('UPDATE members SET pseudo = :pseudo, mail = :mail, name = :name, phone = :phone, profession = :profession WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE members SET pseudo = :pseudo, mail = :mail, name = :name, phone = :phone, profession = :profession, genre = :genre WHERE id = :id');
     
     $requete->bindValue(':pseudo', $member->pseudo());
     $requete->bindValue(':mail', $member->mail());
     $requete->bindValue(':name', $member->name());
     $requete->bindValue(':phone', $member->phone());
     $requete->bindValue(':profession', $member->profession());
+    $requete->bindValue(':genre', $member->genre());
     $requete->bindValue(':id', $member->id(), \PDO::PARAM_INT);
     
     $requete->execute();

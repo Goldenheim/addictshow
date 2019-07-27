@@ -13,25 +13,54 @@ class NewsController extends BackController
   {
     if (isset($_COOKIE['login']) && $_COOKIE['login'] != Null) {
       $manager = $this->managers->getManagerOf('Member'); 
-      $member = $manager->get('pseudo', $_COOKIE['login']);
-      $_SESSION['id']     = $member['id'];
-      $_SESSION['pseudo'] = $member['pseudo'];
-      $_SESSION['mail']  = $member['mail'];
-      $_SESSION['avatar']  = $member['avatar'];
+      $member = $manager->get('id', $_COOKIE['login']);
+      $this->app->user()->setAttribute('id',$member['id']);
+      $this->app->user()->setAttribute('pseudo',$member['pseudo']);
+      $this->app->user()->setAttribute('mail',$member['mail']);
+      $this->app->user()->setAttribute('genre',$member['genre']);
+      $this->app->user()->setAttribute('avatar',$member['avatar']);
+      $this->app->user()->setAttribute('name',$member['name']);
+      $this->app->user()->setAttribute('profession',$member['profession']);
+      $this->app->user()->setAttribute('phone',$member['phone']);
       $this->app->user()->setAuthenticated(true);
     }
 
     $api = $this->app->config()->get('apiKey');
     $nombreCaracteres = $this->app->config()->get('nombre_caracteres');
+    $year = date("Y");
+    $month = date("n");
  
     // On ajoute une définition pour le titre.
     $this->page->addVar('title', 'Page d\'accueil: AddictShow');
  
-    $json = file_get_contents("https://api.themoviedb.org/3/discover/tv?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&sort_by=popularity.desc&air_date.gte=2019&page=1&timezone=France%2FPARIS&include_null_first_air_dates=false");
+    $json = file_get_contents("https://api.themoviedb.org/3/discover/tv?api_key=$api&language=fr-FR&sort_by=popularity.desc&air_date.gte=2019&page=1&timezone=France%2FPARIS&include_null_first_air_dates=false");
     $parsee = json_decode($json, true);
+    $jsonNew = file_get_contents("https://api.themoviedb.org/3/discover/tv?api_key=$api&language=fr-FR&sort_by=first_air_date.desc&first_air_date.gte=$year-$month-01&first_air_date.lte=$year-$month-31&page=1&timezone=France%2FPARIS&with_networks=213&include_null_first_air_dates=false");
+    $parseeNew = json_decode($jsonNew, true);
+    $jsonCharacter = file_get_contents("https://api.themoviedb.org/3/person/popular?api_key=$api&language=fr-FR&page=1");
+    $parseeCharacter = json_decode($jsonCharacter, true);
+    $jsonSearch = file_get_contents("https://api.themoviedb.org/3/genre/tv/list?api_key=$api&language=fr-FR");
+    $parseeSearch = json_decode($jsonSearch, true);
+
+    $lastCom = $this->managers->getManagerOf('Comments')->getList(0, 5);
+
+    foreach ($lastCom as $com)
+    {
+      if (strlen($com->contenu()) > $nombreCaracteres)
+      {
+        $debut = substr($com->contenu(), 0, $nombreCaracteres);
+        $debut = substr($debut, 0, strrpos($debut, ' ')) . ' [...]';
+ 
+        $com->setContenu($debut);
+      }
+    }
 
     // On ajoute la variable $listeNews à la vue.
     $this->page->addVar('listShow', $parsee);
+    $this->page->addVar('new', $parseeNew);
+    $this->page->addVar('lastCom', $lastCom);
+    $this->page->addVar('character', $parseeCharacter);
+    $this->page->addVar('search', $parseeSearch);
   }
  
   public function executeSearch(HTTPRequest $request)
@@ -54,6 +83,24 @@ class NewsController extends BackController
     $this->page->addVar('title', $title);
   }
 
+  public function executeGenre(HTTPRequest $request)
+  {
+    if (isset($_POST["search"]) && $_POST["search"] != null) 
+    { 
+      $id = $_POST["search"];
+
+      $json = file_get_contents("https://api.themoviedb.org/3/discover/tv?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&sort_by=popularity.desc&page=1&timezone=France%2FPARIS&with_genres=$id&include_null_first_air_dates=false");
+      $parsee = json_decode($json, true); 
+    }
+    else
+    {
+      $this->app->httpResponse()->redirect404();
+    }
+ 
+    $this->page->addVar('title', 'Recherche par genre');
+    $this->page->addVar('search', $parsee);
+  }
+
   public function executeMovie(HTTPRequest $request)
   {
     $id = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
@@ -63,9 +110,11 @@ class NewsController extends BackController
       $searchEncode = urlencode($_GET['id']);
 
       $json = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
-      $jsonSimilar = file_get_contents("https://api.themoviedb.org/3/tv/1399/similar?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&page=1");
+      $jsonSimilar = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode/similar?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&page=1");
+      $jsonReviews = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode/reviews?api_key=22b5d3d2b10babbb4291177132454423&language=en-US&page=1");
       $parsee = json_decode($json, true);
       $parseeSimilar = json_decode($jsonSimilar, true);
+      $parseeReviews = json_decode($jsonReviews, true);
     } else {
       $this->app->httpResponse()->redirect404();
     }
@@ -74,15 +123,13 @@ class NewsController extends BackController
  
     $this->page->addVar('movie', $parsee);
     $this->page->addVar('similar', $parseeSimilar);
+    $this->page->addVar('reviews', $parseeReviews);
     $this->page->addVar('title', $title);
     $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf(urlencode($_GET['id'])));
   }
 
-   public function executeSeason(HTTPRequest $request)
+  public function executeSeason(HTTPRequest $request)
   {
-    $id = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
-    $number = $this->managers->getManagerOf('News')->getUnique($request->getData('number'));
-
     if(isset($_GET['id']) && isset($_GET['number']))
     {
       $idSeason = $_GET['id'];
@@ -98,8 +145,41 @@ class NewsController extends BackController
       $this->app->httpResponse()->redirect404();
     }
 
+    $this->page->addVar('seasonId', $idSeason);
     $this->page->addVar('season', $parsee);
     $this->page->addVar('video', $parseeVideo);
+  }
+
+  public function executeEpisode(HTTPRequest $request)
+  {
+    if(!empty($_GET['id']) && !empty($_GET['season']) && !empty($_GET['episode']))
+    {
+      $idSeason = $_GET['id'];
+      $numberSeason = $_GET['season'];
+      $numberEpisode = $_GET['episode'];
+
+      $json = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason/season/$numberSeason/episode/$numberEpisode?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
+      $parsee = json_decode($json, true);
+      $name = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
+      $parseeName = json_decode($name, true);
+      $jsonCast = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason/season/$numberSeason/episode/$numberEpisode/credits?api_key=22b5d3d2b10babbb4291177132454423");
+      $cast = json_decode($jsonCast, true);
+      $jsonVideo = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason/season/$numberSeason/episode/$numberEpisode/videos?api_key=22b5d3d2b10babbb4291177132454423&language=en-US");
+      $parseeVideo = json_decode($jsonVideo, true);
+      $jsonImg = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason/season/$numberSeason/episode/$numberEpisode/images?api_key=22b5d3d2b10babbb4291177132454423");
+      $parseeImg = json_decode($jsonImg, true);
+    }
+    else
+    {
+      $this->app->httpResponse()->redirect404();
+    }
+
+    $this->page->addVar('showTitle', $parseeName['name']);
+    $this->page->addVar('video', $parseeVideo);
+    $this->page->addVar('episode', $parsee);
+    $this->page->addVar('cast', $cast);
+    $this->page->addVar('image', $parseeImg);
+    $this->page->addVar('title','Épisode ' . $parsee['episode_number'] . ' de la saison ' . $parsee['season_number'] . ' de ' . $parseeName['name']);
   }
  
   public function executeInsertComment(HTTPRequest $request)

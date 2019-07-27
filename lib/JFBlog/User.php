@@ -5,6 +5,13 @@ session_start();
 
 class User
 {
+  public function logOut()
+  {
+    // Suppression des variables de session et de la session
+    $_SESSION = array();
+    session_destroy();
+  }
+
   public function getAttribute($attr)
   {
     return isset($_SESSION[$attr]) ? $_SESSION[$attr] : null;

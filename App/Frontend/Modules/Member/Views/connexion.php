@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-<div class="container-fluid">
+<div class="container-fluid mt-4">
   <div class="row">
     <h2 class="display-5 mx-auto text-white">Veuillez-vous identifier</h2>
   </div>
@@ -56,8 +56,7 @@
 </form>
 <hr>
 <div class="container-fluid">
-  <div class="row">
+  <div class="row mt-3 mb-3">
     <a href="/subscribe.php" class="btn btn-primary btn-rounded mx-auto">Vous n'êtes pas encore inscris ?</a>
   </div>
 </div>
-<br>

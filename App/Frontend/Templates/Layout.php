@@ -36,8 +36,6 @@
         </section>
       </div>
 
-    <br>
-
     <div class='scrolltop'>
         <div class='scroll icon'><i class="fa fa-arrow-circle-up"></i></div>
     </div>  
@@ -49,7 +47,7 @@
       <div class="container text-center text-md-left">
 
         <!-- Grid row -->
-        <div class="row">
+        <div class="container">
 
           <!-- Grid column -->
           <div class="col-md-4 mx-auto">

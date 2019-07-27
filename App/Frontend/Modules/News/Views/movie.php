@@ -1,80 +1,98 @@
 <div class="thetop"></div>  
-  <div class="pos-f">
-    <nav class="navbar navbar-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <form class="inline-group" method="get" action="">
-        <?php if ($user->isAuthenticated())
-        {
-        ?>
-          <div class="btn-group">
-            <a class="dropdown" data-toggle="dropdown" href=""><img id="avatar-nav" src="img/upload/<?php echo $_SESSION['avatar']; ?>"></a>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                    <div class="navbar-login">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <p class="text-center">
+<div class="pos-f-t">
+  <nav class="navbar navbar-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class=""><span class="mx-auto p-2"><strong class="text-light">ADDICTSHOW</strong></span></a>
+    <form class="inline-group" method="get" action="">
+      <?php if ($user->isAuthenticated())
+      {
+      ?>
+        <div class="btn-group">
+          <a class="dropdown" data-toggle="dropdown" href=""><img id="avatar-nav" src="img/upload/<?php echo $_SESSION['avatar']; ?>"></a>
+          <ul class="dropdown-menu dropdown-menu-right">
+              <li>
+                  <div class="navbar-login">
+                      <div class="row">
+                          <div class="col-lg-4">
+                              <p class="text-center">
+                                  <?php if ($_SESSION['avatar'] == 'Array') 
+                                  {
+                                  ?>  
+                                    <img id="login-avatar" src="img/img_404.png">
+                                  <?php  
+                                  } else 
+                                  {
+                                  ?>  
                                     <img id="login-avatar" src="img/upload/<?php echo $_SESSION['avatar']; ?>">
-                                </p>
-                            </div>
-                            <div class="col-lg-8">
-                                <p class="text-left"><strong><?php echo $_SESSION['pseudo']; ?></strong></p>
-                                <p class="text-left">
-                                    <a href="#" class="btn btn-primary btn-block btn-sm">Compte</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <div class="navbar-login navbar-login-session">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <p>
-                                    <a href="/admin/logout.html" class="btn btn-danger btn-block">Déconnexion</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>            
-          </div>
-        <?php  
-        } else 
-        {
-        ?> 
-        <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
-        <a class="btn btn-primary my-2 my-sm-0" href="connexion.php" >Connexion</a>
-        <?php
-        }
-        ?>
-      </form>
-    </nav>
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-dark p-3">
-        <div class="jumbotron">
-          <h1 class="display-5 form-inline"><em>Faire une recherche</em></h1>
-          <form method="post" action="search.php" class="form-inline">
-            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
-          </form>
-          <hr class="my-4">
+                                  <?php
+                                  }
+                                  ?>
+                              </p>
+                          </div>
+                          <div class="col-lg-8">
+                              <p class="text-left"><strong><?php echo $_SESSION['pseudo']; ?></strong></p>
+                              <p class="text-left">
+                                  <a href="profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+              <li class="divider"></li>
+              <li>
+                  <div class="navbar-login navbar-login-session">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <p>
+                                  <a href="logout.html" class="btn btn-danger btn-block">Déconnexion</a>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </li>
+          </ul>            
         </div>
+      <?php  
+      } else 
+      {
+      ?> 
+      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="connexion.php" >Connexion</a>
+      <?php
+      }
+      ?>
+    </form>
+  </nav>
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-3">
+      <div class="jumbotron">
+        <h1 class="display-5 form-inline"><em>Faire une recherche</em></h1>
+        <form method="post" action="search.php" class="form-inline">
+          <input class="form-control mr-sm-2" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
+          <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+        <hr class="my-4">
       </div>
     </div>
   </div>
+</div>
 <!-- Page Header -->
 <header>
     <div class="dark">
-     <div class="pt-5 pb-5 mt-0 d-flex" id="fullHeaderMovie" style="background-image: url('https://image.tmdb.org/t/p/w1280<?= $movie["poster_path"]; ?> ');">
+     <div class="pt-5 pb-5 mt-0 d-flex" id="fullHeaderMovie" style="background-image: url('https://image.tmdb.org/t/p/w1280<?php echo $movie["poster_path"]; ?> ');">
      </div>
      <div  id="blur" class="container-fluid">
         <div class="row  justify-content-center align-items-start d-flex text-center">
           <div class="col-12 col-md-8  h-50">
-              <a href="/" style="text-decoration: none;"><h1 class="display-3 text-light mb-2 mt-5"><strong><?php echo $movie['name']; ?></strong></h1></a>
+              <div class="d-flex justify-content-center align-items-center mt-3">
+                <h1 class="display-3 font-weight-bold text-light"><strong><?php echo $movie['name']; ?></strong></h1>
+                <?php foreach (array_slice($movie['networks'], 0, 1) as $network)
+                {
+                  echo '<img class="ml-2 network" src="https://image.tmdb.org/t/p/w300' . $network['logo_path'] . '">';
+                }?> 
+              </div>
               <p class="lead text-light mb-5">Genre(s):
               <?php
               	foreach ($movie['genres'] as $genre) 
@@ -88,8 +106,11 @@
         </div>
         <div class="container movieContent">
         	<div class="row col-12 col-md-12">
-        		<img src="https://image.tmdb.org/t/p/w500<?= $movie['poster_path']; ?>" class="col-lg-7 col-md-12 poster"/>
+        		<img src="https://image.tmdb.org/t/p/w500<?php echo $movie['poster_path']; ?>" class="col-lg-7 col-md-12 poster"/>
         		<div id="infosContent" class="col-lg-5 col-md-12">
+              <div id="favorite_show">
+                <button type="submit"><i class="far fa-heart"></i></button>
+              </div>
               <div class="container-rating">
                 <div class="feedback">
                   <div class="rating">
@@ -195,9 +216,9 @@
               </div>
         			<div>
         				<div class="movie-info similar">
-        				   <div class="info-section"><label>Date de sortie</label><span><?= $movie['first_air_date']; ?></span></div>
-        				   <div class="info-section"><label>nb. votes</label><span><?= $movie['vote_count']; ?></span></div>
-        				   <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?= $movie['vote_average']; ?></span></div>
+        				   <div class="info-section"><label>Date de sortie</label><span><?php echo $movie['first_air_date']; ?></span></div>
+        				   <div class="info-section"><label>nb. votes</label><span><?php echo $movie['vote_count']; ?></span></div>
+        				   <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $movie['vote_average']; ?></span></div>
         				</div>
         				<p class="text-white text-light"><a href="<?php echo $movie['homepage']; ?>"><p class="text-light text-white">Site officiel</p></a></p>
         				<p class="text-white text-light">Nombre de saison(s): <?php echo $movie['number_of_seasons']; ?></p>
@@ -216,11 +237,7 @@
         					?>
         				</p>
         			</div>
-	              	<?php foreach ($movie['networks'] as $network)
-					{
-						echo '<img class="network" src="https://image.tmdb.org/t/p/w500' . $network['logo_path'] . '">';
-					}?>	
-					<span id="profiles" class="card-primary">
+					<span id="profiles" class="card-primary mt-3 mb-3">
 					<?php foreach ($movie['created_by'] as $author)
 					{
 						if ($author['profile_path']) {
@@ -235,8 +252,28 @@
       </div>
     </div>
 </header>
+<div class="card last-air-episode">
+  <div class="p-0 card-body">
+    <div class="row mx-auto">
+      <img class="backdrop-show" src="https://image.tmdb.org/t/p/w500<?php echo $movie['backdrop_path']; ?>">
+      <div class="col-lg-3 card-title d-flex flex-column justify-content-between align-items-start m-2 p-2">
+        <small>Dernier épisode diffusé à ce jour</small>
+        <a class="stretched-link" href="/episode-<?php echo $movie['id']; ?>-<?php echo $movie['last_episode_to_air']['season_number']; ?>-<?php echo $movie['last_episode_to_air']['episode_number']; ?>.html"><h4><?php echo $movie['last_episode_to_air']['name']; ?></h4></a>
+        <p class="p-0"><?php echo $movie['last_episode_to_air']['overview']; ?></p>
+        <div class="card-text  align-self-stretch">
+          <div class="movie-info">
+             <div class="info-section"><label>Date de sortie</label><span><?php echo $movie['last_episode_to_air']['air_date']; ?></span></div>
+             <div class="info-section"><label>nb. votes</label><span><?php echo $movie['last_episode_to_air']['vote_count']; ?></span></div>
+             <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $movie['last_episode_to_air']['vote_average']; ?></span></div>
+          </div> 
+        </div> 
+      </div>
+      <img class="col-lg-4 p-2" src="https://image.tmdb.org/t/p/w300<?php echo $movie['last_episode_to_air']['still_path']; ?>">
+    </div>     
+  </div>
+</div>
 <h2 class="display-5 mt-3 mb-3 text-center text-white">Toutes les saisons de <?php echo $movie['name']; ?>:</h2>
-<div id="seasonContent" class="container-fluid d-flex flex-row flex-wrap justify-content-center">
+<div id="seasonContent" class="p-3 container-fluid d-flex flex-row flex-wrap justify-content-center">
 <?php
 	foreach ($movie['seasons'] as $seasons) 
 	{
@@ -244,7 +281,7 @@
 			{	
 ?>
 			<div id="seasonCard" class="p-2 card col-lg-3">
-				<a href="season-<?= $movie['id']; ?>-<?= $seasons['season_number']; ?>.html">
+				<a href="season-<?php echo $movie['id']; ?>-<?php echo $seasons['season_number']; ?>.html">
 					<h3 class="lead text-center"><?php echo $seasons['name']; ?></h3>
 				</a>
 				<?php 
@@ -256,7 +293,7 @@
 				} else
 				{
 				?>
-					<img src="img/img_404.png">
+					<img src="img/season-404.png">
 				<?php	
 				}
 				?>
@@ -268,6 +305,10 @@
 	}
 ?>
 </div>
+<?php
+if($similar['results'] != Null)
+{
+?>
 <div class="cardContainer container-fluid">
     <h2 class="display-5 text-light mt-3 mb-3 text-center">Les séries similaires à <?php echo $movie['name']; ?>:</h2>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -277,23 +318,23 @@
       {
       ?>
         <div class="carousel-item col-md-4">
-           <div id="<?= $show['id']; ?>" class="movie-card">
-              <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?= $show['backdrop_path']; ?>');">
+           <div id="<?php echo $show['id']; ?>" class="movie-card">
+              <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?php echo $show['backdrop_path']; ?>');">
                  <div class="header-icon-container">
                     <a href="#"><i class="material-icons header-icon"></i></a>
                  </div>
               </div>
               <div class="movie-content">
                  <div class="movie-content-header">
-                    <a href="movie-<?= $show['id']; ?>.html">
-                       <h3 class="movie-title"><?= $show['name']; ?></h3>
+                    <a href="movie-<?php echo $show['id']; ?>.html">
+                       <h3 class="movie-title"><?php echo $show['name']; ?></h3>
                     </a>
                     <div class="imax-logo"></div>
                  </div>
                  <div class="movie-info">
-                    <div class="info-section"><label>Date de sortie</label><span><?= $show['first_air_date']; ?></span></div>
-                    <div class="info-section"><label>nb. votes</label><span><?= $show['vote_count']; ?></span></div>
-                    <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?= $show['vote_average']; ?></span></div>
+                    <div class="info-section"><label>Date de sortie</label><span><?php echo $show['first_air_date']; ?></span></div>
+                    <div class="info-section"><label>nb. votes</label><span><?php echo $show['vote_count']; ?></span></div>
+                    <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $show['vote_average']; ?></span></div>
                  </div>
               </div>
            </div>
@@ -312,8 +353,12 @@
     </a>
   </div>
 </div>
+<?php
+}
+?>
+
 <div class="container">
-	<div class="row">
+	<div class="row mt-3">
 		<h2 class="display-5 text-light text-white">Commentaires:</h2>
 	</div>
 </div>
@@ -322,13 +367,13 @@
     <?php if ($user->isAuthenticated())
     {
     ?>
-        <a class="mx-auto" href="commenter-<?= $movie['id'] ?>.html"><button class="btn btn-info">Ajouter un commentaire</button></a>
+        <a class="mx-auto" href="commenter-<?php echo $movie['id'] ?>.html"><button class="btn btn-info">Ajouter un commentaire</button></a>
     <?php
     } 
     else
     {
     ?>
-      <a class="nav-link" href="connexion.php"><p class="text-white">Vous devez être connecté pour poster un commentaire</p></a>
+      <a class="btn btn-outline-success text-white" href="connexion.php">Connectez-vous pour poster un commentaire</a>
     <?php  
     }  
     ?>
@@ -349,8 +394,9 @@ if (empty($comments))
 else 
 {
 ?>
+
 <!-- Grid row -->
-<div id="comment-container" class="mt-3 d-flex justify-content-center">
+<div id="comment-container" class="mt-3 mb-3 d-flex justify-content-center">
 
   <!-- Grid column -->
   <div class="col-lg-12 col-xl-8">
@@ -373,23 +419,23 @@ else
         }
         ?>
         <div class="media-body text-center text-md-left ml-md-3 ml-0">
-          <h5 class="mt-0 font-weight-bold blue-text"><span class="small">Posté par <strong><?= htmlspecialchars($comment['auteur']) ?></strong> le <?= $comment['date']->format('d/m/Y à H\hi') ?>
+          <h5 class="mt-0 font-weight-bold blue-text"><span class="small">Posté par <strong><?php echo htmlspecialchars($comment['auteur']) ?></strong> le <?php echo $comment['date']->format('d/m/Y à H\hi') ?>
                 <div class="btn-group float-right"> 
                   <button class="btn btn-info">Action(s)</button>
                   <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <?php if ($user->isAuthenticated() && ($_SESSION['pseudo'] == $comment['auteur'])) { ?> 
-                    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?= $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?= $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?php echo $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?php echo $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
                     <?php if ($comment['answer'] != null) { ?>
-                        <li class="nav-item"><a class="nav-link" href="admin/Answer-delete-<?= $comment['id'] ?>.html"><i class="fas fa-eraser"> Supp. la réponse</i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin/Answer-delete-<?php echo $comment['id'] ?>.html"><i class="fas fa-eraser"> Supp. la réponse</i></a></li>
                       <?php
                       } else 
                       { ?>
-                        <li class="nav-item"><a class="nav-link" href="admin/comment-answer-<?= $comment['id'] ?>.html"><i class="fas fa-feather-alt"> Répondre</i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin/comment-answer-<?php echo $comment['id'] ?>.html"><i class="fas fa-feather-alt"> Répondre</i></a></li>
                     <?php
                     } } else { ?>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tooltip" title="signaler le commentaire" href="/comment-report-<?= $comment['id'] ?>.html"><i class="fas fa-flag"> Signaler</i></a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tooltip" title="signaler le commentaire" href="/comment-report-<?php echo $comment['id'] ?>.html"><i class="fas fa-flag"> Signaler</i></a></li>
                     <?php 
                     } ?>
                   </ul>
@@ -421,6 +467,37 @@ else
 ?>
   </div>
   <!-- Grid column -->
+</div>
+<!-- Grid row -->
 
+<!-- Reviews --> 
+
+<!-- Grid row -->
+<div class="mt-3 mb-3 d-flex justify-content-center">
+  <!-- Grid column -->
+  <div class="col-lg-12">
+    <?php  
+    if(!empty($reviews['results']))
+    {
+    ?>
+    <div class="container">
+      <div class="row mt-3">
+        <h2 class="display-5 text-light text-white">Avis des internautes:</h2>
+      </div>
+    </div>
+    <?php
+     foreach ($reviews['results'] as $review)
+      {
+      ?>
+       <div class="m-3 p-3 card">
+         <h4><?php echo $review['author']; ?></h4>
+         <p><?php echo $review['content']; ?></p>
+       </div>
+      <?php
+      } 
+    }
+    ?>
+  </div>
+  <!-- Grid column -->
 </div>
 <!-- Grid row -->

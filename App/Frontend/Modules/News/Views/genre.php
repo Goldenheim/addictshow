@@ -4,6 +4,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <a href="/" class=""><span class="mx-auto p-2"><strong class="text-light">ADDICTSHOW</strong></span></a>
       <form class="inline-group" method="get" action="">
         <?php if ($user->isAuthenticated())
         {
@@ -16,7 +17,18 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <p class="text-center">
-                                    <img id="login-avatar" src="img/upload/<?php echo $_SESSION['avatar']; ?>">
+                                    <?php if ($_SESSION['avatar'] == 'Array') 
+                                    {
+                                    ?>  
+                                      <img id="login-avatar" src="img/img_404.png">
+                                    <?php  
+                                    } else 
+                                    {
+                                    ?>  
+                                      <img id="login-avatar" src="img/upload/<?php echo $_SESSION['avatar']; ?>">
+                                    <?php
+                                    }
+                                    ?>
                                 </p>
                             </div>
                             <div class="col-lg-8">
@@ -66,33 +78,30 @@
       </div>
     </div>
   </div>
-<div id="seasonContent">
-	<div class="blue">
-		<div class="container-fluid p-4">
-		  <div class="row">
-		    <h2 class="display-5 mx-auto text-white">Édition du profil</h2>
-		  </div>
-		  <hr>
-		</div>
-		<form method="POST" action="" enctype="multipart/form-data" role="form" class="col-lg-3 mx-auto">
-			<div class="form-group">
-        <label class="display-5" for="fav_genre">Votre genre de série favori:</label>
-        <select class="custom-select form-control" id="fav_genre" name="fav_genre">
-          <?php foreach ($search['genres'] as $genre) 
-            {
-            ?>
-            <option value="<?php echo $genre['id']; ?>"><?php echo $genre['name']; ?></option>
-            <?php
-            }
-            ?>
-        </select>  
+
+  <div class="container-fluid d-flex flex-wrap justify-content-center">
+    <?php foreach ($search['results'] as $genre) 
+    {
+    ?>
+      <div class="card m-3 col-lg-5">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8 card-title d-flex flex-column justify-content-between align-items-start">
+              <a class="stretched-link" href="/movie-<?php echo $genre['id']; ?>.html"><h4><?php echo $genre['name']; ?></h4></a>
+              <span class="p-0 d-inline-block text-truncate"><?php echo $genre['overview']; ?></span>
+              <div class="card-text  align-self-stretch">
+                <div class="movie-info">
+                   <div class="info-section"><label>Date de sortie</label><span><?php echo $genre['first_air_date']; ?></span></div>
+                   <div class="info-section"><label>nb. votes</label><span><?php echo $genre['vote_count']; ?></span></div>
+                   <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $genre['vote_average']; ?></span></div>
+                </div> 
+              </div> 
+            </div>
+            <img class="col-lg-4 avatar-new" src="https://image.tmdb.org/t/p/w300<?php echo $genre['poster_path']; ?>">
+          </div>     
+        </div>
       </div>
-      <?php echo $form; ?> 
-			<div class="text-center mb-5">    
-        <input type="submit" name="editProfil" value="Envoyer" class="btn btn-primary">
-        <input class="btn btn-primary" type="button" onclick="window.location.replace('/profil.php')" value="Annuler">
-			</div>
-		</form>
-		<br>
-	</div>
-</div>
+    <?php
+    }
+    ?>
+  </div>

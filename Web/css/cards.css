@@ -1,7 +1,7 @@
 body {
   height: 100%;
   width: 100%;
-  background: #45BDE5;
+  background: #01D474;
   font-family: 'Arimo', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -13,10 +13,37 @@ body {
   transition: 300ms;
 }
 
+.avatar-new {
+  border-radius: 5%;
+}
+
+.bg-dark {
+  background-color: #213E49!important;
+}
+
+.breadcrumb {
+  border-radius: 0px;
+  margin: 0;
+}
+
+/* INDEX */ 
+
+#index-features {
+  background-image: url('/img/index.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* GENRE */
+
+.text-truncate {
+  max-width: 300px;
+}
+
 /* TITLE */
 
 .title {
-  color: #6ACFF0;
+  color: #01D474;
 }
 
 /* AVATAR */ 
@@ -99,20 +126,19 @@ a:hover {
 }
 
 .btn-primary {
-  background: #22A6D2!important;
+  background: #01D474!important;
   color: white;
   border: none;
 } 
 
 .btn-primary:hover {
-  background: #96DFF7!important;
+  background: #56DFA1!important;
   color: white;
   border: none;
 }
 
 .blue {
-  background: #45BDE5;
-  opacity: 0.8;
+  position: relative;
 }
 
 .dark {
@@ -124,9 +150,33 @@ a:hover {
   margin-bottom: 0;
 }
 
+/* INDEX */
+
 #fullHeader {
   height:100vh; 
   background-size: cover; 
+}
+
+.blue:before {
+  position: absolute;
+  width: 0;
+  z-index: 1;
+  height: 0;
+  content: "";
+  border-bottom: 65px solid transparent;
+  border-left: 50vw solid #01D474;
+}
+
+.blue:after {
+  right: 0;
+  position: absolute;
+  bottom: 0px;
+  width: 0;
+  z-index: 1;
+  height: 0;
+  content: "";
+  border-top: 65px solid transparent;
+  border-right: 50vw solid #01D474;
 }
 
 #blur {
@@ -177,7 +227,7 @@ a:hover {
 }
 
 .navbar {
-  background: #6ACFF0;
+  background: radial-gradient(at 30% top, rgba(7, 64, 52, 1) 0%, rgba(8, 28, 36, 1) 70%);
 }
 
 .container {
@@ -384,15 +434,112 @@ a:hover {
 
 @media screen and (max-width: 500px) {
   .movie-card {
-    width: 95%;
-    max-width: 95%;
-    margin: 1em;
+    margin: auto;
     display: block;
+  }
+
+  /* INDEX */
+
+  .cardContainer {
+    height: 605px !important;
   }
 
   .container {
     padding: 0;
     margin: 0;
+  }
+
+  .display-2 {
+    font-size: 3.5rem;
+  }
+
+  .movie-card-search {
+    margin: auto;
+  }
+
+  #searchContent {
+    position: relative !important;
+  }
+
+  #fullHeaderMovie {
+    height: 240vh;
+  }
+
+  /* SEASON */
+
+  #fullHeaderSeason {
+    height: 10vh;
+    filter: blur(5px);
+  }
+
+  #blur {
+    position: relative;
+    top: 0;
+  }
+
+  #infosContent {
+    padding: 3%;
+  }
+
+  .preface {
+    justify-content: center;
+  }
+
+  #episodeCard {
+    flex-direction: column!important;
+  }
+
+  /* EPISODE */
+
+  .filmoja-theater-area:before {
+    width: 100% !important;
+  }
+
+  .filmoja-theater-area:after {
+    width: 100% !important;
+  }
+
+  #cast {
+    position: relative;
+    overflow: auto;
+  }
+
+  .cast-fluid {
+    position: relative;
+    left: 40px;
+    width: 100vw;
+  }
+
+  .cast-container {
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+    background: none!important;
+  }
+
+  /* SEARCH */ 
+
+  #search-cards {
+    flex-direction: column;
+  }
+
+  /* PROFIL */
+
+  .background-profil {
+    height: 33vw!important;
+    position: relative;
+  }
+
+  .profile-img img {
+    width: 100%!important;
+  }
+
+  .profile-img .file {
+    margin-top: -10%;
+    width: 100%;
+  }
+
+  .emp-profile {
+    border-radius: 0px;
   }
 }
 
@@ -402,14 +549,47 @@ a:hover {
 }
 
 #seasonContent {
+  background: url("/img/addictshow.png") repeat, rgba(255,255,255,.4);
+}
+
+/* SEARCH */
+
+#searchContent {
   padding: 5% 0 5% 0;
-  background: url("/img/addictshow.png") repeat, rgba(255,255,255,0.7);
+  position: absolute;
+  top: 25%;
+  background: url("/img/addictshow.png") repeat, rgba(255,255,255,0.9);
+}
+
+#background-search {
+  background: url("/img/tv-show-body.jpg");
+  opacity: 0.2;
+  background-size: cover;
+  height: 70vw;
+}
+
+.movie-card-search {
+  height: 340px;
+  max-width: 300px;
+  min-width: 300px;
+}
+
+.header-search {
+  height: 169px;
+}
+
+.header-title {
+  color: #132D37;
+}
+
+.search-link {
+  text-decoration: none!important;
 }
 
 .cardContainer {
   overflow: hidden;
   height: 575px;
-  max-width: 1250px;
+  max-width: 1260px;
   margin: auto;
 }
 
@@ -424,6 +604,24 @@ a:hover {
   text-align: justify;
 }
 
+/* movie */ 
+
+.last-air-episode {
+  border: none;
+  border-radius: 0px;
+}
+
+.backdrop-show {
+  opacity: 0.5;
+}
+
+/* SEASON */
+
+.overview-overflow {
+  max-height: 282px;
+  overflow: auto;
+}
+
 #episodeCard {
   background: rgba(0,0,0,0.9);
   padding: 1%;
@@ -431,11 +629,16 @@ a:hover {
   max-width: 1050px;
 }
 
+.movie-infos {
+  flex: 1;
+  padding-left: 1%;
+}
+
 .profile {
-  border-radius: 50%;
+  border-radius: 5%;
   width: 100px;
-  height: 100px;
-  border: 5px white solid;
+  height: 150px;
+  border: 3px #01D474 solid;
 }
 
 #profiles {
@@ -445,13 +648,8 @@ a:hover {
 }
 
 .network {
-  width: 220px;
-  height: 105px;
-  background-color: rgba(255,255,255,0.4);
-  padding: 5%;
-  border-radius: 22% 0;
-  display: flex;
-  margin: 0 auto;
+  width: 185px;
+  padding: 1%;
 }
 
 .similar, .similar label {
@@ -474,7 +672,6 @@ a:hover {
 .pos-f-t {
   position: sticky;
   top: 0;
-  margin-bottom: 2%;
   z-index: 99999;
 }
 
@@ -501,7 +698,7 @@ a:hover {
   color: white;
   right:1%;
   bottom:1%;
-  background:#6ACFF0;
+  background:#081C25;
   padding:0.5%;
   text-align: center;
   margin: 0 0 0 0;
@@ -548,16 +745,191 @@ a:hover {
           flex-direction: row;
 }
 
+/* EPISODE */
+
+.filmoja-theater-area {
+  position: relative;
+  z-index: 1;
+  background: #f9f9f9 none repeat scroll 0 0;
+}
+
+.filmoja-theater-area:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 65%;
+  height: 100%;
+  background: #111 none repeat scroll 0 0;
+  opacity: 0.5;
+}
+
+.section_70 {
+  padding: 70px 0;
+}
+
+.filmoja-theater-area:after {
+  position: absolute;
+  left: 0;
+  content: "";
+  width: 65%;
+  top: 0;
+  height: 100%;
+  background: url(/img/tv-show-body.jpg) no-repeat scroll 0 0/cover;
+  z-index: -1;
+}
+
+.theater-left {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.theater-box {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  background: rgba(255,255,255,.2);
+  padding: 2%;
+}
+
+.single-theater {
+  border: 5px solid #01D474;
+  border-radius: 5px;
+  position: relative;
+  background: #01D474;
+}
+
+.single-theater img {
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.single-theater a.play-video {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 60px;
+  height: 40px;
+  background: #FF0000 none repeat scroll 0 0;
+  border-radius: 10px;
+  top: 54%;
+  left: 50%;
+  margin: -30px 0 0 -30px;
+  z-index: 3;
+  font-size: 17px;
+  color: #fff;
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+  text-decoration: none;
+}
+
+.single-theater a.play-video:hover {
+  transform: scale(1.2);
+}
+
+.theater-text h3 {
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 37px;
+  font-weight: 500;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .004);
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.theater-text h4 {
+  font-size: 17px;
+  color: #01D474;
+  font-family: 'Roboto Condensed', sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.theater-text p {
+  text-align: justify;
+  color: #fff;
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.theater-text a.filmoja-btn {
+  margin-top: 20px;
+}
+
+.single-theater:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000 none repeat scroll 0 0;
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+}
+
+#avatar-cast {
+  width: 100px;
+  height: 150px;
+  border-radius: 5%;
+  border: 3px white solid;
+}
+
+.cast-container {
+ padding: 1%;
+ background: rgba(255,255,255,.2);
+}
+
+.cast-card {
+  max-width: 160px;
+  min-width: 160px;
+}
+
+/* GALLERY */
+
+.gallery {
+  background: rgba(255,255,255,.2);
+}
+
 /* PROFIL VIEW */
+
+.background-profil {
+  background-image: url(/img/tv-show-body.jpg);
+  height: 15vw;
+  background-size: cover;
+}
+
+.profil-head {
+  position: absolute;
+  color: white;
+  background: rgba(0,0,0,0.5);
+} 
 
 .emp-profile{
     padding: 3%;
-    margin-top: 3%;
-    margin-bottom: 3%;
+    margin: 3% auto !important;
     border-radius: 0.5rem;
     background: #fff;
-    margin: auto;
 }
+
+.text-profil {
+  color: #01D474;
+}
+
 .profile-img{
     text-align: center;
 }
@@ -639,7 +1011,7 @@ a:hover {
 }
 .profile-tab p{
     font-weight: 600;
-    color: #6ACFF0;
+    color: #01D474;
 }
 
 /* RATING TV SHOW */
@@ -756,7 +1128,8 @@ a:hover {
 
 footer {
   width: 100%;
-  background-color: #6ACFF0;
+  background: url('https://www.themoviedb.org/assets/2/v4/footers_v2/BreakingBad-0541701c71d1c77aae2d4487be97b9a879fc41e881911fd3d32558f1f5f75d44.jpg'), radial-gradient(at 30% top, rgba(7, 64, 52, 1) 0%, rgba(8, 28, 36, 1) 70%);
+  background-size: cover;
   min-height: 250px;
   padding: 10px 0px 25px 0px;
   color: white;

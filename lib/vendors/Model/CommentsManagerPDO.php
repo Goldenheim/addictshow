@@ -162,7 +162,7 @@ class CommentsManagerPDO extends CommentsManager
 
   public function getList($debut = -1, $limite = -1)
   {
-    $sql = 'SELECT comments.id, comments.auteur, comments.date, comments.contenu, comments.news, news.titre AS titre FROM comments INNER JOIN news ON comments.news = news.id ORDER BY comments.date DESC ';
+    $sql = 'SELECT id, auteur, date, contenu, movie FROM comments ORDER BY comments.date DESC ';
 
     if ($debut != -1 || $limite != -1)
     {

@@ -14,6 +14,8 @@ class Member extends Entity
             $name,
             $phone,
             $profession,
+            $genre,
+            $tmdbSession,
             $avatar = array();
 
   const PSEUDO_INVALIDE = 1;
@@ -64,6 +66,16 @@ class Member extends Entity
     $this->name = $name;
   }
 
+  public function setTmdbSession($tmdbSession)
+  {
+    if (!is_string($tmdbSession) || empty($tmdbSession))
+    {
+      $this->erreurs[] = self::TMDBSESSION_INVALIDE;
+    }
+
+    $this->tmdbSession = $tmdbSession;
+  }
+
   public function setProfession($profession)
   {
     if (!is_string($profession) || empty($profession))
@@ -72,6 +84,16 @@ class Member extends Entity
     }
 
     $this->profession = $profession;
+  }
+
+  public function setGenre($genre)
+  {
+    if (!is_string($genre) || empty($genre))
+    {
+      $this->erreurs[] = self::GENRE_INVALIDE;
+    }
+
+    $this->genre = $genre;
   }
 
   public function setPhone($phone)
@@ -135,7 +157,7 @@ class Member extends Entity
   }
 
   // GETTERS //
-
+  
   public function pseudo()
   {
     return $this->pseudo;
@@ -166,6 +188,11 @@ class Member extends Entity
     return $this->profession;
   }
 
+  public function genre()
+  {
+    return $this->genre;
+  }
+
   public function mail_confirm()
   {
     return $this->mail_confirm;
@@ -185,6 +212,12 @@ class Member extends Entity
   {
     return $this->date_inscription;
   }
+
+   public function tmdbSession()
+  {
+    return $this->tmdbSession;
+  }
+
 
   public function avatar()
   {

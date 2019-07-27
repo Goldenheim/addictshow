@@ -32,6 +32,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <a href="/" class=""><span class="mx-auto p-2"><strong class="text-light">ADDICTSHOW</strong></span></a>
         <form class="inline-group" method="get" action="">
           <?php if ($user->isAuthenticated())
           {
@@ -105,33 +106,33 @@
         </div>
       </div>
     </div>
-    <div id="smoothAnchor"></div>
-<div class="cardContainer" class="container-fluid">
-    <h1 class="text-center mb-3 text-white">Les séries les plus populaires en ce moment:</h1>
+<div class="cardContainer mb-5" class="container-fluid">
+    <div id="smoothAnchor" class="mt-5"></div>
+    <h3 class="text-center mb-3 text-white">Les 10 séries les plus populaires en ce moment:</h3>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <div  id="movieCards" class="carousel-inner row w-100 mx-auto">
       <?php
-      foreach ($listShow['results'] as $show)
+      foreach (array_slice($listShow['results'], 0, 10) as $show)
       {
       ?>
         <div class="carousel-item col-md-4">
-           <div id="<?= $show['id']; ?>" class="movie-card">
-              <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?= $show['backdrop_path']; ?>');">
+           <div id="<?php echo $show['id']; ?>" class="movie-card">
+              <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?php echo $show['backdrop_path']; ?>');">
                  <div class="header-icon-container">
                     <a href="#"><i class="material-icons header-icon"></i></a>
                  </div>
               </div>
               <div class="movie-content">
                  <div class="movie-content-header">
-                    <a href="movie-<?= $show['id']; ?>.html">
-                       <h3 class="movie-title"><?= $show['name']; ?></h3>
+                    <a href="movie-<?php echo $show['id']; ?>.html">
+                       <h3 class="movie-title"><?php echo $show['name']; ?></h3>
                     </a>
                     <div class="imax-logo"></div>
                  </div>
                  <div class="movie-info">
-                    <div class="info-section"><label>Date de sortie</label><span><?= $show['first_air_date']; ?></span></div>
-                    <div class="info-section"><label>nb. votes</label><span><?= $show['vote_count']; ?></span></div>
-                    <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?= $show['vote_average']; ?></span></div>
+                    <div class="info-section"><label>Date de sortie</label><span><?php echo $show['first_air_date']; ?></span></div>
+                    <div class="info-section"><label>nb. votes</label><span><?php echo $show['vote_count']; ?></span></div>
+                    <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $show['vote_average']; ?></span></div>
                  </div>
               </div>
            </div>
@@ -148,5 +149,85 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
+  </div>
+</div>
+
+<div class="container mb-3">
+  <div class="pl-0 col-lg-6">
+  <h3 class="text-center mb-3 text-white">les 5 dernières sorties de <?php setlocale(LC_TIME, 'fra_fra'); echo strftime('%B %Y'); ?> sur Netflix:</h3>
+  <div>
+    <?php foreach (array_slice($new['results'], 0, 5) as $new) 
+    {
+    ?>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8 card-title d-flex flex-column justify-content-between align-items-start">
+              <a class="stretched-link" href="/movie-<?php echo $new['id']; ?>.html"><h4><span class="badge badge-danger">Nouveau</span> <?php echo $new['name']; ?></h4></a>
+              <p class="p-0"><?php echo $new['overview']; ?></p>
+              <div class="card-text  align-self-stretch">
+                <div class="movie-info">
+                   <div class="info-section"><label>Date de sortie</label><span><?php echo $new['first_air_date']; ?></span></div>
+                   <div class="info-section"><label>nb. votes</label><span><?php echo $new['vote_count']; ?></span></div>
+                   <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $new['vote_average']; ?></span></div>
+                </div> 
+              </div> 
+            </div>
+            <img class="col-lg-4 avatar-new" src="https://image.tmdb.org/t/p/w300<?php echo $new['poster_path']; ?>">
+          </div>     
+        </div>
+      </div>
+    <?php
+    }
+    ?>
+  </div>
+  </div>
+  <div id="index-features" class="col-lg-6">
+    <div class="mt-3 container-fluid">
+      <h4 class="lead">Faire une recherche par genre:</h4>
+        <form method="post" action="genre.php">
+          <select class="custom-select col-9" id="search" name="search">
+            <?php foreach ($search['genres'] as $genre) 
+              {
+              ?>
+              <option value="<?php echo $genre['id']; ?>"><?php echo $genre['name']; ?></option>
+              <?php
+              }
+              ?>
+          </select>
+          <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
+      </form>
+    </div>
+    <div class="mt-3 container-fluid">
+      <h4 class="lead">Les derniers commentaires postés: </h4>
+      <ul class="list-group">
+        <?php foreach ($lastCom as $com) 
+        {
+        ?>
+        <li class="list-group-item">
+        <small>Par <strong><?php echo $com['auteur']; ?></strong>, posté le <?php echo $com['date']; ?></small>
+        <p><a class="stretched-link" href="movie-<?php echo $com['movie']; ?>.html#comment-<?php echo $com['id']; ?>"><?php echo $com['contenu']; ?></a></p>
+        </li>
+        <?php
+        }
+        ?>
+      </ul>
+    </div>
+    <div class="mt-3 container-fluid">
+      <h4 class="lead">Les acteurs et actrices en vogue: </h4>
+        <div class="cast-container d-flex justify-content-center align-items-start wrap mb-3">
+          <?php
+           foreach (array_slice($character['results'],0, 12) as $character) 
+           {
+           ?> 
+             <div class="cast-card text-center m-2">
+               <img id="avatar-cast" src="https://image.tmdb.org/t/p/w300/<?php echo $character['profile_path']; ?>" class="img-fluid">
+               <p><?php echo $character['name']; ?></p>
+             </div>
+           <?php  
+           }
+           ?>
+       </div>
+    </div>
   </div>
 </div>

@@ -76,7 +76,7 @@
       <p>
         <?= $form ?>
         <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
-        <div class="row">
+        <div class="container-fluid d-flex">
           <p class="mx-auto">
               <input class="btn btn-primary" type="submit" value="Répondre" />
               <input class="btn btn-primary" type="button" onclick="window.location.replace('/movie-<?php echo $id ?>.html')" value="Annuler" />

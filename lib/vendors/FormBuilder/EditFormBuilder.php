@@ -11,7 +11,7 @@ class EditFormBuilder extends FormBuilder
   public function build()
   {
     $this->form->add(new StringField([
-        'label' => 'Pseudo',
+        'label' => 'Pseudo:',
         'name' => 'pseudo',
         'type' => 'text',
         'required' => 'false',
@@ -23,7 +23,7 @@ class EditFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
-        'label' => 'Nom',
+        'label' => 'Nom:',
         'name' => 'name',
         'type' => 'text',
         'required' => 'false',
@@ -35,7 +35,7 @@ class EditFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
-        'label' => 'Adresse email',
+        'label' => 'Adresse email:',
         'name' => 'mail',
         'type' => 'email',
         'placeHolder' => $_SESSION['mail'],
@@ -46,7 +46,7 @@ class EditFormBuilder extends FormBuilder
         ],
        ]))
        ->add(new StringField([
-        'label' => 'Profession',
+        'label' => 'Profession:',
         'name' => 'profession',
         'required' => 'false',
         'type' => 'text',
