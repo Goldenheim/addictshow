@@ -67,6 +67,12 @@ class EditFormBuilder extends FormBuilder
         'validators' => [
           new NotNullValidator('Merci de spécifier un numéro'),
         ],
+       ]))
+       ->add(new StringField([
+        'label' => 'Envoyer une photo de profil',
+        'name' => 'avatar',
+        'accept' =>'image/*',
+        'type' => 'file',
        ]));
   }
 }

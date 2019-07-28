@@ -102,4 +102,31 @@ class MemberManagerPDO extends MemberManager
   {
     $this->dao->exec('DELETE FROM members WHERE id = '.(int) $id);
   }
+
+  public function addfav($id, $movie)
+  {
+    $requete = $this->dao->prepare('INSERT INTO favourite SET member_id = :member_id, show_id = :show_id');
+   
+    $requete->bindValue(':member_id', $id);
+    $requete->bindValue(':show_id', $movie);
+   
+    $requete->execute();
+ }
+
+  public function getFav($id)
+    {
+      $requete = $this->dao->prepare('SELECT show_id FROM favourite WHERE member_id = ' .(int) $id);
+      $requete->execute();
+      
+      $requete->setFetchMode();
+      
+      $favourites = $requete->fetchAll();
+
+      return $favourites;
+    }
+
+  public function deleteFav($id)
+  {
+    $this->dao->exec('DELETE FROM favourite WHERE show_id = '.(int) $id);
+  }  
 }

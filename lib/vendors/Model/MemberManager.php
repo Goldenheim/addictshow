@@ -67,4 +67,12 @@ abstract class MemberManager extends Manager
    * @return void
    */
   abstract public function delete($id); 
+
+  /**
+    * Méthode permettant d'ajouter un membre.
+    * @param $id Le membre à ajouter
+    * @param $movie member Le membre à ajouter
+    * @return void
+    */
+  abstract protected function addfav ($id, $movie);
 }

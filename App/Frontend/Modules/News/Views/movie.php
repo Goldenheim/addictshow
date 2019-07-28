@@ -108,9 +108,21 @@
         	<div class="row col-12 col-md-12">
         		<img src="https://image.tmdb.org/t/p/w500<?php echo $movie['poster_path']; ?>" class="col-lg-7 col-md-12 poster"/>
         		<div id="infosContent" class="col-lg-5 col-md-12">
-              <div id="favorite_show">
-                <button type="submit"><i class="far fa-heart"></i></button>
-              </div>
+              <?php if (isset($_SESSION['id']))
+              { 
+                  if (empty($favourites))
+                  {
+                  ?>
+                    <a class="favourite" data-toggle="tooltip" title="Ajouter aux favoris" href="favourite-<?php echo $_SESSION['id']; ?>-<?php echo $movie['id']; ?>.html"><i class="far fa-heart"></i></a>
+                  <?php
+                  } else
+                  {
+                    ?>
+                      <a class="favourite selected" data-toggle="tooltip" title="Retirer des favoris" href="favourite-delete-<?php echo $favourites['0']['id']; ?>.html"><i class="fas fa-heart"></i></a>
+                    <?php
+                  }
+               }
+              ?>
               <div class="container-rating">
                 <div class="feedback">
                   <div class="rating">
@@ -220,7 +232,7 @@
         				   <div class="info-section"><label>nb. votes</label><span><?php echo $movie['vote_count']; ?></span></div>
         				   <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $movie['vote_average']; ?></span></div>
         				</div>
-        				<p class="text-white text-light"><a href="<?php echo $movie['homepage']; ?>"><p class="text-light text-white">Site officiel</p></a></p>
+        				<p class="text-white text-light"><a class="p-0 nav-link" href="<?php echo $movie['homepage']; ?>"><p class="text-light text-white">Site officiel</p></a></p>
         				<p class="text-white text-light">Nombre de saison(s): <?php echo $movie['number_of_seasons']; ?></p>
         				<p class="text-white text-light">Nombre d'épisodes sortis: <?php echo $movie['number_of_episodes']; ?></p>
         				<p class="text-white text-light resume">Résumé: <?php echo $movie['overview']; ?></p>
@@ -258,7 +270,7 @@
       <img class="backdrop-show" src="https://image.tmdb.org/t/p/w500<?php echo $movie['backdrop_path']; ?>">
       <div class="col-lg-3 card-title d-flex flex-column justify-content-between align-items-start m-2 p-2">
         <small>Dernier épisode diffusé à ce jour</small>
-        <a class="stretched-link" href="/episode-<?php echo $movie['id']; ?>-<?php echo $movie['last_episode_to_air']['season_number']; ?>-<?php echo $movie['last_episode_to_air']['episode_number']; ?>.html"><h4><?php echo $movie['last_episode_to_air']['name']; ?></h4></a>
+        <a class="p-0 nav-link stretched-link" href="/episode-<?php echo $movie['id']; ?>-<?php echo $movie['last_episode_to_air']['season_number']; ?>-<?php echo $movie['last_episode_to_air']['episode_number']; ?>.html"><h4><?php echo $movie['last_episode_to_air']['name']; ?></h4></a>
         <p class="p-0"><?php echo $movie['last_episode_to_air']['overview']; ?></p>
         <div class="card-text  align-self-stretch">
           <div class="movie-info">
@@ -281,7 +293,7 @@
 			{	
 ?>
 			<div id="seasonCard" class="p-2 card col-lg-3">
-				<a href="season-<?php echo $movie['id']; ?>-<?php echo $seasons['season_number']; ?>.html">
+				<a class="p-0 nav-link stretched-link" href="season-<?php echo $movie['id']; ?>-<?php echo $seasons['season_number']; ?>.html">
 					<h3 class="lead text-center"><?php echo $seasons['name']; ?></h3>
 				</a>
 				<?php 

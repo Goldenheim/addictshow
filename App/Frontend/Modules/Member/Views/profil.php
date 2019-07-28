@@ -89,7 +89,7 @@
                     <img src="img/upload/<?php echo $_SESSION['avatar']; ?>" alt=""/>
                     <div class="file btn btn-lg btn-primary">
                         Changer la photo
-                        <input type="file" name="file"/>
+                    	<input type="file" accept="image/*" name="edit-avatar"/>
                     </div>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">À propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vos séries préférées</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Vos derniers commentaires</a>
                         </li>
                     </ul>
                 </div>
@@ -124,8 +124,8 @@
                 <div class="profile-work">
                     <p>LIENS</p>
                     <a href="/">Accueil</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
+                    <a href="favoris.html">Liste de vos favoris</a><br/>
+                    <a href="">Découvertes</a>
                     <p>OPTIONS</p>
                     <a href="">Web Designer</a><br/>
                     <a href="">Web Developer</a><br/>

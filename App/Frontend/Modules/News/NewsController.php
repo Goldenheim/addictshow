@@ -104,6 +104,23 @@ class NewsController extends BackController
   public function executeMovie(HTTPRequest $request)
   {
     $id = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+    if ($this->app->user()->isAuthenticated())
+    {
+      $memberId = $_SESSION['id'];
+      $manager = $this->managers->getManagerOf('Member');
+      $favourites = $manager->getFav($memberId);
+      $fav = array();
+
+      foreach ($favourites as $favourite) {
+        $showId = $favourite['show_id'];
+        $json = file_get_contents("https://api.themoviedb.org/3/tv/$showId?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
+        $parsee = json_decode($json, true);
+        if ($parsee['id'] == $request->getData('id')) {
+          array_push($fav, $parsee);
+        }
+      }
+      $this->page->addVar('favourites', $fav);
+    }
 
     if(isset($_GET['id']))
     {

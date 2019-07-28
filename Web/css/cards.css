@@ -1,7 +1,7 @@
 body {
   height: 100%;
   width: 100%;
-  background: #01D474;
+  background: #323232;
   font-family: 'Arimo', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -11,6 +11,10 @@ body {
 * {
   -webkit-transition: 300ms;
   transition: 300ms;
+}
+
+#heading-404 {
+  max-width: 100%;
 }
 
 .avatar-new {
@@ -549,7 +553,7 @@ a:hover {
 }
 
 #seasonContent {
-  background: url("/img/addictshow.png") repeat, rgba(255,255,255,.4);
+  background: url("/img/addictshow.png") repeat, rgba(255,255,255,.9);
 }
 
 /* SEARCH */
@@ -598,6 +602,7 @@ a:hover {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
+  height: 100%;
 }
 
 .resume {
@@ -605,6 +610,15 @@ a:hover {
 }
 
 /* movie */ 
+
+.favourite {
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.selected {
+  color: red;
+}
 
 .last-air-episode {
   border: none;

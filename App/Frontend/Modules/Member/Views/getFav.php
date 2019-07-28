@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a href="/" class=""><span class="mx-auto p-2"><strong class="text-light">ADDICTSHOW</strong></span></a>
+    <a href="/" class="nav-link"><span class="mx-auto p-2"><strong class="text-light">ADDICTSHOW</strong></span></a>
     <form class="inline-group" method="get" action="">
       <?php if ($user->isAuthenticated())
       {
@@ -58,8 +58,8 @@
       } else 
       {
       ?> 
-      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
-      <a class="btn btn-primary my-2 my-sm-0" href="connexion.php" >Connexion</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php">Inscription</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="connexion.php">Connexion</a>
       <?php
       }
       ?>
@@ -78,14 +78,40 @@
     </div>
   </div>
 </div>
-<!-- Page Header -->
-  <header class="masthead">
-    <div class="p-0 col-lg-12 col-md-10 mx-auto">
-      <div class="site-heading">
-        <img id="heading-404" src="/img/erreur-404.jpg">
+
+<?php if (!empty($favourites)) {
+  ?>
+  <div class="mb-3 mt-3 d-flex flex-wrap justify-content-center">
+  <?php foreach ($favourites as $favourite)
+  {
+  ?>
+    <div class="card m-1 col-lg-5">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-8 card-title d-flex flex-column justify-content-between align-items-start">
+            <a class="p-0 nav-link" href="/movie-<?php echo $favourite['id']; ?>.html"><h4><?php echo $favourite['name']; ?></h4></a>
+            <a href="/favourite-delete-<?php echo $favourite['id']; ?>.html" class="btn btn-danger">Supprimer des favoris</a>
+            <div class="card-text  align-self-stretch">
+              <div class="movie-info">
+                 <div class="info-section"><label>Date de sortie</label><span><?php echo $favourite['first_air_date']; ?></span></div>
+                 <div class="info-section"><label>nb. votes</label><span><?php echo $favourite['vote_count']; ?></span></div>
+                 <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $favourite['vote_average']; ?></span></div>
+              </div> 
+            </div> 
+          </div>
+          <img class="col-lg-4 p-0" src="https://image.tmdb.org/t/p/w300<?php echo $favourite['poster_path']; ?>">
+        </div>     
       </div>
     </div>
-  </header>
-<div class="mt-2 col-lg-8 col-md-10 mx-auto text-white text-center">
-<h1>DOCUMENT NON TROUVÉ</h1>
-<p>Le document auquel vous tentez d'accéder est introuvable. Vous pouvez contacter l'administrateur du site si vous pensez qu'il s'agit d'un bug.</p>
+  <?php
+  }
+  ?>
+  </div>
+<?php  
+} else 
+{
+?>
+  <p class="mb-3 mt-3 text-center text-light">Vous n'avez pas encore de favoris dans votre liste</p>
+<?php
+}
+?>

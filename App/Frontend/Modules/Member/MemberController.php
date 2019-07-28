@@ -260,4 +260,84 @@ class memberController extends BackController
 		  // On ajoute une définition pour le titre.
 		  $this->page->addVar('title', 'Édition du profil');
 	}
+
+	public function executeEditAvatar (HTTPRequest $request) {
+	  	if(isset($_FILES['edit-avatar']) AND $_FILES['edit-avatar']['error'] == 0)
+	  	{
+		  	$content_dir = "img/upload/"; // dossier où sera déplacé le fichier
+		  	 
+	  	    $tmp_file = $_FILES['edit-avatar']['tmp_name'];
+	  	 
+	  	    if( !is_uploaded_file($tmp_file) )
+	  	    {
+	  	        exit("Le fichier est introuvable");
+	  	    }
+	  	 
+	  	    // on copie le fichier dans le dossier de destination
+	  	    $name_file = $pseudo ."-" . $_FILES['edit-avatar']['name'];
+	  	 
+	  	    if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
+	  	    {
+	  	        exit("Impossible de copier le fichier dans $content_dir");
+	  	    }
+		  	else
+		  	{
+		  	    echo "Le fichier est enregistré";
+			}
+
+			$member = new Member([
+				'avatar' => $name_file,
+			]);
+
+			if ($request->getExists('id'))
+		  	{
+		  	  $member->setId($request->getData('id'));
+		  	}
+	  	}
+
+	  	$formBuilder = new MemberFormBuilder($member);
+	  	$formBuilder->build();
+	  	
+	  	$form = $formBuilder->form();
+	  	
+	  	$formHandler = new FormHandler($form, $manager, $request);
+		
+		if ($formHandler->process())
+		{
+		  $this->app->user()->setFlash('Votre photo a bien été mis à jour');
+		  $this->app->httpResponse()->redirect('profil.php');
+		}
+	}
+
+	public function executeFavourite (HTTPRequest $request) {
+		$id = $request->getData('id');	
+		$movie = $request->getData('movie');
+		$manager = $this->managers->getManagerOf('Member');
+		$manager->addfav($id, $movie);
+		$this->app->user()->setFlash('Ajouté à vos favoris !');
+		$this->app->httpResponse()->redirect('movie-' . $movie .'.html');	
+	}
+
+	public function executeGetFav (HTTPRequest $request) {
+		$id = $_SESSION['id'];
+		$manager = $this->managers->getManagerOf('Member');
+		$favourites = $manager->getFav($id);
+		$fav = array();
+
+		foreach ($favourites as $favourite) {
+			$id = $favourite['show_id'];
+			$json = file_get_contents("https://api.themoviedb.org/3/tv/$id?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
+			$parsee = json_decode($json, true);
+			array_push($fav, $parsee);
+		}
+		$this->page->addVar('favourites', $fav);
+	}
+
+	public function executeDeleteFav (HTTPRequest $request) {
+		$showId = $request->getData('id');
+		
+		$this->managers->getManagerOf('Member')->deleteFav($showId);
+		$this->app->user()->setFlash('Vos favoris ont bien été mis à jour');
+		$this->app->httpResponse()->redirect('Location: ' . $_SERVER['HTTP_REFERER']);
+	}
 }

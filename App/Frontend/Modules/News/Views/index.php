@@ -163,7 +163,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-8 card-title d-flex flex-column justify-content-between align-items-start">
-              <a class="stretched-link" href="/movie-<?php echo $new['id']; ?>.html"><h4><span class="badge badge-danger">Nouveau</span> <?php echo $new['name']; ?></h4></a>
+              <a class="p-0 nav-link stretched-link" href="/movie-<?php echo $new['id']; ?>.html"><h4><span class="badge badge-danger">Nouveau</span> <?php echo $new['name']; ?></h4></a>
               <p class="p-0"><?php echo $new['overview']; ?></p>
               <div class="card-text  align-self-stretch">
                 <div class="movie-info">
@@ -206,7 +206,7 @@
         ?>
         <li class="list-group-item">
         <small>Par <strong><?php echo $com['auteur']; ?></strong>, posté le <?php echo $com['date']; ?></small>
-        <p><a class="stretched-link" href="movie-<?php echo $com['movie']; ?>.html#comment-<?php echo $com['id']; ?>"><?php echo $com['contenu']; ?></a></p>
+        <p><a class="p-0 nav-link stretched-link" href="movie-<?php echo $com['movie']; ?>.html#comment-<?php echo $com['id']; ?>"><?php echo $com['contenu']; ?></a></p>
         </li>
         <?php
         }

@@ -65,12 +65,6 @@
       ?>
     </form>
   </nav>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb text-center">
-      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      <li class="breadcrumb-item"><a href="movie-<?php echo $_GET['id']; ?>.html"><?php echo $_GET['id']; ?></a></li>
-    </ol>
-  </nav>
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-3">
       <div class="jumbotron">
@@ -84,63 +78,5 @@
     </div>
   </div>
 </div>
-<header>
-<div class="dark">
-	<div class="pt-5 pb-5 mt-0 d-flex" id="fullHeaderSeason" style="background-image: url('https://image.tmdb.org/t/p/original<?php echo $season['poster_path']; ?>');">
-	 </div>
-	<div id="blur" class="container-fluid">
-		<div class="mt-1 justify-content-center d-flex text-center">
-		  <div class="col-12 col-md-8 h-50">
-		      <h1 class="display-3 text-light mb-2 mt-5"><strong><?php echo $season['name']; ?></strong></h1>
-		  </div>       
-		</div>
-		<div class="container movieContent">
-				<div class="row col-12 col-md-12">
-		    		<img src="https://image.tmdb.org/t/p/original<?php echo $season['poster_path']; ?>" class="col-lg-2 col-md-12 poster"/>
-					<div id="infosContent" class="col-lg-10 col-md-12">
-						<div class="overview-overflow">
-							<p class="text-white text-light resume"><?php if($season['overview'] == Null) { ?> Il n'y pas encore de résumé disponbile pour cette saison <?php } else { ?> Résumé: <?php echo $season['overview']; } ?></p>
-						</div>
-					</div>
-				</div>
-		</div>
-	</div>
-</div>
-<h2 class="display-5 mt-3 mb-3 text-center text-white">Toutes les épisodes de la <?php echo $season['name']; ?>:</h2>
-<div class="p-3 d-flex flex-row flex-wrap justify-content-around mb-3" style="background-color: white;">
-	<?php
-		foreach ($season['episodes'] as $episode) 
-		{
-	?>
-			<div id="episodeCard" class="d-flex flex-row justify-content-between align-items-center col-lg-10 mb-2">
-        <?php if ($episode['still_path'] == Null) 
-        {
-        ?>  
-          <img src="img/episode-404.png">
-        <?php  
-        } else 
-        {
-        ?>  
-          <img src="https://image.tmdb.org/t/p/w300<?php echo $episode['still_path']; ?>">
-        <?php
-        }
-        ?>
-				<div class="movie-infos mx-3 d-flex flex-column justify-content-between">
-					<div class="d-flex flex-row justify-content-between">
-						<a class="p-0 nav-link" href="episode-<?php echo $seasonId; ?>-<?php echo $season['season_number']; ?>-<?php echo $episode['episode_number']; ?>.html" class="streched link"><h3 class="display-5 text-white"><?php echo $episode['name']; ?></h3></a>
-						<p class="lead text-white">Épisode <?php echo $episode['episode_number']; ?></p>
-					</div>
-					<div>
-						<p class="text-white"><?php if($episode['overview'] == Null) { ?> Il n'y pas encore de résumé disponbile pour cet épisode<?php } else { ?> Résumé: <?php echo $episode['overview']; } ?></p>
-						<p class="float-right text-white">Date de sortie: <?php echo $episode['air_date']; ?></p>
-					</div>
-					<div class="movie-infos d-flex justify-content-between">
-						<div class="info-section text-white"><label class="text-white">nb. votes:</label><span class="lead"><?php echo $episode['vote_count']; ?></span></div>
-						<div class="info-section text-white"><label class="text-white">Note:</label><span><i class="fas fa-star"></i> <?php echo $episode['vote_average']; ?></span></div>
-					</div>
-				</div>
-			</div>
-	<?php
-		}
-	?>	
-</div>
+
+<?php var_dump($favourites);
