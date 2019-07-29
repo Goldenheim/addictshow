@@ -96,7 +96,7 @@
       <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-3">
           <div class="jumbotron">
-            <h1 class="display-5 form-inline"><em>Faire une recherche</em></h1>
+            <h1 class="lead form-inline"><em>Faire une recherche</em></h1>
             <form method="post" action="search.php" class="form-inline">
               <input class="form-control mr-sm-2" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
               <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
@@ -153,9 +153,9 @@
 </div>
 
 <div class="container mb-3">
-  <div class="pl-0 col-lg-6">
+  <div id="netflix" class="pl-0 col-lg-6">
   <h3 class="text-center mb-3 text-white">les 5 dernières sorties de <?php setlocale(LC_TIME, 'fra_fra'); echo strftime('%B %Y'); ?> sur Netflix:</h3>
-  <div>
+  <div class="netflix-container">
     <?php foreach (array_slice($new['results'], 0, 5) as $new) 
     {
     ?>
@@ -186,7 +186,7 @@
     <div class="mt-3 container-fluid">
       <h4 class="lead">Faire une recherche par genre:</h4>
         <form method="post" action="genre.php">
-          <select class="custom-select col-9" id="search" name="search">
+          <select class="custom-select col-lg-9" id="search" name="search">
             <?php foreach ($search['genres'] as $genre) 
               {
               ?>

@@ -99,9 +99,15 @@
                                 <?php echo $_SESSION['pseudo']; ?>
                             </h5>
                             <h6>
-                                Web Developer and Designer
+                            	<?php
+                               if(isset($_SESSION['profession'])) 
+                               {
+                               	echo $_SESSION['profession'];
+                               } else {
+                               	echo 'Profession non renseignée';
+                               }?>
                             </h6>
-                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                            <p class="proile-rating">Moyenne de vos notations : <span>8/10</span></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">À propos</a>
@@ -123,15 +129,12 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>LIENS</p>
-                    <a href="/">Accueil</a><br/>
-                    <a href="favoris.html">Liste de vos favoris</a><br/>
-                    <a href="">Découvertes</a>
+                    <a class="d-inline nav-link" href="/">Accueil</a><br/>
+                    <a class="d-inline nav-link" href="favoris.html">Liste de vos favoris</a><br/>
+                    <a class="d-inline nav-link" href="">Découvertes</a><br/>
+                    <a class="d-inline nav-link" href="">Vos notes</a><br/>
                     <p>OPTIONS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">WordPress</a><br/>
-                    <a href="">WooCommerce</a><br/>
-                    <a href="">PHP, .Net</a><br/>
+                    <a class="d-inline nav-link" href="">Commentaires</a><br/>
                 </div>
             </div>
             <div class="col-md-8">

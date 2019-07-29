@@ -122,7 +122,7 @@
 <h3 class="mt-1 text-white text-center">Casting: </h3>
 <div id="cast">
     <div class="cast-fluid">
-      <div class="cast-container d-flex justify-content-center align-items-start wrap mb-3">
+      <div class="cast-container cast-episode d-flex justify-content-center align-items-start wrap mb-3">
        <?php
        foreach ($cast['cast'] as $actor) 
        {

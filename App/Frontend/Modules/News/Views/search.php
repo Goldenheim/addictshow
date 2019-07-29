@@ -1,4 +1,4 @@
-<div class="thetop"></div>  
+0<div class="thetop"></div>  
 <div class="pos-f">
   <nav class="navbar navbar-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,19 +86,19 @@
         </div>
         <span>Il y a <?php echo $search['total_results'] ?> résultat(s) correspondants(s)</span>
       </div>
-        <div class="container-fluid">
-          <div id="search-cards" class="w-100 justify-content-center d-flex">
+        <div class="container">
+          <div id="search-cards" class="d-flex justify-content-center">
           <?php
           foreach ($search['results'] as $show)
           {
           ?>
-            <div class="col-md-3 mb-3">
+            <div class="m-3">
                <div id="<?= $show['id']; ?>" class="movie-card movie-card-search">
                   <div class="movie-header header-search" style="background: url('https://image.tmdb.org/t/p/w300<?= $show['backdrop_path']; ?>');">
                   </div>
                   <div class="movie-content">
                      <div class="movie-content-header">
-                        <a href="movie-<?= $show['id']; ?>.html" class="search-link stretched-link">
+                        <a href="movie-<?= $show['id']; ?>.html" class="search-link">
                            <h3 class="movie-title"><?= $show['name']; ?></h3>
                         </a>
                      </div>

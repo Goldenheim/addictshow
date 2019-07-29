@@ -88,7 +88,7 @@
 <div class="dark">
 	<div class="pt-5 pb-5 mt-0 d-flex" id="fullHeaderSeason" style="background-image: url('https://image.tmdb.org/t/p/original<?php echo $season['poster_path']; ?>');">
 	 </div>
-	<div id="blur" class="container-fluid">
+	<div id="blur" class="container-fluid blur-season">
 		<div class="mt-1 justify-content-center d-flex text-center">
 		  <div class="col-12 col-md-8 h-50">
 		      <h1 class="display-3 text-light mb-2 mt-5"><strong><?php echo $season['name']; ?></strong></h1>

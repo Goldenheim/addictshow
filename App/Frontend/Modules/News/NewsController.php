@@ -104,10 +104,10 @@ class NewsController extends BackController
   public function executeMovie(HTTPRequest $request)
   {
     $id = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+    $manager = $this->managers->getManagerOf('Member');
     if ($this->app->user()->isAuthenticated())
     {
       $memberId = $_SESSION['id'];
-      $manager = $this->managers->getManagerOf('Member');
       $favourites = $manager->getFav($memberId);
       $fav = array();
 
@@ -137,6 +137,22 @@ class NewsController extends BackController
     }
 
     $title = $parsee['name'];
+    if (isset($_POST['rating']))
+    {
+      $id = $request->getData('id');
+      $member = $_SESSION['id'];
+      $currentRate = $manager->getRate($id);
+      if (empty($currentRate))
+      {
+        $rate = $_POST['rating'];
+        $manager->addRate($member, $id, $rate);
+        $this->app->user()->setFlash('Votre note à bien été enregistrée');
+      }
+      else
+      {
+        $this->app->user()->setFlash('Vous avez déjà donné une note à cette série');
+      }  
+    }
  
     $this->page->addVar('movie', $parsee);
     $this->page->addVar('similar', $parseeSimilar);

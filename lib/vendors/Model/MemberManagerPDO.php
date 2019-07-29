@@ -111,22 +111,47 @@ class MemberManagerPDO extends MemberManager
     $requete->bindValue(':show_id', $movie);
    
     $requete->execute();
- }
+  }
 
   public function getFav($id)
-    {
-      $requete = $this->dao->prepare('SELECT show_id FROM favourite WHERE member_id = ' .(int) $id);
-      $requete->execute();
-      
-      $requete->setFetchMode();
-      
-      $favourites = $requete->fetchAll();
+  {
+    $requete = $this->dao->prepare('SELECT show_id FROM favourite WHERE member_id = ' .(int) $id);
+    $requete->execute();
+    
+    $requete->setFetchMode();
+    
+    $favourites = $requete->fetchAll();
 
-      return $favourites;
-    }
+    return $favourites;
+  }
 
   public function deleteFav($id)
   {
     $this->dao->exec('DELETE FROM favourite WHERE show_id = '.(int) $id);
   }  
+
+  public function addRate($member, $id, $rate)
+  {
+    $requete = $this->dao->prepare('INSERT INTO rating SET member_id = :member_id, show_id = :show_id, rate = :rate');
+   
+    $requete->bindValue(':member_id', $member);
+    $requete->bindValue(':show_id', $id);
+    $requete->bindValue(':rate', $rate);
+   
+    $requete->execute();
+  }
+
+  public function getRate($id)
+  {
+    $requete = $this->dao->prepare('SELECT rate FROM rating WHERE show_id = ' .(int) $id);
+    $requete->execute();
+
+    return $rate = $requete->fetch();
+  }
+
+  public function deleteRate($id)
+  {
+    $this->dao->exec('DELETE FROM rating WHERE show_id = '.(int) $id);
+  }  
+
 }

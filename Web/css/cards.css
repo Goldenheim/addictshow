@@ -8,6 +8,26 @@ body {
   color: #010b26;
 }
 
+/* get scroll bar appear with modal */
+
+.modal-open {
+    overflow: auto;
+    padding-right: 0px!important;
+}
+
+/* NAV */
+
+/* fix nav dropdown */
+
+#navbarToggleExternalContent {
+  position: absolute;
+  width: 100%;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+}
+
 * {
   -webkit-transition: 300ms;
   transition: 300ms;
@@ -465,8 +485,47 @@ a:hover {
     position: relative !important;
   }
 
+  .custom-select {
+    width: 69%;
+  }
+
+  #netflix {
+    padding-left: 15px!important;
+  }
+
+  .netflix-container {
+    flex-direction: row;
+    display: flex;
+    overflow: auto;
+    margin-bottom: 2em;
+  }
+
+  .card {
+    min-width: 90%;
+    margin-right: 1em;
+  }
+
+  /* SHOW */
+
   #fullHeaderMovie {
     height: 240vh;
+  }
+
+  #blur {
+    top: 7%;
+  }
+
+  .last-air-episode {
+    margin: 0;
+  }
+
+  #show-title {
+    flex-direction: column;
+  }
+
+  .container-rating {
+    padding: 0px!important;
+    margin: 2% 0;
   }
 
   /* SEASON */
@@ -476,13 +535,15 @@ a:hover {
     filter: blur(5px);
   }
 
-  #blur {
-    position: relative;
-    top: 0;
+  .blur-season {
+    position: relative!important;
+    top: 0!important;
   }
 
   #infosContent {
     padding: 3%;
+    justify-content: flex-start !important;
+    height: auto!important;
   }
 
   .preface {
@@ -503,14 +564,8 @@ a:hover {
     width: 100% !important;
   }
 
-  #cast {
-    position: relative;
-    overflow: auto;
-  }
-
   .cast-fluid {
     position: relative;
-    left: 40px;
     width: 100vw;
   }
 
@@ -518,12 +573,23 @@ a:hover {
     flex-direction: row;
     flex-wrap: nowrap !important;
     background: none!important;
+    overflow: auto;
+  }
+
+  .cast-episode {
+    padding-left: 30%!important;
+    padding-right: 5%!important;
   }
 
   /* SEARCH */ 
 
-  #search-cards {
-    flex-direction: column;
+  .search-card-container {
+    margin: auto;
+    padding: 0;
+  }
+
+  .movie-card-search {
+    min-width: auto;
   }
 
   /* PROFIL */
@@ -543,7 +609,7 @@ a:hover {
   }
 
   .emp-profile {
-    border-radius: 0px;
+    border-radius: 0px!important;
   }
 }
 
@@ -560,8 +626,6 @@ a:hover {
 
 #searchContent {
   padding: 5% 0 5% 0;
-  position: absolute;
-  top: 25%;
   background: url("/img/addictshow.png") repeat, rgba(255,255,255,0.9);
 }
 
@@ -569,7 +633,7 @@ a:hover {
   background: url("/img/tv-show-body.jpg");
   opacity: 0.2;
   background-size: cover;
-  height: 70vw;
+  height: 10vw;
 }
 
 .movie-card-search {
@@ -588,6 +652,10 @@ a:hover {
 
 .search-link {
   text-decoration: none!important;
+}
+
+#search-cards {
+  flex-wrap: wrap!important;
 }
 
 .cardContainer {
@@ -627,6 +695,7 @@ a:hover {
 
 .backdrop-show {
   opacity: 0.5;
+  max-width: 100%;
 }
 
 /* SEASON */
@@ -1013,7 +1082,6 @@ a:hover {
 }
 .profile-work a{
     text-decoration: none;
-    color: #495057;
     font-weight: 600;
     font-size: 14px;
 }
@@ -1029,6 +1097,11 @@ a:hover {
 }
 
 /* RATING TV SHOW */
+
+.rating-btn {
+  align-self: flex-end;
+  padding: 2%;
+}
 
 .container-rating {
   display: flex;
