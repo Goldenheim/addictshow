@@ -223,6 +223,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/pagination.js"></script>
+    <script src="/js/form.js"></script>
+    <script src="/js/script.js"></script>
     <script>
       function scrollTo(target) {
           if (target.length) {

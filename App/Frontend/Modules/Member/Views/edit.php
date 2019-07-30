@@ -76,7 +76,7 @@
 		</div>
 		<form method="POST" action="" enctype="multipart/form-data" role="form" class="col-lg-3 mx-auto">
 			<div class="form-group">
-        <label class="display-5" for="fav_genre">Votre genre de série favori:</label>
+        <label class="display-5" for="fav_genre">Votre genre de série favori:</label><br>
         <select class="custom-select form-control" id="fav_genre" name="fav_genre">
           <?php foreach ($search['genres'] as $genre) 
             {
@@ -88,7 +88,7 @@
         </select>  
       </div>
       <?php echo $form; ?> 
-			<div class="text-center mb-5">    
+			<div id="editForm" class="text-center mb-5">    
         <input type="submit" name="editProfil" value="Envoyer" class="btn btn-primary">
         <input class="btn btn-primary" type="button" onclick="window.location.replace('/profil.php')" value="Annuler">
 			</div>

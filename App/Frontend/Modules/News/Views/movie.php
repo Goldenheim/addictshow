@@ -269,7 +269,7 @@
 </header>
 <div class="card last-air-episode">
   <div class="p-0 card-body">
-    <div class="row mx-auto">
+    <div class="backdrop-last-air-episode-bloc mx-auto">
       <img class="backdrop-show" src="https://image.tmdb.org/t/p/w500<?php echo $movie['backdrop_path']; ?>">
       <div class="col-lg-3 card-title d-flex flex-column justify-content-between align-items-start m-2 p-2">
         <small>Dernier épisode diffusé à ce jour</small>

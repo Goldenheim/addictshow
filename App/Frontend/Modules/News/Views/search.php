@@ -1,4 +1,4 @@
-0<div class="thetop"></div>  
+<div class="thetop"></div>  
 <div class="pos-f">
   <nav class="navbar navbar-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
