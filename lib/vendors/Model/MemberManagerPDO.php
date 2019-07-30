@@ -149,6 +149,11 @@ class MemberManagerPDO extends MemberManager
     return $rate = $requete->fetch();
   }
 
+  public function getRateAvg($id)
+  {
+    return $this->dao->query('SELECT round(AVG(rate), 2) FROM rating WHERE member_id = ' .(int) $id)->fetchColumn();
+  }
+
   public function deleteRate($id)
   {
     $this->dao->exec('DELETE FROM rating WHERE show_id = '.(int) $id);

@@ -7,10 +7,11 @@ class CommentsManagerPDO extends CommentsManager
 {
   protected function add(Comment $comment)
   {
-    $q = $this->dao->prepare('INSERT INTO comments SET movie = :movie, auteur = :auteur, contenu = :contenu, avatar = :avatar, date = NOW()');
+    $q = $this->dao->prepare('INSERT INTO comments SET movie = :movie, auteur = :auteur, member_id = :member_id, contenu = :contenu, avatar = :avatar, date = NOW()');
     
     $q->bindValue(':movie', $comment->movie(), \PDO::PARAM_INT);
     $q->bindValue(':auteur', $comment->auteur());
+    $q->bindValue(':member_id', $comment->member_id());
     $q->bindValue(':contenu', $comment->contenu());
     $q->bindValue(':avatar', $comment->avatar());
     
@@ -107,10 +108,10 @@ class CommentsManagerPDO extends CommentsManager
     return $q->fetch();
   }  
 
-  public function author($auteur)
+  public function author($id)
   {
-    $q = $this->dao->prepare('SELECT id, movie, auteur, contenu, date, report FROM comments WHERE auteur = :auteur');
-    $q->bindValue(':auteur', $auteur);
+    $q = $this->dao->prepare('SELECT id, movie, auteur, contenu, date, report FROM comments WHERE member_id = :id ORDER BY date DESC');
+    $q->bindValue(':id', $id);
     $q->execute();
     
     $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
@@ -124,6 +125,11 @@ class CommentsManagerPDO extends CommentsManager
     
     return $comments;
   }  
+
+  public function authorCount($id)
+  {
+    return $this->dao->query('SELECT COUNT(*) FROM comments WHERE member_id =' . (int) $id)->fetchColumn();
+  }
 
   public function delete($id)
   {

@@ -6,14 +6,12 @@
          <div class="container-fluid">
             <div class="row  justify-content-center align-items-center d-flex text-center h-100">
               <div class="col-12 col-md-8  h-50 ">
-                  <a href="/" style="text-decoration: none;"><h1 class="display-2  text-light mb-2 mt-5"><strong><span class="title">ADDICT</span>SHOW</strong></h1></a>
-                  <p class="lead  text-light mb-5">Retrouvez toutes les informations disponibles sur vos séries préférées</p>
-                  <p class="mb5">
-                      <form method="post" action="search.php" class="form-inline">
-                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
-                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
-                      </form>
-                  </p>  
+                  <h1 class="display-2  text-light mb-2 mt-5"><strong><span class="title">ADDICT</span>SHOW</strong></h1>
+                  <p class="lead text-light mb-5">Retrouvez toutes les informations disponibles sur vos séries préférées</p>
+                  <form method="post" action="search.php" class="form-inline">
+                    <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
+                  </form>
                   <div class="btn-container-wrapper p-relative d-block  zindex-1">
                     <a id="smoothClic" class="btn btn-link btn-lg mt-md-3 mb-4 align-self-center text-light" href="#wrap">
                         <i class="fa fa-angle-down fa-4x text-light"></i>
@@ -124,7 +122,7 @@
               </div>
               <div class="movie-content">
                  <div class="movie-content-header">
-                    <a href="movie-<?php echo $show['id']; ?>.html">
+                    <a class="p-0 nav-link" href="movie-<?php echo $show['id']; ?>.html">
                        <h3 class="movie-title"><?php echo $show['name']; ?></h3>
                     </a>
                     <div class="imax-logo"></div>

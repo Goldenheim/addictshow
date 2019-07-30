@@ -175,9 +175,21 @@ class memberController extends BackController
 		$json = file_get_contents("https://api.themoviedb.org/3/genre/tv/list?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
 		$parsee = json_decode($json, true); 
 
-		$auteur = $this->managers->getManagerOf('Comments')->author($_SESSION['pseudo']);
+		$manager = $this->managers->getManagerOf('Comments');
+		$managerMember = $this->managers->getManagerOf('Member');
+
+		$auteur = $manager->author($_SESSION['id']);
 		$this->page->addVar('auteur', $auteur);	
 		$this->page->addVar('genre', $parsee);	
+		$this->page->addVar('count', $manager->authorCount($_SESSION['id']));
+		$this->page->addVar('rateAvg', $managerMember->getRateAvg($_SESSION['id']));		
+	}
+
+	public function executeComments (HTTPRequest $request) {
+		$this->page->addVar('title', 'Tous les commentaires de ' . $_SESSION['pseudo']);
+		$manager = $this->managers->getManagerOf('Comments');
+		$auteur = $manager->author($_SESSION['id']);
+		$this->page->addVar('comments', $auteur);	
 	}
 
 	public function executeDelete (HTTPRequest $request) {
@@ -338,6 +350,26 @@ class memberController extends BackController
 		
 		$this->managers->getManagerOf('Member')->deleteFav($showId);
 		$this->app->user()->setFlash('Vos favoris ont bien été mis à jour');
-		$this->app->httpResponse()->redirect('Location: ' . $_SERVER['HTTP_REFERER']);
+		$this->app->httpResponse()->addHeader('Location: '.$_SERVER['REQUEST_URI']);
+	}
+
+	public function executeDiscover (HTTPRequest $request) {
+		$manager = $this->managers->getManagerOf('Member');
+		$member = $manager->get('id',$_SESSION['id']);
+		$genreId = $member['genre'];
+
+		$json = file_get_contents("https://api.themoviedb.org/3/discover/tv?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&sort_by=popularity.desc&page=1&timezone=France%2FPARIS&with_genres=$genreId&include_null_first_air_dates=false");
+		$parsee = json_decode($json, true); 
+		$jsonGenre = file_get_contents("https://api.themoviedb.org/3/genre/tv/list?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
+		$parseeGenre = json_decode($jsonGenre, true);
+		foreach ($parseeGenre['genres'] as $genres) {
+			if ($genres['id'] == $genreId) {
+				$genre = $genres['name'];
+			}
+		}
+
+		$this->page->addVar('title', 'Découvertes selon vos goûts');
+		$this->page->addVar('search', $parsee);
+		$this->page->addVar('genre', $genre);
 	}
 }

@@ -7,6 +7,7 @@ class Comment extends Entity
 {
   protected $movie,
             $auteur,
+            $member_id,
             $contenu,
             $answer,
             $avatar,
@@ -34,6 +35,16 @@ class Comment extends Entity
     }
 
     $this->auteur = $auteur;
+  }
+
+  public function setMember_id($member_id)
+  {
+    if (!is_string($member_id) || empty($member_id))
+    {
+      $this->erreurs[] = self::MEMBER_ID_INVALIDE;
+    }
+
+    $this->member_id = $member_id;
   }
 
   public function setContenu($contenu)
@@ -94,6 +105,11 @@ class Comment extends Entity
   public function auteur()
   {
     return $this->auteur;
+  }
+
+  public function member_id()
+  {
+    return $this->member_id;
   }
 
   public function avatar()

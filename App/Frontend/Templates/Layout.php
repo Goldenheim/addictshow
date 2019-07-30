@@ -53,10 +53,8 @@
           <div class="col-md-4 mx-auto">
 
             <!-- Content -->
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-            <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-              consectetur
-              adipisicing elit.</p>
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4"><strong><span class="title">ADDICT</span>SHOW</strong></h5>
+            <p>Retrouver toutes les informations que vous recherchez à travers une base de données officielle regroupant plus de 84000 séries</p>
 
           </div>
           <!-- Grid column -->
@@ -207,15 +205,11 @@
       <div class="footer-copyright text-center py-3">© 2019 Copyright:
         <a href="https://www.cedricheim.fr"> cedricheim.fr</a>
       </div>
-        <p class="text-center">Tags: 
-          <a href="#"><span class="label label-info">Snipp</span></a> 
-        <a href="#"><span class="label label-info">Bootstrap</span></a> 
-        <a href="#"><span class="label label-info">UI</span></a> 
-        <a href="#"><span class="label label-info">growth</span></a>
+        <p class="text-center">Liens: 
+          <a href="#"><span class="label label-info">mentions légales</span></a> 
         | <i class="icon-user"></i> <a href="#">Admin</a> 
         | <i class="icon-calendar"></i> <?php setlocale(LC_TIME, 'fra_fra'); echo strftime('%A %d %B %Y, %H:%M'); ?>
-        | <i class="icon-comment"></i> <a href="#">3 Commentaires</a>
-          | <i class="icon-share"></i> <a href="#">39 Partages</a>
+        | <i class="icon-comment"></i> <a href="#">3 Commentaires postés</a>
       </p>
     </footer>
     <!-- Footer -->
@@ -252,6 +246,16 @@
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();   
     });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#search").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
     </script>
 </body>
 </html>

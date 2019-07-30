@@ -107,7 +107,11 @@
                                	echo 'Profession non renseignée';
                                }?>
                             </h6>
-                            <p class="proile-rating">Moyenne de vos notations : <span>8/10</span></p>
+                            <p class="proile-rating">Moyenne de vos notations : <?php if(!empty($rateAvg)) {
+                                          echo $rateAvg . '/5';
+                                        } else {
+                                          echo 'Vous n\'avez pas encore noter de série';
+                                        }?></p>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">À propos</a>
@@ -131,10 +135,10 @@
                     <p>LIENS</p>
                     <a class="d-inline nav-link" href="/">Accueil</a><br/>
                     <a class="d-inline nav-link" href="favoris.html">Liste de vos favoris</a><br/>
-                    <a class="d-inline nav-link" href="">Découvertes</a><br/>
+                    <a class="d-inline nav-link" href="discover.php">Découvertes</a><br/>
                     <a class="d-inline nav-link" href="">Vos notes</a><br/>
                     <p>OPTIONS</p>
-                    <a class="d-inline nav-link" href="">Commentaires</a><br/>
+                    <a class="d-inline nav-link" href="comments.php">Commentaires</a><br/>
                 </div>
             </div>
             <div class="col-md-8">
@@ -206,59 +210,48 @@
                                 </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Derniers commentaires publiés : </label>
-                                    </div>
-                                    
-                                        <?php foreach ($auteur as $com) 
-                                        {
-                                        ?>
-                                            <div class="col-md-10" id="<?php echo $com['id']; ?>">
-                                            	<a href="movie-<?php echo $com['movie']; ?>.html#comment-<?php echo $com['id']; ?>"><?php echo $com['contenu']; ?></a><small> publié le <?php echo $com['date']->format('d/m/Y'); ?></small>
-                                            </div>
-                                        <?php	
-                                        }
-                                        ?>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Hourly Rate</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>10$/hr</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Total Projects</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>230</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>English Level</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Availability</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>6 months</p>
-                                    </div>
-                                </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Biographie</label><br/>
-                                <p>Votre description en details</p>
-                            </div>
-                        </div>
+                      <?php
+                        if (!empty($auteur)) 
+                        {
+                        ?>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <p>Vous avez posté <?php echo $count ?> commentaires en tout</p>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <label>Vos 5 derniers commentaires publiés : </label>
+                              </div>
+                              <table class="table">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Date</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php foreach (array_splice($auteur, 0, 5) as $com) 
+                                  {
+                                  ?>
+                                    <tr>
+                                      <td><a class="nav-link" href="movie-<?php echo $com['movie']; ?>.html#comment-<?php echo $com['id']; ?>"><?php echo $com['contenu']; ?></a></td>
+                                      <td><?php echo $com['date']->format('d/m/Y'); ?></td>
+                                    </tr>
+                                  <?php 
+                                  }
+                                  ?>
+                                  </tbody>
+                              </table>
+                          </div> 
+                        <?php 
+                        } else
+                        { 
+                      ?>    
+                        <p class="text-info">Vous n'avez pas de commentaires postés sur <span class="font-weight-bold text-uppercase mt-3 mb-4"><strong class="text-dark"><span class="title">ADDICT</span>SHOW</strong></span></p>
+                      <?php    
+                        } 
+                      ?> 
                     </div>
                 </div>
             </div>

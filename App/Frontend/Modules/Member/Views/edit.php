@@ -89,7 +89,7 @@
       </div>
       <?php echo $form; ?> 
 			<div id="editForm" class="text-center mb-5">    
-        <input type="submit" name="editProfil" value="Envoyer" class="btn btn-primary">
+        <input type="submit" id="editProfil" name="editProfil" value="Envoyer" class="btn btn-primary">
         <input class="btn btn-primary" type="button" onclick="window.location.replace('/profil.php')" value="Annuler">
 			</div>
 		</form>

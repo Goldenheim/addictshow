@@ -226,6 +226,7 @@ class NewsController extends BackController
       $comment = new Comment([
         'movie' => $request->getData('movie'),
         'auteur' => $member['pseudo'],
+        'member_id' => $_SESSION['id'],
         'contenu' => $request->postData('contenu'),
         'avatar' => $member['avatar']
       ]);

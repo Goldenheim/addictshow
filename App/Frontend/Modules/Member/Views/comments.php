@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a href="/" class="nav-link"><span class="mx-auto p-2"><strong class="text-light">ADDICTSHOW</strong></span></a>
+    <a href="/" class=""><span class="mx-auto p-2"><strong class="text-light">ADDICTSHOW</strong></span></a>
     <form class="inline-group" method="get" action="">
       <?php if ($user->isAuthenticated())
       {
@@ -58,8 +58,8 @@
       } else 
       {
       ?> 
-      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php">Inscription</a>
-      <a class="btn btn-primary my-2 my-sm-0" href="connexion.php">Connexion</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="connexion.php" >Connexion</a>
       <?php
       }
       ?>
@@ -78,47 +78,32 @@
     </div>
   </div>
 </div>
+<div class="emp-profile col-lg-10">
+	<div class="container media border mx-auto p-3 mb-3">
+	  <div class="media-body">
+	  	<h4>Faire une recherche</h4>
+	  	<p>Filtrer les résultats en fonction du contenu du commentaire que vous voulez retrouver:</p>  
+	  	<input class="form-control" id="search" type="text" placeholder="Chercher...">
+	  </div>
+	</div>
 
-<?php if (!empty($favourites)) {
-  ?>
-  <div class="container media text-white mx-auto p-3 mb-3">
-    <div class="media-body col-lg-10">
-      <h4>Faire une recherche</h4>
-      <p>Filtrer les résultats en fonction du favori que vous voulez retrouver:</p>  
-      <input class="form-control" id="search" type="text" placeholder="Chercher...">
-    </div>
-  </div>
-  <section class="mb-3 mt-3 d-flex flex-wrap justify-content-center">
-  <?php foreach ($favourites as $favourite)
-  {
-  ?>
-    <div class="card m-1 col-lg-5">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-8 card-title d-flex flex-column justify-content-between align-items-start">
-            <a class="p-0 nav-link" href="/movie-<?php echo $favourite['id']; ?>.html"><h4><?php echo $favourite['name']; ?></h4></a>
-            <a href="/favourite-delete-<?php echo $favourite['id']; ?>.html" class="btn btn-danger">Supprimer des favoris</a>
-            <div class="card-text  align-self-stretch">
-              <div class="movie-info">
-                 <div class="info-section"><label>Date de sortie</label><span><?php echo $favourite['first_air_date']; ?></span></div>
-                 <div class="info-section"><label>nb. votes</label><span><?php echo $favourite['vote_count']; ?></span></div>
-                 <div class="info-section"><label>Note</label><span><i class="fas fa-star"></i> <?php echo $favourite['vote_average']; ?></span></div>
-              </div> 
-            </div> 
-          </div>
-          <img class="col-lg-4 p-0" src="https://image.tmdb.org/t/p/w300<?php echo $favourite['poster_path']; ?>">
-        </div>     
-      </div>
-    </div>
-  <?php
-  }
-  ?>
-  </section>
-<?php  
-} else 
-{
-?>
-  <p class="mb-3 mt-3 text-center text-light">Vous n'avez pas encore de favoris dans votre liste</p>
-<?php
-}
-?>
+	<section class="col-lg-12 col-xs-10 table-responsive">
+		<div class="row">
+			<p class="mx-auto">Liste de tous les commentaires:</p>
+		</div>
+
+		<div class="row">
+			<table class="table table-sm table-borderless table-condensed">
+				
+			  <thead class="thead-dark">
+			  <tr><th>Contenu</th><th>Date</th><th>Action</th></tr></thead>
+				<?php
+				foreach ($comments as $comment)
+				{
+				  echo '<tr><td><a class="nav-link" href="movie-' . $comment['movie'] . '.html#comment-' . $comment['id'] . '">' . $comment['contenu'] . '</a></td><td>' . $comment['date']->format('d/m/Y'). '</td><td><a href="comment-update-' . $comment['id'] . '.html"><i class="fas fa-edit"></i></a> <a href="comment-delete-' . $comment['id'] . '.html"><i class="fas fa-trash"></i></a></td></tr>', "\n";
+				}
+				?>
+			</table>
+		</div>
+	</section>
+</div>
