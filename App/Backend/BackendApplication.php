@@ -1,7 +1,7 @@
 <?php
 namespace App\Backend;
 
-use \JFBlog\Application;
+use \AddictFram\Application;
 
 class BackendApplication extends Application
 {
@@ -20,7 +20,7 @@ class BackendApplication extends Application
     }
     else
     {
-      $controller = new Modules\Connexion\ConnexionController($this, 'Connexion', 'index');
+      $this->app->user()->redirect('login.php');
     }
 
     $controller->execute();

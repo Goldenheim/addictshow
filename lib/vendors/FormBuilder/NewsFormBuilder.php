@@ -1,11 +1,11 @@
 <?php
 namespace FormBuilder;
 
-use \JFBlog\FormBuilder;
-use \JFBlog\StringField;
-use \JFBlog\TextField;
-use \JFBlog\MaxLengthValidator;
-use \JFBlog\NotNullValidator;
+use \AddictFram\FormBuilder;
+use \AddictFram\StringField;
+use \AddictFram\TextField;
+use \AddictFram\MaxLengthValidator;
+use \AddictFram\NotNullValidator;
 
 class NewsFormBuilder extends FormBuilder
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-use \JFBlog\Manager;
+use \AddictFram\Manager;
 use \Entity\member;
 
 abstract class MemberManager extends Manager

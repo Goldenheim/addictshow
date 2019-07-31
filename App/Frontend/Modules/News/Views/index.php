@@ -60,7 +60,7 @@
                               <div class="col-lg-8">
                                   <p class="text-left"><strong><?php echo $_SESSION['pseudo']; ?></strong></p>
                                   <p class="text-left">
-                                      <a href="profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
+                                      <a href="/member/profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
                                   </p>
                               </div>
                           </div>
@@ -72,7 +72,7 @@
                           <div class="row">
                               <div class="col-lg-12">
                                   <p>
-                                      <a href="logout.html" class="btn btn-danger btn-block">Déconnexion</a>
+                                      <a href="/member/logout.html" class="btn btn-danger btn-block">Déconnexion</a>
                                   </p>
                               </div>
                           </div>
@@ -84,8 +84,8 @@
           } else 
           {
           ?> 
-          <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
-          <a class="btn btn-primary my-2 my-sm-0" href="connexion.php" >Connexion</a>
+          <a class="btn btn-primary my-2 my-sm-0" href="/member/subscribe.php" >Inscription</a>
+          <a class="btn btn-primary my-2 my-sm-0" href="/member/connexion.php" >Connexion</a>
           <?php
           }
           ?>

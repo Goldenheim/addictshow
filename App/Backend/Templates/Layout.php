@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
     <title><?= isset($title) ? $title : 'AddictShow' ?></title>
@@ -13,275 +12,250 @@
     <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/cards.css">
 </head> 
- 
-  <body>
-      <?php if ($user->isAuthenticated()) { ?>
-      <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-        <div class="container">
-          <a class="navbar-brand" href="/"><i class="fas fa-undo-alt"></i> Retour au blog</a>
-          <?php if (isset($nombreReport) && $nombreReport != 0)
-                 echo '<i class="fas fa-comment-alt notify"><a data-toggle="modal" href="#infos"><span  class="badge badge-danger badge-notify">' . $nombreReport . '</span></a></i>' ?>
-          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/"><i class="fas fa-home"></i> Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/news-insert.html">Ajouter un article</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/logout.html"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <?php } else { ?>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-          <div class="container">
-            <a class="navbar-brand lead text-white" href="/">Retour au site</a>
-            </div>
-          </div>
-        </nav>
-        <header id="fullHeader" class="login">
-          <div class="overlay"></div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-12 col-md-10 mx-auto">
-                <div class="site-heading">
-                  <h1>Connexion</h1>
-                  <span class="subheading">Espace personnel</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-      <?php } ?>
- 
-      <div id="login-form" class="col-lg-12 col-md-10 mx-auto">
-        <section id="main">
-          <br>
+<body>
+  <!-- Main Content -->
+  <div id="content-wrap">
+        <section id="main">      
           <?= $content ?>
-          <div class="modal" id="infos">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                    <?php if ($user->hasFlash()) echo '<p id="modal">', $user->getFlash(), '<button type="button" class="close" data-dismiss="modal">x</button></p>'; ?> 
+          <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-blue" id="exampleModalLongTitle">Notifications</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <?php if ($user->hasFlash()) echo '<p id="modal">' . $user->getFlash() . '</p>'; ?> 
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>  
-          <div class="modal" id="badge">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                      <?php echo '<a class="nav-link mx-auto" href="report.html" id="badge">' . $nombreReport .' commentaire(s) signalé(s)</a>'; ?> 
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>         
+            </div> 
         </section>
       </div>
 
-      <!-- Footer -->
-          <footer class="page-footer font-small stylish-color-dark pt-4">
+    <div class='scrolltop'>
+        <div class='scroll icon'><i class="fa fa-arrow-circle-up"></i></div>
+    </div>  
 
-            <!-- Footer Links -->
-            <div class="container text-center text-md-left">
+    <!-- Footer -->
+    <footer class="page-footer font-small stylish-color-dark pt-4">
 
-              <!-- Grid row -->
-              <div class="row">
+      <!-- Footer Links -->
+      <div class="container text-center text-md-left">
 
-                <!-- Grid column -->
-                <div class="col-md-4 mx-auto">
+        <!-- Grid row -->
+        <div class="container">
 
-                  <!-- Content -->
-                  <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-                  <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                    consectetur
-                    adipisicing elit.</p>
+          <!-- Grid column -->
+          <div class="col-md-4 mx-auto">
 
-                </div>
-                <!-- Grid column -->
+            <!-- Content -->
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4"><strong><span class="title">ADDICT</span>SHOW</strong></h5>
+            <p>Retrouver toutes les informations que vous recherchez à travers une base de données officielle regroupant plus de 84000 séries</p>
 
-                <hr class="clearfix w-100 d-md-none">
+          </div>
+          <!-- Grid column -->
 
-                <!-- Grid column -->
-                <div class="col-md-2 mx-auto">
+          <hr class="clearfix w-100 d-md-none">
 
-                  <!-- Links -->
-                  <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+          <!-- Grid column -->
+          <div class="col-md-2 mx-auto">
 
-                  <ul class="list-unstyled">
-                    <li>
-                      <a href="#!">Link 1</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 4</a>
-                    </li>
-                  </ul>
+            <!-- Links -->
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 mx-auto">
-
-                  <!-- Links -->
-                  <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-                  <ul class="list-unstyled">
-                    <li>
-                      <a href="#!">Link 1</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 4</a>
-                    </li>
-                  </ul>
-
-                </div>
-                <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 mx-auto">
-
-                  <!-- Links -->
-                  <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-                  <ul class="list-unstyled">
-                    <li>
-                      <a href="#!">Link 1</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 2</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 3</a>
-                    </li>
-                    <li>
-                      <a href="#!">Link 4</a>
-                    </li>
-                  </ul>
-
-                </div>
-                <!-- Grid column -->
-
-              </div>
-              <!-- Grid row -->
-
-            </div>
-            <!-- Footer Links -->
-
-            <hr>
-
-            <!-- Call to action -->
-            <ul class="list-unstyled list-inline text-center py-2">
-              <li class="list-inline-item">
-                <h5 class="mb-1">Créer un compte</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!">Link 1</a>
               </li>
-              <li class="list-inline-item">
-                <a href="subcribe.php" class="btn btn-primary btn-rounded">Inscrivez-vous !</a>
+              <li>
+                <a href="#!">Link 2</a>
+              </li>
+              <li>
+                <a href="#!">Link 3</a>
+              </li>
+              <li>
+                <a href="#!">Link 4</a>
               </li>
             </ul>
-            <!-- Call to action -->
 
-            <hr>
+          </div>
+          <!-- Grid column -->
 
-            <!-- Social buttons -->
-            <ul class="list-unstyled list-inline text-center">
-              <li class="list-inline-item">
-                <a class="btn-floating btn-fb mx-1">
-                  <i class="fab fa-facebook-f"> </i>
-                </a>
+          <hr class="clearfix w-100 d-md-none">
+
+          <!-- Grid column -->
+          <div class="col-md-2 mx-auto">
+
+            <!-- Links -->
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!">Link 1</a>
               </li>
-              <li class="list-inline-item">
-                <a class="btn-floating btn-tw mx-1">
-                  <i class="fab fa-twitter"> </i>
-                </a>
+              <li>
+                <a href="#!">Link 2</a>
               </li>
-              <li class="list-inline-item">
-                <a class="btn-floating btn-gplus mx-1">
-                  <i class="fab fa-google-plus-g"> </i>
-                </a>
+              <li>
+                <a href="#!">Link 3</a>
               </li>
-              <li class="list-inline-item">
-                <a class="btn-floating btn-li mx-1">
-                  <i class="fab fa-linkedin-in"> </i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a class="btn-floating btn-dribbble mx-1">
-                  <i class="fab fa-dribbble"> </i>
-                </a>
+              <li>
+                <a href="#!">Link 4</a>
               </li>
             </ul>
-            <!-- Social buttons -->
 
-            <!-- Copyright -->
-            <div class="footer-copyright text-center py-3">© 2019 Copyright:
-              <a href="https://www.cedricheim.fr"> cedricheim.fr</a>
-            </div>
-              <p class="text-center">Tags: 
-                <a href="#"><span class="label label-info">Snipp</span></a> 
-              <a href="#"><span class="label label-info">Bootstrap</span></a> 
-              <a href="#"><span class="label label-info">UI</span></a> 
-              <a href="#"><span class="label label-info">growth</span></a>
-              | <i class="icon-user"></i> <a href="#">Admin</a> 
-              | <i class="icon-calendar"></i> Sept 16, 2019 à 16:20
-              | <i class="icon-comment"></i> <a href="#">3 Commentaires</a>
-                | <i class="icon-share"></i> <a href="#">39 Partages</a>
-            </p>
-          </footer>
-          <!-- Footer -->
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-          <script src="/js/bootstrap.min.js"></script>
-          <script src="/js/pagination.js"></script>
-          <script>
-            function scrollTo(target) {
-                if (target.length) {
-                    $("html, body")
-                        .stop()
-                        .animate({
-                            scrollTop: target.offset()
-                                .top
-                        }, 1500);
-                }
-            };
-            $("#smoothClic").click( e =>  {
-              scrollTo($("#smoothAnchor"));
-            });
-          </script>
-          <script>
-            let flash = $("#modal");
-            if (flash.text() != "") {
-              $('.modal').modal('show');
-            };
+          </div>
+          <!-- Grid column -->
 
-            $("#movieCards div:eq(0)").addClass("active");
-          </script>
-      </body>
-      </html>
+          <hr class="clearfix w-100 d-md-none">
+
+          <!-- Grid column -->
+          <div class="col-md-2 mx-auto">
+
+            <!-- Links -->
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!">Link 1</a>
+              </li>
+              <li>
+                <a href="#!">Link 2</a>
+              </li>
+              <li>
+                <a href="#!">Link 3</a>
+              </li>
+              <li>
+                <a href="#!">Link 4</a>
+              </li>
+            </ul>
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+      <!-- Footer Links -->
+
+      <hr>
+
+      <!-- Call to action -->
+      <ul class="list-unstyled list-inline text-center py-2">
+        <?php if ($user->isAuthenticated())
+        {
+        ?>
+          <li class="list-inline-item">
+            <h5 class="mb-1">Vous êtes actuellement connecté en tant que <a class="d-inline p-0 nav-link" href="profil.php"><strong><?php echo $_SESSION['pseudo']; ?></strong></a></h5>
+          </li>
+        <?php  
+        } else 
+        {
+        ?> 
+        <li class="list-inline-item">
+          <h5 class="mb-1">Créer un compte</h5>
+        </li>
+        <li class="list-inline-item">
+          <a href="/subscribe.php" class="btn btn-primary btn-rounded">Inscrivez-vous !</a>
+        </li>
+        <?php
+        }
+        ?>
+      </ul>
+      <!-- Call to action -->
+
+      <hr>
+
+      <!-- Social buttons -->
+      <ul class="list-unstyled list-inline text-center">
+        <li class="list-inline-item">
+          <a class="btn-floating btn-fb mx-1">
+            <i class="fab fa-facebook-f"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-tw mx-1">
+            <i class="fab fa-twitter"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-gplus mx-1">
+            <i class="fab fa-google-plus-g"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-li mx-1">
+            <i class="fab fa-linkedin-in"> </i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="btn-floating btn-dribbble mx-1">
+            <i class="fab fa-dribbble"> </i>
+          </a>
+        </li>
+      </ul>
+      <!-- Social buttons -->
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2019 Copyright:
+        <a href="https://www.cedricheim.fr"> cedricheim.fr</a>
+      </div>
+        <p class="text-center">Liens: 
+          <a href="#"><span class="label label-info">mentions légales</span></a> 
+        | <i class="icon-user"></i> <a href="#">Admin</a> 
+        | <i class="icon-calendar"></i> <?php setlocale(LC_TIME, 'fra_fra'); echo strftime('%A %d %B %Y, %H:%M'); ?>
+        | <i class="icon-comment"></i> <a href="#">3 Commentaires postés</a>
+      </p>
+    </footer>
+    <!-- Footer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/form.js"></script>
+    <script src="/js/script.js"></script>
+    <script>
+      function scrollTo(target) {
+          if (target.length) {
+              $("html, body")
+                  .stop()
+                  .animate({
+                      scrollTop: target.offset()
+                          .top
+                  }, 1500);
+          }
+      };
+      $("#smoothClic").click( e =>  {
+        scrollTo($("#smoothAnchor"));
+      });
+    </script>
+    <script>
+      let flash = $("#modal");
+      if (flash.text() != "") {
+        $('.modal').modal('show');
+      };
+
+      $("#movieCards div:eq(0)").addClass("active");
+    </script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#search").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+    </script>
+    <script></script>
+</body>
+</html>

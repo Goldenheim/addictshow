@@ -5,11 +5,11 @@ const DEFAULT_APP = 'Frontend';
 if (!isset($_GET['app']) || !file_exists(__DIR__.'/../App/'.$_GET['app'])) $_GET['app'] = DEFAULT_APP;
 
 // On commence par inclure la classe nous permettant d'enregistrer nos autoload
-require __DIR__.'/../lib/JFBlog/SplClassLoader.php';
+require __DIR__.'/../lib/AddictFram/SplClassLoader.php';
 
-// On va ensuite enregistrer les autoloads correspondant à chaque vendor (JFBlog, App, Model, etc.)
-$JFBlogLoader = new SplClassLoader('JFBlog', __DIR__.'/../lib');
-$JFBlogLoader->register();
+// On va ensuite enregistrer les autoloads correspondant à chaque vendor (AddictFram, App, Model, etc.)
+$AddictFramLoader = new SplClassLoader('AddictFram', __DIR__.'/../lib');
+$AddictFramLoader->register();
 
 $appLoader = new SplClassLoader('App', __DIR__.'/..');
 $appLoader->register();

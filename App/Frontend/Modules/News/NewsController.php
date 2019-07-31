@@ -1,11 +1,11 @@
 <?php
 namespace App\Frontend\Modules\News;
  
-use \JFBlog\BackController;
-use \JFBlog\HTTPRequest;
+use \AddictFram\BackController;
+use \AddictFram\HTTPRequest;
 use \Entity\Comment;
 use \FormBuilder\CommentFormBuilder;
-use \JFBlog\FormHandler;
+use \AddictFram\FormHandler;
  
 class NewsController extends BackController
 {

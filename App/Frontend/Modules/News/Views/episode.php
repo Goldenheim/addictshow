@@ -34,7 +34,7 @@
                           <div class="col-lg-8">
                               <p class="text-left"><strong><?php echo $_SESSION['pseudo']; ?></strong></p>
                               <p class="text-left">
-                                  <a href="profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
+                                  <a href="admin/profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
                               </p>
                           </div>
                       </div>

@@ -1,7 +1,7 @@
 <?php
 namespace App\Frontend;
 
-use \JFBlog\Application;
+use \AddictFram\Application;
 
 class FrontendApplication extends Application
 {

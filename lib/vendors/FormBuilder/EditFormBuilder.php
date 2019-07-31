@@ -1,10 +1,10 @@
 <?php
 namespace FormBuilder;
 
-use \JFBlog\FormBuilder;
-use \JFBlog\StringField;
-use \JFBlog\MaxLengthValidator;
-use \JFBlog\NotNullValidator;
+use \AddictFram\FormBuilder;
+use \AddictFram\StringField;
+use \AddictFram\MaxLengthValidator;
+use \AddictFram\NotNullValidator;
 
 class EditFormBuilder extends FormBuilder
 {

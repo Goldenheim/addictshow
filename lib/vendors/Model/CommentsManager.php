@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-use \JFBlog\Manager;
+use \AddictFram\Manager;
 use \Entity\Comment;
 
 abstract class CommentsManager extends Manager

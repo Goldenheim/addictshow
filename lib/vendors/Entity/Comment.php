@@ -1,7 +1,7 @@
 <?php
 namespace Entity;
 
-use \JFBlog\Entity;
+use \AddictFram\Entity;
 
 class Comment extends Entity
 {
