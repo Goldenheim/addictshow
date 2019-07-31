@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
     <title><?= isset($title) ? $title : 'AddictShow' ?></title>
@@ -13,6 +12,7 @@
     <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/css/cards.css">
 </head> 
+<body>
   <!-- Main Content -->
   <div id="content-wrap">
         <section id="main">      
@@ -216,7 +216,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/pagination.js"></script>
     <script src="/js/form.js"></script>
     <script src="/js/script.js"></script>
     <script>
@@ -257,5 +256,6 @@
         });
       });
     </script>
+    <script></script>
 </body>
 </html>

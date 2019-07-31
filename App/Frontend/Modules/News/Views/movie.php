@@ -81,11 +81,11 @@
 <!-- Page Header -->
 <header>
     <div class="dark">
-     <div class="pt-5 pb-5 mt-0 d-flex" id="fullHeaderMovie" style="background-image: url('https://image.tmdb.org/t/p/w1280<?php echo $movie["poster_path"]; ?> ');">
+     <div class="pb-5 mt-0 d-flex" id="fullHeaderMovie" style="background-image: url('https://image.tmdb.org/t/p/w1280<?php echo $movie["poster_path"]; ?> ');">
      </div>
      <div  id="blur" class="container-fluid">
         <div class="row  justify-content-center align-items-start d-flex text-center">
-          <div class="col-12 col-md-8  h-50">
+          <div class="col-lg-12 h-50">
               <div id="show-title" class="d-flex justify-content-center align-items-center mt-3">
                 <h1 class="display-3 font-weight-bold text-light"><strong><?php echo $movie['name']; ?></strong></h1>
                 <?php foreach (array_slice($movie['networks'], 0, 1) as $network)
@@ -452,8 +452,8 @@ else
                   <button class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                   <ul class="dropdown-menu">
                     <?php if ($user->isAuthenticated() && ($_SESSION['pseudo'] == $comment['auteur'])) { ?> 
-                    <li class="nav-item"><a class="nav-link" href="admin/comment-update-<?php echo $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="admin/comment-delete-<?php echo $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="comment-update-<?php echo $comment['id'] ?>.html"><i class="fas fa-edit"> Modifier</i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="comment-delete-<?php echo $comment['id'] ?>.html"><i class="fas fa-trash"> Supprimer</i></a></li>
                     <?php if ($comment['answer'] != null) { ?>
                         <li class="nav-item"><a class="nav-link" href="admin/Answer-delete-<?php echo $comment['id'] ?>.html"><i class="fas fa-eraser"> Supp. la réponse</i></a></li>
                       <?php
@@ -472,7 +472,7 @@ else
                      <?php
                      if ($comment['report'] == 2) 
                       { 
-                        echo '<p id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'<div style="text-align:right;"><small> Édité par J.Forteroche</small><hr></div></p>'; ?>
+                        echo '<p id="comment-'.$comment['id'].'">'.nl2br($comment['contenu']).'<div style="text-align:right;"><small> Édité par ' . $comment['auteur']. '</small><hr></div></p>'; ?>
                         
                     <?php 
                     } else 

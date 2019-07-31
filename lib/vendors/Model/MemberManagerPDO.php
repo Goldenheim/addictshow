@@ -85,7 +85,7 @@ class MemberManagerPDO extends MemberManager
 
   protected function modify(Member $member)
   {
-    $requete = $this->dao->prepare('UPDATE members SET pseudo = :pseudo, mail = :mail, name = :name, phone = :phone, profession = :profession, genre = :genre WHERE id = :id');
+    $requete = $this->dao->prepare('UPDATE members SET pseudo = :pseudo, mail = :mail, name = :name, phone = :phone, profession = :profession, avatar = :avatar, genre = :genre WHERE id = :id');
     
     $requete->bindValue(':pseudo', $member->pseudo());
     $requete->bindValue(':mail', $member->mail());
@@ -93,6 +93,7 @@ class MemberManagerPDO extends MemberManager
     $requete->bindValue(':phone', $member->phone());
     $requete->bindValue(':profession', $member->profession());
     $requete->bindValue(':genre', $member->genre());
+    $requete->bindValue(':avatar', $member->avatar());
     $requete->bindValue(':id', $member->id(), \PDO::PARAM_INT);
     
     $requete->execute();
@@ -123,6 +124,11 @@ class MemberManagerPDO extends MemberManager
     $favourites = $requete->fetchAll();
 
     return $favourites;
+  }
+
+  public function getRandomFav($id)
+  {
+    return $this->dao->query('SELECT show_id FROM favourite WHERE member_id = ' . (int) $id . ' ORDER BY RAND() LIMIT 1')->fetchColumn();
   }
 
   public function deleteFav($id)

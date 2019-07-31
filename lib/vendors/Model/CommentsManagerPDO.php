@@ -56,13 +56,13 @@ class CommentsManagerPDO extends CommentsManager
         throw new \InvalidArgumentException('L\'identifiant passé doit être un nombre entier valide');
       }
       
-      $q = $this->dao->prepare('SELECT id, movie, auteur, contenu, answer, report, date, avatar FROM comments WHERE movie = :movie');
+      $q = $this->dao->prepare('SELECT comments.id, comments.movie, comments.auteur, comments.contenu, comments.answer, comments.report, comments.date, members.avatar AS avatar FROM comments INNER JOIN members ON comments.member_id = members.id WHERE comments.movie = :movie');
       $q->bindValue(':movie', $movie, \PDO::PARAM_INT);
       $q->execute();
       
-      $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+      $q->setFetchMode();
       
-      $comments = $q->fetchAll();
+      $comments = $q->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
       
       foreach ($comments as $comment)
       {
@@ -88,9 +88,8 @@ class CommentsManagerPDO extends CommentsManager
 
   protected function modify(Comment $comment)
   {
-    $q = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu, report = 2 WHERE id = :id');
+    $q = $this->dao->prepare('UPDATE comments SET contenu = :contenu, report = 2 WHERE id = :id');
     
-    $q->bindValue(':auteur', $comment->auteur());
     $q->bindValue(':contenu', $comment->contenu());
     $q->bindValue(':id', $comment->id(), \PDO::PARAM_INT);
     

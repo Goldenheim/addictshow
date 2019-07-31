@@ -82,15 +82,11 @@
 	<h1 class="profil-head w-100 text-center text-uppercase p-4"><strong>Profil de <span class="text-profil"><?php  echo $_SESSION['pseudo']; ?></span></strong></h1>
 </div>
 <div class="emp-profile col-lg-10">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
                     <img src="img/upload/<?php echo $_SESSION['avatar']; ?>" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Changer la photo
-                    	<input type="file" accept="image/*" name="edit-avatar"/>
-                    </div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -178,7 +174,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p><?php if(isset($_SESSION['phone'])) {
-                                        	echo $_SESSION['phone'];
+                                        	echo '0' . $_SESSION['phone'];
                                         } else {
                                         	echo 'non renseigné';
                                         }?></p>
@@ -257,4 +253,4 @@
             </div>
         </div>
     </form>           
-</div>  
+</div> 

@@ -5,6 +5,8 @@ use \JFBlog\BackController;
 use \JFBlog\HTTPRequest;
 use \JFBlog\httpResponse;
 use \Entity\Member;
+use \Entity\Comment;
+use \FormBuilder\CommentFormBuilder;
 use \FormBuilder\MemberFormBuilder;
 use \FormBuilder\EditFormBuilder;
 use \JFBlog\FormHandler;
@@ -22,11 +24,6 @@ class memberController extends BackController
 	  // Si le formulaire a été envoyé.
 	  if ($request->method() == 'POST')
 	  {
-	  	if(!empty($_POST['tmdbAccess'])) {
-	  		$json = file_get_contents("https://api.themoviedb.org/3/authentication/token/new?api_key=22b5d3d2b10babbb4291177132454423");
-	  			  	$parsee = json_decode($json, true);
-	  			  	$tmdbSession = $parsee['request_token'];
-	  	} 
 
 	  	if(isset($_FILES['avatar']) AND $_FILES['avatar']['error'] == 0)
 	  	{
@@ -219,14 +216,54 @@ class memberController extends BackController
 		  // Si le formulaire a été envoyé.
 		  if ($request->method() == 'POST')
 		  {
-		  	$member = new Member([
+
+	  	  	if(isset($_FILES['avatar']) AND $_FILES['avatar']['error'] == 0)
+	  	  	{
+	  	  		$memberBd = $manager->get('id', $_SESSION['id']);
+	  	  		if(!empty($memberBd['avatar']))
+	  	  		{
+	  	  			unlink("img/upload/" . $memberBd['avatar']);
+	  	  		}
+
+	  		  	$content_dir = "img/upload/"; // dossier où sera déplacé le fichier
+	  		  	 
+	  	  	    $tmp_file = $_FILES['avatar']['tmp_name'];
+	  	  	 
+	  	  	    if( !is_uploaded_file($tmp_file) )
+	  	  	    {
+	  	  	        exit("Le fichier est introuvable");
+	  	  	    }
+
+	  	  	    $path = $_FILES['avatar']['name'];
+	  	  	    $ext = pathinfo($path, PATHINFO_EXTENSION);
+	  	  	 
+	  	  	    // on copie le fichier dans le dossier de destination
+	  	  	    $name_file = $_SESSION['pseudo'] . "." . $_SESSION['id'] . "." . $ext;
+	  	  	 
+	  	  	    if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
+	  	  	    {
+	  	  	        exit("Impossible de copier le fichier dans $content_dir");
+	  	  	    }
+		  	  		$member = new Member([
+			  		'pseudo' => $pseudo,
+			  		'name' => $name,
+			  		'phone' => $phone,
+			  		'mail' => $mail,
+			  		'profession' => $profession,
+			  		'avatar' => $name_file,
+			  		'genre' => $genre,
+			  		]);
+	  	  	} else
+	  	  	{
+	  	  		$member = new Member([
 		  		'pseudo' => $pseudo,
 		  		'name' => $name,
 		  		'phone' => $phone,
 		  		'mail' => $mail,
 		  		'profession' => $profession,
 		  		'genre' => $genre,
-		  	]);
+		  		]);
+	  	  	}
 
 		  	if ($request->getExists('id'))
 		  	{
@@ -249,7 +286,6 @@ class memberController extends BackController
 		  		 
 		  		  if ($formHandler->process())
 			  	  		{
-			  	  		    $this->app->user()->setFlash('Votre profil a bien été édité');
 			  	  		    $member = $manager->get('id',$_SESSION['id']);
 			  	  		    $this->app->user()->setAttribute('id',$member['id']);
 	  						$this->app->user()->setAttribute('pseudo',$member['pseudo']);
@@ -258,8 +294,11 @@ class memberController extends BackController
 	  						$this->app->user()->setAttribute('profession',$member['profession']);
 	  						$this->app->user()->setAttribute('genre',$member['genre']);
 	  						$this->app->user()->setAttribute('name',$member['name']);
-	  						$this->app->user()->setAttribute('avatar',$member['avatar']);
-			  	  		  	$this->app->httpResponse()->redirect('profil.php');
+	  						if(isset($_FILES['avatar']) AND $_FILES['avatar']['error'] == 0)
+	  	  					{
+	  							$this->app->user()->setAttribute('avatar',$member['avatar']);
+	  						}
+			  	  		  	$this->app->httpResponse()->addHeader("Refresh:0; url=profil.php");
 			  	  		}
 		  	} else {
 		  		$this->app->user()->setFlash('Cette adresse mail est déjà utilisée');
@@ -271,54 +310,6 @@ class memberController extends BackController
 		  $this->page->addVar('form', $form->createView());
 		  // On ajoute une définition pour le titre.
 		  $this->page->addVar('title', 'Édition du profil');
-	}
-
-	public function executeEditAvatar (HTTPRequest $request) {
-	  	if(isset($_FILES['edit-avatar']) AND $_FILES['edit-avatar']['error'] == 0)
-	  	{
-		  	$content_dir = "img/upload/"; // dossier où sera déplacé le fichier
-		  	 
-	  	    $tmp_file = $_FILES['edit-avatar']['tmp_name'];
-	  	 
-	  	    if( !is_uploaded_file($tmp_file) )
-	  	    {
-	  	        exit("Le fichier est introuvable");
-	  	    }
-	  	 
-	  	    // on copie le fichier dans le dossier de destination
-	  	    $name_file = $pseudo ."-" . $_FILES['edit-avatar']['name'];
-	  	 
-	  	    if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
-	  	    {
-	  	        exit("Impossible de copier le fichier dans $content_dir");
-	  	    }
-		  	else
-		  	{
-		  	    echo "Le fichier est enregistré";
-			}
-
-			$member = new Member([
-				'avatar' => $name_file,
-			]);
-
-			if ($request->getExists('id'))
-		  	{
-		  	  $member->setId($request->getData('id'));
-		  	}
-	  	}
-
-	  	$formBuilder = new MemberFormBuilder($member);
-	  	$formBuilder->build();
-	  	
-	  	$form = $formBuilder->form();
-	  	
-	  	$formHandler = new FormHandler($form, $manager, $request);
-		
-		if ($formHandler->process())
-		{
-		  $this->app->user()->setFlash('Votre photo a bien été mis à jour');
-		  $this->app->httpResponse()->redirect('profil.php');
-		}
 	}
 
 	public function executeFavourite (HTTPRequest $request) {
@@ -350,12 +341,13 @@ class memberController extends BackController
 		
 		$this->managers->getManagerOf('Member')->deleteFav($showId);
 		$this->app->user()->setFlash('Vos favoris ont bien été mis à jour');
-		$this->app->httpResponse()->addHeader('Location: '.$_SERVER['REQUEST_URI']);
+		$this->app->httpResponse()->addHeader("Refresh:0; url=favoris.html");
 	}
 
 	public function executeDiscover (HTTPRequest $request) {
 		$manager = $this->managers->getManagerOf('Member');
 		$member = $manager->get('id',$_SESSION['id']);
+		$favId = $manager->getRandomFav($_SESSION['id']);
 		$genreId = $member['genre'];
 
 		$json = file_get_contents("https://api.themoviedb.org/3/discover/tv?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&sort_by=popularity.desc&page=1&timezone=France%2FPARIS&with_genres=$genreId&include_null_first_air_dates=false");
@@ -367,9 +359,57 @@ class memberController extends BackController
 				$genre = $genres['name'];
 			}
 		}
+		$jsonTitle = file_get_contents("https://api.themoviedb.org/3/tv/$favId?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
+		$parseeTitle = json_decode($jsonTitle, true); 
+		$jsonFav = file_get_contents("https://api.themoviedb.org/3/tv/$favId/recommendations?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&page=1");
+		$parseeFav = json_decode($jsonFav, true); 
 
 		$this->page->addVar('title', 'Découvertes selon vos goûts');
 		$this->page->addVar('search', $parsee);
 		$this->page->addVar('genre', $genre);
+		$this->page->addVar('similar', $parseeFav);
+		$this->page->addVar('titleFav', $parseeTitle);
+	}
+
+	public function executeDeleteComment(HTTPRequest $request)
+	{
+	  $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
+	
+	  $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
+	
+	  $this->app->httpResponse()->redirect('/');
+	}
+
+	public function executeUpdateComment(HTTPRequest $request)
+	{
+	  $this->page->addVar('title', 'Modification d\'un commentaire');
+	
+	  if ($request->method() == 'POST')
+	  {
+	    $comment = new Comment([
+	      'id' => $request->getData('id'),
+	      'contenu' => htmlspecialchars($request->postData('contenu'))
+	    ]);
+	  }
+	  else
+	  {
+	    $comment = $this->managers->getManagerOf('Comments')->get($request->getData('id'));
+	  }
+	
+	  $formBuilder = new CommentFormBuilder($comment);
+	  $formBuilder->build();
+	
+	  $form = $formBuilder->form();
+	
+	  $formHandler = new FormHandler($form, $this->managers->getManagerOf('Comments'), $request);
+	
+	  if ($formHandler->process())
+	  {
+	    $this->app->user()->setFlash('Le commentaire a bien été modifié');
+	    
+	    $this->app->httpResponse()->redirect('/');
+	  }
+	
+	  $this->page->addVar('form', $form->createView());
 	}
 }

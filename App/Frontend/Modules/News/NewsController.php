@@ -127,11 +127,14 @@ class NewsController extends BackController
       $searchEncode = urlencode($_GET['id']);
 
       $json = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
-      $jsonSimilar = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode/similar?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&page=1");
-      $jsonReviews = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode/reviews?api_key=22b5d3d2b10babbb4291177132454423&language=en-US&page=1");
       $parsee = json_decode($json, true);
+      $this->page->addVar('movie', $parsee);
+      $jsonSimilar = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode/similar?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR&page=1");
       $parseeSimilar = json_decode($jsonSimilar, true);
+      $this->page->addVar('similar', $parseeSimilar);
+      $jsonReviews = file_get_contents("https://api.themoviedb.org/3/tv/$searchEncode/reviews?api_key=22b5d3d2b10babbb4291177132454423&language=en-US&page=1");
       $parseeReviews = json_decode($jsonReviews, true);
+      $this->page->addVar('reviews', $parseeReviews);
     } else {
       $this->app->httpResponse()->redirect404();
     }
@@ -154,9 +157,6 @@ class NewsController extends BackController
       }  
     }
  
-    $this->page->addVar('movie', $parsee);
-    $this->page->addVar('similar', $parseeSimilar);
-    $this->page->addVar('reviews', $parseeReviews);
     $this->page->addVar('title', $title);
     $this->page->addVar('comments', $this->managers->getManagerOf('Comments')->getListOf(urlencode($_GET['id'])));
   }
@@ -228,7 +228,6 @@ class NewsController extends BackController
         'auteur' => $member['pseudo'],
         'member_id' => $_SESSION['id'],
         'contenu' => $request->postData('contenu'),
-        'avatar' => $member['avatar']
       ]);
     }
     else

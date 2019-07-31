@@ -19,7 +19,7 @@ class Comment extends Entity
 
   public function isValid()
   {
-    return !(empty($this->auteur) || empty($this->contenu));
+    return !(empty($this->contenu));
   }
 
   public function setMovie($movie)
