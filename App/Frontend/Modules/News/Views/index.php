@@ -6,8 +6,8 @@
          <div class="container-fluid">
             <div class="row  justify-content-center align-items-center d-flex text-center h-100">
               <div class="col-12 col-md-8  h-50">
-                  <h1 class="display-2 font-weight-bold text-light mb-2 mt-5"><strong><span class="title">ADDICT</span>SHOW</strong></h1>
-                  <p class="lead text-light mb-5">Retrouvez toutes les informations disponibles sur vos séries préférées</p>
+                  <h1 class="fadeInLeft animated display-2 font-weight-bold text-light mb-2 mt-5"><strong><span class="title">ADDICT</span>SHOW</strong></h1>
+                  <p class="fadeInUpBig animated lead text-light mb-5">Retrouvez toutes les informations disponibles sur vos séries préférées</p>
                   <form method="post" action="search.php" class="form-inline">
                     <input class="form-control mr-sm-2" id="search" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>

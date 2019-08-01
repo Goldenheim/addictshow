@@ -65,6 +65,14 @@
       ?>
     </form>
   </nav>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb text-center">
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item"><a href="movie-<?php echo $_GET['id']; ?>.html"><?php echo $showTitle; ?></a></li>
+      <li class="breadcrumb-item"><a href="season-<?php echo $_GET['id']; ?>-<?php echo $_GET['season']; ?>.html">Saison <?php echo $_GET['season']; ?></a></li>
+      <li class="breadcrumb-item active" aria-current="page">Épisode <?php echo $_GET['episode']; ?></li>
+    </ol>
+  </nav>
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-3">
       <div class="jumbotron">
@@ -133,7 +141,7 @@
 </div>
 
 <h3 class="text-white text-center">Gallerie</h3>
-<div class="pt-3 pb-3 gallery mb-3 d-flex wrap justify-content-evenly">
+<div class="pt-3 gallery mb-3 d-flex wrap justify-content-evenly">
     <?php
     foreach ($image['stills'] as $img) 
     {

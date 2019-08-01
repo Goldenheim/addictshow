@@ -128,15 +128,21 @@
                   <?php
                   if (isset($currentRate)) {
                   ?>
-                  <span id="rate" class="font-weight-bold"><?php echo $currentRate ?>/5</span>
-                  <p class="text-white text-light">Votre note pour <?php echo $movie['name']; ?></p>
-                  <a data-toggle="tooltip" title="Supprimer votre note" href="member/rate-delete-<?php echo $movie['id']; ?>.html"><i class="fas fa-minus-square"></i></a>
+                  <p class="text-white text-light">Votre note pour <?php echo $movie['name']; ?></p>  
+                  <form method="" class="rating h-25">
+                    <div class="rating-btn ml-3">
+                      <a class="favourite" data-toggle="tooltip" title="Supprimer votre note" href="member/rate-delete-<?php echo $movie['id']; ?>.html"><i class="fas fa-minus-square"></i></a>
+                    </div>
+                    <div class="card_stars">
+                    <div class="card__stars" data-rating="<?php echo $currentRate ?>"></div>
+                    </div>
+                  </form>
                   <?php
                   } else
                   {
                   ?> 
                   <form method="POST" class="rating">
-                     <div class="rating-btn">    
+                     <div class="rating-btn">   
                         <input type="submit" name="editProfil" value="Voter" class="btn btn-primary">
                      </div>
                      <input type="radio" name="rating" value="5" id="rating-5">
