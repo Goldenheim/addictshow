@@ -30,8 +30,30 @@ class memberController extends BackController
 
 	public function executeComments (HTTPRequest $request) {
 		$this->page->addVar('title', 'Tous les commentaires de ' . $_SESSION['pseudo']);
+		$show_per_page = $this->app->config()->get('pages');
 		$manager = $this->managers->getManagerOf('Comments');
-		$auteur = $manager->author($_SESSION['id']);
+
+		$total = $manager->authorCount($_SESSION['id']);
+		$nombreDePages=ceil($total/$show_per_page);
+
+		if(isset($_GET['page'])) {// Si la variable $_GET['page'] existe
+		     $pageActuelle=intval($_GET['page']);
+		 
+		     if($pageActuelle>$nombreDePages) // Si la valeur de $pageActuelle (le numéro de la page) est plus grande que $nombreDePages...
+		     {
+		          $pageActuelle=$nombreDePages;
+		     }
+		}
+		else 
+		{
+		     $pageActuelle = 1; // default page
+		}   
+
+		$premiereEntree=($pageActuelle-1)*$show_per_page; // On calcul la première entrée à lire
+
+		$auteur = $manager->getlistbyauthor($_SESSION['id'], $premiereEntree, $show_per_page);
+		$this->page->addVar('pageActuelle', $pageActuelle);
+		$this->page->addVar('Pages', $nombreDePages);
 		$this->page->addVar('comments', $auteur);	
 	}
 

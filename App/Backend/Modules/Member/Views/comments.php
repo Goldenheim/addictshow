@@ -25,5 +25,20 @@
 				?>
 			</table>
 		</div>
+		<?php
+		echo '<div class="row"><p class="mx-auto">Page(s) : [ '; //Pour l'affichage, on centre la liste des pages
+		for($i=1; $i<=$Pages; $i++) //On fait notre boucle
+		{
+		     //On va faire notre condition
+		     if($i==$pageActuelle) //Si il s'agit de la page actuelle...
+		     {
+		         echo $i; 
+		     }	
+		     else //Sinon...
+		     {
+		          echo ' <a href="/member/comments/page='.$i.'.html">'.$i.'</a> ';
+		     }
+		}
+		echo ' ]</p></div>' ?>
 	</section>
 </div>

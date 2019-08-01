@@ -125,6 +125,30 @@ class CommentsManagerPDO extends CommentsManager
     return $comments;
   }  
 
+  public function getlistbyauthor($author, $debut = -1, $limite = -1)
+  {
+
+    $sql = 'SELECT id, movie, auteur, contenu, date, report FROM comments WHERE member_id = '. (int) $author .' ORDER BY date DESC';
+    if ($debut != -1 || $limite != -1)
+    {
+      $sql .= ' LIMIT '.(int) $limite.' OFFSET '.(int) $debut;
+    }
+    
+    $q = $this->dao->query($sql);
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
+
+    $comments = $q->fetchAll();
+          
+    foreach ($comments as $comment)
+    {
+      $comment->setDate(new \DateTime($comment->date()));
+    }
+
+    $q->closeCursor();
+    
+    return $comments;
+  }  
+
   public function authorCount($id)
   {
     return $this->dao->query('SELECT COUNT(*) FROM comments WHERE member_id =' . (int) $id)->fetchColumn();
