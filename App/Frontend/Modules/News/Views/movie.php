@@ -366,13 +366,10 @@ if($similar['results'] != Null)
         <div class="carousel-item col-md-4">
            <div id="<?php echo $show['id']; ?>" class="movie-card">
               <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?php echo $show['backdrop_path']; ?>');">
-                 <div class="header-icon-container">
-                    <a href="#"><i class="material-icons header-icon"></i></a>
-                 </div>
               </div>
               <div class="movie-content">
                  <div class="movie-content-header">
-                    <a href="movie-<?php echo $show['id']; ?>.html">
+                    <a class="p-0 nav-link stretched-link" href="movie-<?php echo $show['id']; ?>.html">
                        <h3 class="movie-title"><?php echo $show['name']; ?></h3>
                     </a>
                     <div class="imax-logo"></div>

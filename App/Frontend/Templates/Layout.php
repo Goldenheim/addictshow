@@ -66,20 +66,20 @@
           <div class="col-md-2 mx-auto">
 
             <!-- Links -->
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">membres</h5>
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Link 1</a>
+                <a href="subscribe.php">Inscription</a>
               </li>
               <li>
-                <a href="#!">Link 2</a>
+                <a href="member/connexion.php">Connexion</a>
               </li>
               <li>
-                <a href="#!">Link 3</a>
+                <a href="member/profil.php">Profil</a>
               </li>
               <li>
-                <a href="#!">Link 4</a>
+                <a href="logout.html">Déconnexion</a>
               </li>
             </ul>
 
@@ -92,20 +92,20 @@
           <div class="col-md-2 mx-auto">
 
             <!-- Links -->
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">top séries</h5>
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Link 1</a>
+                <a href="#!">Stranger things</a>
               </li>
               <li>
-                <a href="#!">Link 2</a>
+                <a href="#!">Game of thrones</a>
               </li>
               <li>
-                <a href="#!">Link 3</a>
+                <a href="#!">Mindhunter</a>
               </li>
               <li>
-                <a href="#!">Link 4</a>
+                <a href="#!">Orange is the new black</a>
               </li>
             </ul>
 
@@ -118,7 +118,7 @@
           <div class="col-md-2 mx-auto">
 
             <!-- Links -->
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Nouveautées</h5>
 
             <ul class="list-unstyled">
               <li>

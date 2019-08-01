@@ -9,7 +9,7 @@
                     <img src="/img/upload/<?php echo $_SESSION['avatar']; ?>" alt=""/>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex profile-tab">
                 <div class="profile-head">
                             <h5>
                                 <?php echo $_SESSION['pseudo']; ?>
@@ -38,23 +38,23 @@
                     </ul>
                 </div>
             </div>
-            <div class="row col-md-2">
-            	<div class="d-inline-flex flex-column">
+            <div class="d-flex profile-btn-container">
+            	<div class="d-inline-flex flex-column profile-btn">
             		<a class="btn btn-primary my-2 my-sm-2" href="edit-<?php echo $_SESSION['id']; ?>.html" ><small>Éditer le profil</small></a>
             		<a class="btn btn-danger my-2 my-sm-0" href="profil-delete-<?php echo $_SESSION['id']; ?>.html" ><small>Supprimer le profil</small></a>
             	</div>
             </div>
         </div>
-        <div class="row">
+        <div class="d-flex profile-content">
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>LIENS</p>
-                    <a class="d-inline nav-link" href="/">Accueil</a><br/>
-                    <a class="d-inline nav-link" href="favoris.html">Liste de vos favoris</a><br/>
-                    <a class="d-inline nav-link" href="discover.php">Découvertes</a><br/>
-                    <a class="d-inline nav-link" href="">Vos notes</a><br/>
+                    <a class="d-inline p-0 nav-link" href="/">Accueil</a><br/>
+                    <a class="d-inline p-0 nav-link" href="favoris.html">Liste de vos favoris</a><br/>
+                    <a class="d-inline p-0 nav-link" href="discover.php">Découvertes</a><br/>
+                    <a class="d-inline p-0 nav-link" href="">Vos notes</a><br/>
                     <p>OPTIONS</p>
-                    <a class="d-inline nav-link" href="comments.php">Commentaires</a><br/>
+                    <a class="d-inline p-0 nav-link" href="comments.php">Commentaires</a><br/>
                 </div>
             </div>
             <div class="col-md-8">

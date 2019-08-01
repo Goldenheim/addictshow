@@ -1,7 +1,7 @@
 body {
   height: 100%;
   width: 100%;
-  background: #323232;
+  background: black;
   font-family: 'Arimo', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -340,14 +340,14 @@ a:hover {
   vertical-align: middle;
   margin: 0 auto;
   color: #ffffff;
-  font-size: 54px;
+  font-size: 2rem;
   text-shadow: 0px 0px 20px #6abcea, 0px 5px 20px #6ABCEA;
   opacity: .85;
 }
 
 .header-icon:hover {
   background: rgba(0, 0, 0, 0.15);
-  font-size: 74px;
+  font-size: 3rem;
   text-shadow: 0px 0px 20px #6abcea, 0px 5px 30px #6ABCEA;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -467,7 +467,7 @@ a:hover {
 .cardContainer {
   overflow: hidden;
   height: 575px;
-  max-width: 1260px;
+  max-width: 1255px;
   margin: auto;
 }
 
@@ -1359,5 +1359,30 @@ footer hr {
   }
   .emp-profile {
     border-radius: 0px!important;
+  }
+
+  .profile-content {
+    flex-direction: column-reverse;
+  }
+
+  .profile-tab {
+    order: 3;
+  }
+
+  .profile-work {
+    padding: 0px!important;
+    margin-top: 0px!important;
+  }
+
+  .profile-btn {
+    flex-direction: row!important;
+    display: flex!important;
+    justify-content: space-around;
+    width: 60%;
+  }
+
+  .profile-btn-container {
+    width: 100%;
+    justify-content: space-around;
   }
 }

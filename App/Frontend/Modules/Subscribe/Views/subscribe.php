@@ -88,16 +88,9 @@
 		</div>
 		<form method="POST" action="" enctype="multipart/form-data" role="form" class="col-lg-3 mx-auto">
 			<?php echo $form; ?>   
-      <div class="form-group">
-        <!-- Default checked -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" name="tmdbAccess" id="tmdbAccess" checked>
-          <label class="custom-control-label" for="tmdbAccess">Autoriser l'accès à TMDB (Vous permet d'intéragir avec les données du site)</label>
-        </div>
-      </div>   
 			<div align="center">    
-			        <input type="submit" name="forminscription" value="Envoyer" class="btn btn-primary btn-rounded">
-			        <input class="btn btn-primary" type="button" onclick="window.location.replace('/')" value="Annuler" />
+        <input type="submit" name="forminscription" value="Envoyer" class="btn btn-primary btn-rounded">
+        <input class="btn btn-primary" type="button" onclick="window.location.replace('/')" value="Annuler" />
 			</div>
 		</form>
 		<br>

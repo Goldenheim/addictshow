@@ -50,7 +50,6 @@ class SubscribeController extends BackController
           'password' => $request->postData('password'),
           'avatar' => $name_file,
           'hash_validation' => $hash_validation,
-          'tmdbSession' => $tmdbSession,
         ]);
         } else 
         {
@@ -60,7 +59,6 @@ class SubscribeController extends BackController
             'password' => $request->postData('password'),
             'avatar' => 'avatar-404.jpg',
             'hash_validation' => $hash_validation,
-            'tmdbSession' => $tmdbSession,
           ]);
         }
       }

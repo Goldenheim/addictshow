@@ -117,7 +117,9 @@
            <div id="<?php echo $show['id']; ?>" class="movie-card">
               <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?php echo $show['backdrop_path']; ?>');">
                  <div class="header-icon-container">
-                    <a href="#"><i class="material-icons header-icon"></i></a>
+                  <a class="p-0 nav-link" href="movie-<?php echo $show['id']; ?>.html">
+                    <i class="fas fa-search-plus header-icon"></i>
+                  </a>
                  </div>
               </div>
               <div class="movie-content">
