@@ -20,7 +20,7 @@ class BackendApplication extends Application
     }
     else
     {
-      $this->app->user()->redirect('login.php');
+      $controller = new Modules\Connexion\ConnexionController($this, 'Connexion', 'index');
     }
 
     $controller->execute();

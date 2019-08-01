@@ -103,7 +103,7 @@ class NewsController extends BackController
 
   public function executeMovie(HTTPRequest $request)
   {
-    $id = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
+    $id = $request->getData('id');
     $manager = $this->managers->getManagerOf('Member');
     if ($this->app->user()->isAuthenticated())
     {
@@ -155,6 +155,12 @@ class NewsController extends BackController
       {
         $this->app->user()->setFlash('Vous avez déjà donné une note à cette série');
       }  
+    }
+
+    $currentRate = $manager->getRate($id);
+    if (!empty($currentRate))
+    {
+      $this->page->addVar('currentRate', $currentRate['rate']);
     }
  
     $this->page->addVar('title', $title);

@@ -1106,6 +1106,13 @@ a:hover {
 
 /* RATING TV SHOW */
 
+#rate {
+  background-color: #FFFF00;
+  padding: 1em;
+  height: 10%;
+  border-radius: 50%;
+}
+
 .rating-btn {
   align-self: flex-end;
   padding: 2%;

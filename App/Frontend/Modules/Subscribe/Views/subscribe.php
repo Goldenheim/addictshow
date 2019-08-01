@@ -58,8 +58,8 @@
       } else 
       {
       ?> 
-      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
-      <a class="btn btn-primary my-2 my-sm-0" href="connexion.php" >Connexion</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php">Inscription</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="member/connexion.php" >Connexion</a>
       <?php
       }
       ?>

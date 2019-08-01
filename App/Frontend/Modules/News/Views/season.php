@@ -34,7 +34,7 @@
                           <div class="col-lg-8">
                               <p class="text-left"><strong><?php echo $_SESSION['pseudo']; ?></strong></p>
                               <p class="text-left">
-                                  <a href="profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
+                                  <a href="member/profil.php" class="btn btn-primary btn-block btn-sm">Compte</a>
                               </p>
                           </div>
                       </div>
@@ -46,7 +46,7 @@
                       <div class="row">
                           <div class="col-lg-12">
                               <p>
-                                  <a href="logout.html" class="btn btn-danger btn-block">Déconnexion</a>
+                                  <a href="member/logout.html" class="btn btn-danger btn-block">Déconnexion</a>
                               </p>
                           </div>
                       </div>
@@ -58,23 +58,17 @@
       } else 
       {
       ?> 
-      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php" >Inscription</a>
-      <a class="btn btn-primary my-2 my-sm-0" href="connexion.php" >Connexion</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="subscribe.php">Inscription</a>
+      <a class="btn btn-primary my-2 my-sm-0" href="member/connexion.php">Connexion</a>
       <?php
       }
       ?>
     </form>
   </nav>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb text-center">
-      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-      <li class="breadcrumb-item"><a href="movie-<?php echo $_GET['id']; ?>.html"><?php echo $_GET['id']; ?></a></li>
-    </ol>
-  </nav>
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-3">
       <div class="jumbotron">
-        <h1 class="display-5 form-inline"><em>Faire une recherche</em></h1>
+        <h1 class="lead form-inline"><em>Faire une recherche</em></h1>
         <form method="post" action="search.php" class="form-inline">
           <input class="form-control mr-sm-2" name="search" type="search" placeholder="Rechercher une série" aria-label="Search">
           <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher</button>
