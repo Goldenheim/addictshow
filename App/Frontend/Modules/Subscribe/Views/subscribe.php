@@ -89,7 +89,7 @@
 		<form method="POST" action="" enctype="multipart/form-data" role="form" class="col-lg-3 mx-auto">
 			<?php echo $form; ?>   
 			<div align="center">    
-        <input type="submit" name="forminscription" value="Envoyer" class="btn btn-primary btn-rounded">
+        <input type="submit" name="forminscription" id="subscribeBtn" value="Envoyer" class="btn btn-primary btn-rounded">
         <input class="btn btn-primary" type="button" onclick="window.location.replace('/')" value="Annuler" />
 			</div>
 		</form>

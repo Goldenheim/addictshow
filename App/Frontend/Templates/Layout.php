@@ -218,7 +218,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/form.js"></script>
-    <script src="/js/script.js"></script>
+    <script>
+      /* loading scripts */
+        loadingScripts();
+        /* used to load scripts for specific page */
+        function loadingScripts() {
+            /* getting url of current page */
+            let url = window.location.pathname;
+            if (url == "/subscribe.php") { /* checking whether the current page is home page or not */
+                let script = document.createElement('script');
+                script.src = "/js/script.js";
+                document.body.appendChild(script);
+            }
+        }
+    </script>
     <script>
       function scrollTo(target) {
           if (target.length) {
@@ -257,6 +270,5 @@
         });
       });
     </script>
-    <script></script>
 </body>
 </html>
