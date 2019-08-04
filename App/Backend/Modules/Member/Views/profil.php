@@ -54,7 +54,7 @@
                     <a class="d-inline p-0 nav-link" href="discover.php">Découvertes</a><br/>
                     <a class="d-inline p-0 nav-link" href="">Vos notes</a><br/>
                     <p>OPTIONS</p>
-                    <a class="d-inline p-0 nav-link" href="comments.php">Commentaires</a><br/>
+                    <a class="d-inline p-0 nav-link" href="comments/page=1.html">Commentaires</a><br/>
                 </div>
             </div>
             <div class="col-md-8">

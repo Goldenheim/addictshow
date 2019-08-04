@@ -1,5 +1,5 @@
 <?php
-namespace App\Frontend\Modules\News;
+namespace App\Frontend\Modules\Show;
  
 use \AddictFram\BackController;
 use \AddictFram\HTTPRequest;
@@ -7,7 +7,7 @@ use \Entity\Comment;
 use \FormBuilder\CommentFormBuilder;
 use \AddictFram\FormHandler;
  
-class NewsController extends BackController
+class ShowController extends BackController
 {
   public function executeIndex(HTTPRequest $request)
   {
@@ -176,17 +176,17 @@ class NewsController extends BackController
 
       $json = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason/season/$numberSeason?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
       $parsee = json_decode($json, true);
-      $jsonVideo = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason/season/$numberSeason/videos?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
-      $parseeVideo = json_decode($json, true);
+      $jsonTitle = file_get_contents("https://api.themoviedb.org/3/tv/$idSeason?api_key=22b5d3d2b10babbb4291177132454423&language=fr-FR");
+      $parseeTitle = json_decode($jsonTitle, true);
     }
     else
     {
       $this->app->httpResponse()->redirect404();
     }
 
+    $this->page->addVar('showTitle', $parseeTitle['name']);
     $this->page->addVar('seasonId', $idSeason);
     $this->page->addVar('season', $parsee);
-    $this->page->addVar('video', $parseeVideo);
   }
 
   public function executeEpisode(HTTPRequest $request)

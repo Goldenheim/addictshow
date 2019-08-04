@@ -92,7 +92,7 @@
           <div class="col-md-2 mx-auto">
 
             <!-- Links -->
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">top séries</h5>
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">top</h5>
 
             <ul class="list-unstyled">
               <li>
@@ -118,7 +118,7 @@
           <div class="col-md-2 mx-auto">
 
             <!-- Links -->
-            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Nouveautées</h5>
+            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Nouveau</h5>
 
             <ul class="list-unstyled">
               <li>
@@ -209,13 +209,14 @@
         <p class="text-center">Liens: 
           <a href="#"><span class="label label-info">mentions légales</span></a> 
         | <i class="icon-user"></i> <a href="#">Admin</a> 
-        | <i class="icon-calendar"></i> <?php setlocale(LC_TIME, 'fra_fra'); echo strftime('%A %d %B %Y, %H:%M'); ?>
+        | <i class="icon-calendar"></i> <?php setlocale(LC_TIME, 'fra_fra'); echo utf8_encode(strftime('%A %d %B %Y, %H:%M')); ?>
         | <i class="icon-comment"></i> <a href="#">3 Commentaires postés</a>
       </p>
     </footer>
     <!-- Footer -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="/js/pagination.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/form.js"></script>
     <script>

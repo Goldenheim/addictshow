@@ -65,6 +65,12 @@
       ?>
     </form>
   </nav>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb text-center">
+      <li class="breadcrumb-item"><a href="/">Accueil</a></li>
+      <li class="breadcrumb-item"><a href="movie-<?php echo $_GET['id']; ?>.html"><?php echo $showTitle; ?></a></li>
+    </ol>
+  </nav>
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="bg-dark p-3">
       <div class="jumbotron">

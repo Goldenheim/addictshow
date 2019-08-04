@@ -5,7 +5,7 @@
         
          <div class="container-fluid">
             <div class="row  justify-content-center align-items-center d-flex text-center h-100">
-              <div class="col-12 col-md-8  h-50">
+              <div class="col-12 col-md-10 col-sm-8 h-50">
                   <h1 class="fadeInLeft animated display-2 font-weight-bold text-light mb-2 mt-5"><strong><span class="title">ADDICT</span>SHOW</strong></h1>
                   <p class="fadeInUpBig animated lead text-light mb-5">Retrouvez toutes les informations disponibles sur vos séries préférées</p>
                   <form method="post" action="search.php" class="form-inline">
@@ -113,7 +113,7 @@
       foreach (array_slice($listShow['results'], 0, 10) as $show)
       {
       ?>
-        <div class="carousel-item col-md-4">
+        <div class="carousel-item col-lg-4 col-md-12">
            <div id="<?php echo $show['id']; ?>" class="movie-card">
               <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?php echo $show['backdrop_path']; ?>');">
                  <div class="header-icon-container">
@@ -154,7 +154,7 @@
 
 <div class="container mb-3">
   <div id="netflix" class="pl-0 col-lg-6">
-  <h3 class="text-center mb-3 text-white">les 5 dernières sorties de <?php setlocale(LC_TIME, 'fra_fra'); echo strftime('%B %Y'); ?> sur Netflix:</h3>
+  <h3 class="text-center mb-3 text-white">les 5 dernières sorties de <?php setlocale(LC_TIME, 'fra_fra'); echo utf8_encode(strftime('%B %Y')); ?> sur Netflix:</h3>
   <div class="netflix-container">
     <?php foreach (array_slice($new['results'], 0, 5) as $new) 
     {
@@ -173,7 +173,19 @@
                 </div> 
               </div> 
             </div>
-            <img class="col-lg-4 avatar-new" src="https://image.tmdb.org/t/p/w300<?php echo $new['poster_path']; ?>">
+            <?php 
+            if($new['poster_path'] != null) 
+            {
+            ?>
+              <img class="col-lg-4 avatar-new" src="https://image.tmdb.org/t/p/w300<?php echo $new['poster_path']; ?>">
+            <?php
+            } else
+            {
+            ?>
+              <img class="col-lg-4 avatar-new" src="img/new-show-404.png">
+            <?php 
+            }
+            ?>
           </div>     
         </div>
       </div>
@@ -221,8 +233,20 @@
            {
            ?> 
              <div class="cast-card text-center m-2">
-               <img id="avatar-cast" src="https://image.tmdb.org/t/p/w300/<?php echo $character['profile_path']; ?>" class="img-fluid">
-               <p><?php echo $character['name']; ?></p>
+              <?php 
+              if($character['profile_path'] != null) 
+              {
+              ?>
+                <img id="avatar-cast" src="https://image.tmdb.org/t/p/w300/<?php echo $character['profile_path']; ?>" class="img-fluid">
+              <?php
+              } else
+              {
+              ?>
+                <img id="avatar-cast" src="img/avatar-people-404.png" class="img-fluid">
+              <?php 
+              }
+              ?>
+              <p><?php echo $character['name']; ?></p>
              </div>
            <?php  
            }

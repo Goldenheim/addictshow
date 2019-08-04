@@ -106,7 +106,19 @@
         </div>
         <div class="container movieContent">
         	<div class="row col-12 col-md-12">
-        		<img src="https://image.tmdb.org/t/p/w500<?php echo $movie['poster_path']; ?>" class="col-lg-7 col-md-12 poster"/>
+            <?php 
+            if($movie['poster_path'] != null) 
+            {
+            ?>
+              <img class="col-lg-7 col-md-12 poster" src="https://image.tmdb.org/t/p/w500<?php echo $movie['poster_path']; ?>"/>
+            <?php
+            } else
+            {
+            ?>
+              <img class="col-lg-7 col-md-12 poster" src="img/jaquette-404.png">
+            <?php 
+            }
+            ?>
         		<div id="infosContent" class="col-lg-5 col-md-12">
               <?php if (isset($_SESSION['id']))
               { 
@@ -121,7 +133,6 @@
                       <a class="favourite selected" data-toggle="tooltip" title="Retirer des favoris" href="member/favourite-delete-<?php echo $favourites['0']['id']; ?>.html"><i class="fas fa-heart"></i></a>
                     <?php
                   }
-               }
                ?>
                <div class="container-rating">
                  <div class="feedback">
@@ -243,11 +254,18 @@
                         </div>
                      </div>
                   </form>
-                  <?php
-                  }
-                  ?>
                  </div>
                </div>
+               <?php
+             }
+           }  
+           else
+            {
+            ?>
+              <a href="member/connexion.php" class="rate-connect btn btn-primary mx-auto">Connectez-vous pour noter <?php echo $movie['name'] ?></a>
+            <?php
+            }
+            ?>
         			<div>
         				<div class="movie-info similar">
         				   <div class="info-section"><label>Date de sortie</label><span><?php echo $movie['first_air_date']; ?></span></div>
@@ -290,10 +308,10 @@
   <div class="p-0 card-body">
     <div class="backdrop-last-air-episode-bloc mx-auto">
       <img class="backdrop-show" src="https://image.tmdb.org/t/p/w500<?php echo $movie['backdrop_path']; ?>">
-      <div class="col-lg-3 card-title d-flex flex-column justify-content-between align-items-start m-2 p-2">
+      <div class="last-air-episode-bloc col-lg-3 card-title d-flex flex-column justify-content-between align-items-start m-2 p-2">
         <small>Dernier épisode diffusé à ce jour</small>
-        <a class="p-0 nav-link stretched-link" href="/episode-<?php echo $movie['id']; ?>-<?php echo $movie['last_episode_to_air']['season_number']; ?>-<?php echo $movie['last_episode_to_air']['episode_number']; ?>.html"><h4><?php echo $movie['last_episode_to_air']['name']; ?></h4></a>
-        <p class="p-0"><?php echo $movie['last_episode_to_air']['overview']; ?></p>
+        <a class="p-0 nav-link" href="/episode-<?php echo $movie['id']; ?>-<?php echo $movie['last_episode_to_air']['season_number']; ?>-<?php echo $movie['last_episode_to_air']['episode_number']; ?>.html"><h4><?php echo $movie['last_episode_to_air']['name']; ?></h4></a>
+        <p class="p-0 last-episode-overview"><?php echo $movie['last_episode_to_air']['overview']; ?></p>
         <div class="card-text  align-self-stretch">
           <div class="movie-info">
              <div class="info-section"><label>Date de sortie</label><span><?php echo $movie['last_episode_to_air']['air_date']; ?></span></div>
@@ -363,7 +381,7 @@ if($similar['results'] != Null)
       foreach ($similar['results'] as $show)
       {
       ?>
-        <div class="carousel-item col-md-4">
+        <div class="carousel-item col-lg-4">
            <div id="<?php echo $show['id']; ?>" class="movie-card">
               <div class="movie-header" style="background: url('https://image.tmdb.org/t/p/w500<?php echo $show['backdrop_path']; ?>');">
               </div>

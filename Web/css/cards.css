@@ -222,7 +222,7 @@ a:hover {
   height: 0;
   content: "";
   border-bottom: 65px solid transparent;
-  border-left: 50vw solid #01D474;
+  border-left: 50vw solid rgba(1, 212, 116,0.5);;
 }
 
 .blue:after {
@@ -234,7 +234,7 @@ a:hover {
   height: 0;
   content: "";
   border-top: 65px solid transparent;
-  border-right: 50vw solid #01D474;
+  border-right: 50vw solid rgba(1, 212, 116,0.5);;
 }
 
 #blur {
@@ -498,6 +498,11 @@ a:hover {
 .last-air-episode {
   border: none;
   border-radius: 0px;
+}
+
+.last-episode-overview {
+  max-height: 63px;
+  overflow: auto;
 }
 
 .backdrop-show {
@@ -1178,7 +1183,7 @@ footer hr {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.0' x='0px' y='0px' viewBox='0 0 50 50' fill='%23e3d06c' %3E%3Cpath d='M 25 2.2734375 L 18.609375 18.480469 L 0.81054688 19.417969 L 14.648438 30.412109 L 10.070312 47.222656 L 25 37.771484 L 39.929688 47.222656 L 35.351562 30.412109 L 49.189453 19.417969 L 31.390625 18.480469 L 25 2.2734375 z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   /* show 3 items */
   .carousel-inner .active,
   .carousel-inner .active+.carousel-item,
@@ -1237,6 +1242,88 @@ footer hr {
   }
 }
 
+@media screen and (min-width: 501px) and (max-width: 768px) {
+  /* INDEX */ 
+
+  .blue h1 {
+    font-size: 5.5em!important;
+  }
+
+  .cardContainer {
+    height: auto;
+  }
+
+  .movie-card {
+    margin: auto;
+    display: block;
+  }
+
+  #netflix {
+    padding: 0 !important;
+  }
+
+  #netflix .row {
+    flex-wrap: nowrap;
+  }
+  .avatar-new {
+    border-radius: 0px;
+    max-width: 35%;
+  }
+  .netflix-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: auto;
+    margin-bottom: 3%;
+  }
+
+  #netflix .card {
+    min-width: 90%;
+  }
+
+  #index-features #search {
+    width: 83%;
+  }
+
+  /* MOVIE */ 
+
+  #fullHeaderMovie {
+    height: 245vh;
+  }
+
+  .rate-connect {
+    margin-top: 2%;
+  }
+
+  #show-title h1 {
+    font-size: 3.5em !important;
+  }
+
+  .backdrop-show {
+    min-width: 100%;
+  }
+
+  .last-air-episode-bloc {
+    margin: 0px !important;
+  }
+
+  /* SEASON */ 
+
+  #infosContent {
+    height: auto;
+  }
+
+  /* PROFILE */ 
+
+  .profile-btn-container {
+    width: 100%;
+  }
+
+  .profile-btn {
+    margin-left: 8%;
+    align-items: stretch;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .movie-card {
     margin: auto;
@@ -1246,6 +1333,9 @@ footer hr {
   #search {
     width: 50%;
     margin-right: 1%;
+  }
+  #index-features #search {
+    width: 68%;
   }
   .cardContainer {
     height: 605px !important;
@@ -1285,6 +1375,9 @@ footer hr {
   }
   .last-air-episode {
     margin: 0;
+  }
+  .last-air-episode .card-title {
+    margin: 0!important;
   }
   #show-title {
     flex-direction: column;
